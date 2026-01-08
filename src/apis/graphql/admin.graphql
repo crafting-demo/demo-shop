@@ -1,0 +1,209 @@
+# =============================================================================
+# Admin API
+# GraphQL schema for administrative operations
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Admin Input Types
+# -----------------------------------------------------------------------------
+
+"""
+Input for creating a new product (Admin)
+"""
+input CreateProductInput {
+  """Display name of the product"""
+  name: String!
+  
+  """Detailed description of the product"""
+  description: String
+  
+  """Image data for the product. The value follows the data URI scheme (e.g., 'data:image/png;base64,...')"""
+  imageData: String
+  
+  """Price per unit in cents"""
+  pricePerUnit: Int!
+  
+  """Number of units in stock"""
+  countInStock: Int!
+  
+  """Initial availability state (default: AVAILABLE)"""
+  state: ProductState = AVAILABLE
+}
+
+"""
+Input for updating an existing product (Admin)
+"""
+input UpdateProductInput {
+  """ID of the product to update"""
+  id: ID!
+  
+  """New display name"""
+  name: String
+  
+  """New description"""
+  description: String
+  
+  """New image data for the product. The value follows the data URI scheme (e.g., 'data:image/png;base64,...')"""
+  imageData: String
+  
+  """New price per unit in cents"""
+  pricePerUnit: Int
+  
+  """New count in stock"""
+  countInStock: Int
+  
+  """New availability state"""
+  state: ProductState
+}
+
+"""
+Filter options for products (Admin)
+"""
+input ProductFilterInput {
+  """Filter by product state"""
+  state: ProductState
+  
+  """Search by name (case-insensitive partial match)"""
+  searchName: String
+}
+
+"""
+Filter options for orders (Admin)
+"""
+input OrderFilterInput {
+  """Filter by order state"""
+  state: OrderState
+  
+  """Filter by customer email"""
+  customerEmail: String
+}
+
+# -----------------------------------------------------------------------------
+# Admin Queries
+# -----------------------------------------------------------------------------
+
+type Query {
+  """
+  Get a paginated list of all products in the inventory.
+  Returns products in all states including soft-deleted ones.
+  """
+  products(
+    """Number of products to fetch"""
+    first: Int = 20
+    
+    """Cursor to start fetching from"""
+    after: String
+    
+    """Filter options"""
+    filter: ProductFilterInput
+  ): ProductConnection!
+  
+  """
+  Get detailed information about a specific product
+  """
+  product(
+    """ID of the product"""
+    id: ID!
+  ): Product
+  
+  """
+  Get a paginated list of all orders
+  """
+  orders(
+    """Number of orders to fetch"""
+    first: Int = 20
+    
+    """Cursor to start fetching from"""
+    after: String
+    
+    """Filter options"""
+    filter: OrderFilterInput
+  ): OrderConnection!
+  
+  """
+  Get detailed information about a specific order
+  """
+  order(
+    """ID of the order"""
+    id: ID!
+  ): Order
+}
+
+# -----------------------------------------------------------------------------
+# Admin Mutations
+# -----------------------------------------------------------------------------
+
+type Mutation {
+  # -------------------------
+  # Product Mutations
+  # -------------------------
+  
+  """
+  Create a new product in the inventory
+  """
+  createProduct(
+    input: CreateProductInput!
+  ): Product!
+  
+  """
+  Update an existing product
+  """
+  updateProduct(
+    input: UpdateProductInput!
+  ): Product!
+  
+  """
+  Set a product's state to AVAILABLE
+  """
+  putProductOnShelf(
+    """ID of the product"""
+    id: ID!
+  ): Product!
+  
+  """
+  Set a product's state to OFF_SHELF
+  """
+  takeProductOffShelf(
+    """ID of the product"""
+    id: ID!
+  ): Product!
+  
+  """
+  Remove a product from the inventory (soft delete)
+  """
+  removeProduct(
+    """ID of the product to remove"""
+    id: ID!
+  ): Boolean!
+  
+  # -------------------------
+  # Order Mutations
+  # -------------------------
+  
+  """
+  Mark an order as shipped.
+  Only available when current state is PROCESSING.
+  """
+  shipOrder(
+    """ID of the order"""
+    id: ID!
+  ): Order!
+  
+  """
+  Mark an order as completed.
+  Only available when current state is SHIPPED.
+  """
+  completeOrder(
+    """ID of the order"""
+    id: ID!
+  ): Order!
+  
+  """
+  Cancel an order.
+  Only available when current state is PROCESSING or SHIPPED.
+  """
+  cancelOrder(
+    """ID of the order"""
+    id: ID!
+  ): Order!
+}

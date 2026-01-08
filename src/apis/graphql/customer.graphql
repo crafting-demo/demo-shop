@@ -1,0 +1,124 @@
+# =============================================================================
+# Customer API
+# GraphQL schema for customer-facing operations
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Customer Input Types
+# -----------------------------------------------------------------------------
+
+"""
+Input for adding a product to cart
+"""
+input AddToCartInput {
+  """ID of the product to add"""
+  productId: ID!
+  
+  """Number of units to add (default: 1)"""
+  quantity: Int = 1
+}
+
+"""
+Input for updating cart item quantity
+"""
+input UpdateCartItemInput {
+  """ID of the product to update"""
+  productId: ID!
+  
+  """New quantity (0 removes the item)"""
+  quantity: Int!
+}
+
+"""
+Input for placing an order
+"""
+input PlaceOrderInput {
+  """Customer's name"""
+  customerName: String!
+  
+  """Customer's email address"""
+  customerEmail: String!
+  
+  """Shipping address"""
+  shippingAddress: String!
+}
+
+# -----------------------------------------------------------------------------
+# Customer Queries
+# -----------------------------------------------------------------------------
+
+type Query {
+  """
+  Get a paginated list of available products for the shop landing page.
+  Only returns products with state AVAILABLE and countInStock > 0.
+  """
+  products(
+    """Number of products to fetch"""
+    first: Int = 20
+    
+    """Cursor to start fetching from"""
+    after: String
+  ): ProductConnection!
+  
+  """
+  Get detailed information about a specific product
+  """
+  product(
+    """ID of the product"""
+    id: ID!
+  ): Product
+  
+  """
+  Get the current shopping cart for the session
+  """
+  cart: Cart!
+}
+
+# -----------------------------------------------------------------------------
+# Customer Mutations
+# -----------------------------------------------------------------------------
+
+type Mutation {
+  # -------------------------
+  # Cart Mutations
+  # -------------------------
+  
+  """
+  Add a product to the shopping cart
+  """
+  addToCart(
+    input: AddToCartInput!
+  ): Cart!
+  
+  """
+  Update the quantity of a product in the cart
+  """
+  updateCartItem(
+    input: UpdateCartItemInput!
+  ): Cart!
+  
+  """
+  Remove a product from the cart
+  """
+  removeFromCart(
+    """ID of the product to remove"""
+    productId: ID!
+  ): Cart!
+  
+  """
+  Clear all items from the cart
+  """
+  clearCart: Cart!
+  
+  # -------------------------
+  # Order Mutations
+  # -------------------------
+  
+  """
+  Place an order with the items in the cart.
+  This will create an order and clear the cart.
+  """
+  placeOrder(
+    input: PlaceOrderInput!
+  ): Order!
+}

@@ -1,0 +1,228 @@
+# =============================================================================
+# Shared Types, Enums, and Inputs
+# This file contains all types shared between Customer and Admin APIs
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Custom Scalars
+# -----------------------------------------------------------------------------
+
+"""
+A date-time string in ISO 8601 format
+"""
+scalar DateTime
+
+# -----------------------------------------------------------------------------
+# Enums
+# -----------------------------------------------------------------------------
+
+"""
+State representing product availability for customers
+"""
+enum ProductState {
+  """Product is available for purchase"""
+  AVAILABLE
+  
+  """Product is currently off shelf and not available"""
+  OFF_SHELF
+}
+
+"""
+State representing order lifecycle
+The valid state transitions are:
+- PROCESSING -> SHIPPED (when order is dispatched)
+- PROCESSING -> CANCELED (when order is canceled before shipping)
+- SHIPPED -> COMPLETED (when order is delivered)
+- SHIPPED -> CANCELED (when order is canceled after shipping)
+"""
+enum OrderState {
+  """Order has been placed and is being processed"""
+  PROCESSING
+  
+  """Order has been shipped"""
+  SHIPPED
+  
+  """Order has been delivered and completed"""
+  COMPLETED
+  
+  """Order has been canceled"""
+  CANCELED
+}
+
+# -----------------------------------------------------------------------------
+# Core Domain Types
+# -----------------------------------------------------------------------------
+
+"""
+Represents a product in the shop
+"""
+type Product {
+  """Unique identifier for the product"""
+  id: ID!
+  
+  """Display name of the product"""
+  name: String!
+  
+  """Detailed description of the product"""
+  description: String
+  
+  """Image data for the product. The value follows the data URI scheme (e.g., 'data:image/png;base64,...')"""
+  imageData: String
+  
+  """Price per unit in cents"""
+  pricePerUnit: Int!
+  
+  """Number of units currently in stock"""
+  countInStock: Int!
+  
+  """Current availability state"""
+  state: ProductState!
+  
+  """Timestamp when the product was created"""
+  createdAt: DateTime!
+  
+  """Timestamp when the product was last updated"""
+  updatedAt: DateTime!
+}
+
+"""
+Represents an item in the shopping cart
+"""
+type CartItem {
+  """The product snapshot in the cart"""
+  product: Product!
+  
+  """Number of units of this product in the cart"""
+  quantity: Int!
+  
+  """Total price for this cart item (pricePerUnit * quantity)"""
+  totalPrice: Int!
+}
+
+"""
+Represents the shopping cart
+"""
+type Cart {
+  """Unique identifier for the cart. It's immutable once created"""
+  id: ID!
+  
+  """List of items in the cart"""
+  items: [CartItem!]!
+  
+  """Total price of all items in the cart. This may be different from the sum of all items as discounts and other promotions may apply"""
+  totalPrice: Int!
+}
+
+"""
+Represents an item in an order
+"""
+type OrderItem {
+  """The product snapshot that was ordered"""
+  product: Product!
+  
+  """Number of units ordered"""
+  quantity: Int!
+  
+  """Total price for this order item"""
+  totalPrice: Int!
+}
+
+"""
+Represents a customer order
+"""
+type Order {
+  """Unique identifier for the order"""
+  id: ID!
+  
+  """Customer's name"""
+  customerName: String!
+  
+  """Customer's email address"""
+  customerEmail: String!
+  
+  """Shipping address"""
+  shippingAddress: String!
+  
+  """List of items in the order"""
+  items: [OrderItem!]!
+  
+  """Total price of the order"""
+  totalPrice: Int!
+  
+  """Current state of the order"""
+  state: OrderState!
+  
+  """Timestamp when the order was placed"""
+  createdAt: DateTime!
+  
+  """Timestamp when the order was last updated"""
+  updatedAt: DateTime!
+}
+
+# -----------------------------------------------------------------------------
+# Pagination Types
+# -----------------------------------------------------------------------------
+
+"""
+Information about pagination in a connection
+"""
+type PageInfo {
+  """Whether there are more items after this page"""
+  hasNextPage: Boolean!
+  
+  """Whether there are more items before this page"""
+  hasPreviousPage: Boolean!
+  
+  """Cursor to the first item in this page"""
+  startCursor: String
+  
+  """Cursor to the last item in this page"""
+  endCursor: String
+  
+  """Total number of items across all pages"""
+  totalCount: Int!
+}
+
+"""
+A paginated list of products
+"""
+type ProductConnection {
+  """List of products in this page"""
+  edges: [ProductEdge!]!
+  
+  """Pagination information"""
+  pageInfo: PageInfo!
+}
+
+"""
+An edge in the product connection
+"""
+type ProductEdge {
+  """The product"""
+  node: Product!
+  
+  """Cursor for this product"""
+  cursor: String!
+}
+
+"""
+A paginated list of orders
+"""
+type OrderConnection {
+  """List of orders in this page"""
+  edges: [OrderEdge!]!
+  
+  """Pagination information"""
+  pageInfo: PageInfo!
+}
+
+"""
+An edge in the order connection
+"""
+type OrderEdge {
+  """The order"""
+  node: Order!
+  
+  """Cursor for this order"""
+  cursor: String!
+}
