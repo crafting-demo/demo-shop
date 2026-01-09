@@ -34,6 +34,8 @@ func main() {
 		"Address of transaction service (env: TRANSACTION_SERVICE)")
 	sessionSecret := flag.String("session-secret", getEnv("SESSION_COOKIE_SECRET", "default-secret-change-in-production"),
 		"Secret for session cookie signing (env: SESSION_COOKIE_SECRET)")
+	webRoot := flag.String("web-root", getEnv("WEB_ROOT", ""),
+		"Path to folder containing web site assets (env: WEB_ROOT)")
 
 	flag.Parse()
 
@@ -42,6 +44,7 @@ func main() {
 		AdminPort:           *adminPort,
 		TransactionService:  *transactionService,
 		SessionCookieSecret: *sessionSecret,
+		WebRoot:             *webRoot,
 	}
 
 	app, err := frontend.NewApp(cfg)

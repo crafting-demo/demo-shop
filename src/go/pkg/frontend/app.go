@@ -12,6 +12,7 @@ type Config struct {
 	AdminPort           string
 	TransactionService  string
 	SessionCookieSecret string
+	WebRoot             string
 }
 
 type App struct {

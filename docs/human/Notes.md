@@ -16,3 +16,4 @@
   - Use `vite` rather than `webpack`;
   - Use GraphQL APIs rather than mock data;
   - Directly use data types generated from GraphQL schema rather than redefine with convertion logic.
+- Ask agent to update frontend service with `--web-root` flag and serving different index pages for different endpoints.
