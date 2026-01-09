@@ -15,11 +15,6 @@ model:
   filename: models.go
   package: types
 
-# Where should the resolver implementations go?
-resolver:
-  filename: resolvers.go
-  package: types
-
 # Optional configuration
 # omit_slice_element_pointers: false
 # omit_interface_checks: false

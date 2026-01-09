@@ -2418,7 +2418,7 @@ const file_demoshop_v1_transaction_proto_rawDesc = "" +
 	"\vCreateOrder\x12\x1f.demoshop.v1.CreateOrderRequest\x1a .demoshop.v1.CreateOrderResponse\x12P\n" +
 	"\vQueryOrders\x12\x1f.demoshop.v1.QueryOrdersRequest\x1a .demoshop.v1.QueryOrdersResponse\x12G\n" +
 	"\bGetOrder\x12\x1c.demoshop.v1.GetOrderRequest\x1a\x1d.demoshop.v1.GetOrderResponse\x12P\n" +
-	"\vUpdateOrder\x12\x1f.demoshop.v1.UpdateOrderRequest\x1a .demoshop.v1.UpdateOrderResponseB7Z5demoshop/transaction/gen/proto/demoshop/v1;demoshopv1b\x06proto3"
+	"\vUpdateOrder\x12\x1f.demoshop.v1.UpdateOrderRequest\x1a .demoshop.v1.UpdateOrderResponseB+Z)demoshop/gen/proto/demoshop/v1;demoshopv1b\x06proto3"
 
 var (
 	file_demoshop_v1_transaction_proto_rawDescOnce sync.Once

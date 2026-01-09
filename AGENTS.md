@@ -20,3 +20,17 @@
   - `db`: the database schema and migrations
     - `migrations`: the SQL migrations
     - `examples`: the SQL script creating example products if they don't exist
+
+## Build All
+
+This source tree contains all generated code, and can be build directly:
+
+```shell
+./scripts/build-all.sh
+```
+
+To regenerate code:
+
+```shell
+./scripts/generate.sh
+```

@@ -17,9 +17,10 @@ model:
   package: customer
 
 # Where should the resolver implementations go?
-resolver:
-  filename: resolvers.go
-  package: customer
+# DO NOT touch resolvers.go.
+# resolver:
+#   filename: resolvers.go
+#   package: customer
 
 # Optional configuration
 # omit_slice_element_pointers: false
