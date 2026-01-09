@@ -3,9 +3,6 @@
 # Database Migration Script
 # Runs SQL migrations from src/db/migrations directory
 
-set -e
-
-
 SRC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 MIGRATIONS_DIR="$SRC_DIR/src/db/migrations"
 
