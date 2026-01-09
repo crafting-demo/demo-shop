@@ -19,3 +19,4 @@
     - `proto`: the Protobuf and gRPC definition of backend APIs
   - `db`: the database schema and migrations
     - `migrations`: the SQL migrations
+    - `examples`: the SQL script creating example products if they don't exist
