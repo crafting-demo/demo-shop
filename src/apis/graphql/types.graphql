@@ -10,7 +10,7 @@
 """
 A date-time string in ISO 8601 format
 """
-scalar DateTime
+scalar Time
 
 # -----------------------------------------------------------------------------
 # Enums
@@ -79,10 +79,10 @@ type Product {
   state: ProductState!
   
   """Timestamp when the product was created"""
-  createdAt: DateTime!
+  createdAt: Time!
   
   """Timestamp when the product was last updated"""
-  updatedAt: DateTime!
+  updatedAt: Time!
 }
 
 """
@@ -153,10 +153,10 @@ type Order {
   state: OrderState!
   
   """Timestamp when the order was placed"""
-  createdAt: DateTime!
+  createdAt: Time!
   
   """Timestamp when the order was last updated"""
-  updatedAt: DateTime!
+  updatedAt: Time!
 }
 
 # -----------------------------------------------------------------------------

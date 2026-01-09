@@ -3,10 +3,11 @@ package service
 import (
 	"context"
 
-	pb "demoshop/transaction/gen/proto/demoshop/v1"
-	"demoshop/transaction/internal/repository"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+
+	pb "demoshop/gen/proto/demoshop/v1"
+	"demoshop/pkg/transaction/repository"
 )
 
 type CartServer struct {
@@ -115,4 +116,3 @@ func (s *CartServer) ClearCart(ctx context.Context, req *pb.ClearCartRequest) (*
 
 	return &pb.ClearCartResponse{}, nil
 }
-

@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"os"
 	"time"
 
 	_ "github.com/lib/pq"
@@ -17,17 +16,6 @@ type Config struct {
 	Password string
 	DBName   string
 	SSLMode  string
-}
-
-func NewConfig() *Config {
-	return &Config{
-		Host:     getEnv("DB_HOST", "localhost"),
-		Port:     getEnvAsInt("DB_PORT", 5432),
-		User:     getEnv("DB_USER", "postgres"),
-		Password: getEnv("DB_PASSWORD", ""),
-		DBName:   getEnv("DB_NAME", "demoshop"),
-		SSLMode:  getEnv("DB_SSLMODE", "disable"),
-	}
 }
 
 func (c *Config) ConnectionString() string {
@@ -51,21 +39,4 @@ func NewConnection(config *Config) (*sql.DB, error) {
 
 	log.Printf("Connected to PostgreSQL database: %s:%d/%s", config.Host, config.Port, config.DBName)
 	return db, nil
-}
-
-func getEnv(key, defaultValue string) string {
-	if value := os.Getenv(key); value != "" {
-		return value
-	}
-	return defaultValue
-}
-
-func getEnvAsInt(key string, defaultValue int) int {
-	if value := os.Getenv(key); value != "" {
-		var result int
-		if _, err := fmt.Sscanf(value, "%d", &result); err == nil {
-			return result
-		}
-	}
-	return defaultValue
 }

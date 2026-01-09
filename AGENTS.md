@@ -5,10 +5,13 @@
 - `docs`: containing the requirements and designs
   - `App.md`: the top-level product requirements
 - `src`: the source code of services and shared libraries
-  - `frontend`: the frontend service
-  - `transaction`: the transaction service
-    - `gen`: the generated protobuf/gRPC files
-  - `messaging`: the messaging service
+  - `go`: all Go source code
+    - `cmd/transd`: the main package of transaction service
+    - `cmd/frontd`: the main package of frontend service
+    - `gen`: the generated code
+    - `pkg`: shared packages
+      - `transaction`: the transaction service
+      - `frontend`: the frontend service
   - `apis`: the API definitions
     - `graphql`: the GraphQL definition exposed by the frontend service
     - `proto`: the Protobuf and gRPC definition of backend APIs

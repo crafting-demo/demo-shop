@@ -7,8 +7,9 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	pb "demoshop/transaction/gen/proto/demoshop/v1"
 	"google.golang.org/protobuf/types/known/timestamppb"
+
+	pb "demoshop/gen/proto/demoshop/v1"
 )
 
 type ProductRepository interface {

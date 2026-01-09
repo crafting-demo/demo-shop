@@ -3,10 +3,11 @@ package service
 import (
 	"context"
 
-	pb "demoshop/transaction/gen/proto/demoshop/v1"
-	"demoshop/transaction/internal/repository"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+
+	pb "demoshop/gen/proto/demoshop/v1"
+	"demoshop/pkg/transaction/repository"
 )
 
 type InventoryServer struct {
@@ -131,4 +132,3 @@ func (s *InventoryServer) DeleteProduct(ctx context.Context, req *pb.DeleteProdu
 
 	return &pb.DeleteProductResponse{}, nil
 }
-

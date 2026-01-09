@@ -1,0 +1,39 @@
+# GraphQL code generation configuration
+# This config uses the existing schema files from apis/graphql
+
+# Where are all the schema files located?
+schema:
+  - ../../../../../apis/graphql/admin.graphql
+  - ../../../../../apis/graphql/types.graphql
+
+# Where should the generated server code go?
+exec:
+  filename: generated.go
+  package: admin
+
+# Where should any generated models go?
+model:
+  filename: models.go
+  package: admin
+
+# Where should the resolver implementations go?
+resolver:
+  filename: resolvers.go
+  package: admin
+
+# Optional configuration
+# omit_slice_element_pointers: false
+# omit_interface_checks: false
+# omit_complexity: false
+# struct_fields_always_pointers: true
+# resolvers_always_return_pointers: true
+
+# Type mapping between GraphQL and Go types
+models:
+  ID:
+    model:
+      - github.com/99designs/gqlgen/graphql.ID
+
+# Auto-bind existing Go types
+autobind:
+  - "demoshop/pkg/frontend/graphql/types"

@@ -4,7 +4,7 @@ package demoshop.v1;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "demoshop/transaction/gen/proto/demoshop/v1;demoshopv1";
+option go_package = "demoshop/gen/proto/demoshop/v1;demoshopv1";
 
 // =============================================================================
 // Core Message Types
