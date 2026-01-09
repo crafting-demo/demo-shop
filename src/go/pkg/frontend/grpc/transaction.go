@@ -2,6 +2,7 @@ package grpc
 
 import (
 	demoshopv1 "demoshop/gen/proto/demoshop/v1"
+	"demoshop/pkg/common/interceptor"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
@@ -14,7 +15,11 @@ type TransactionClient struct {
 }
 
 func NewTransactionClient(address string) (*TransactionClient, error) {
-	conn, err := grpc.NewClient(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient(
+		address,
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
+		grpc.WithUnaryInterceptor(interceptor.UnaryClientLoggingInterceptor),
+	)
 	if err != nil {
 		return nil, err
 	}

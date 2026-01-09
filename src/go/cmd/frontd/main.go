@@ -53,6 +53,8 @@ func main() {
 	}
 	defer app.Close()
 
+	log.Println("GraphQL and gRPC call tracing and logging enabled")
+
 	srv, err := server.New(cfg, app)
 	if err != nil {
 		log.Fatalf("Failed to create server: %v", err)

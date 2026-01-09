@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 
+	"demoshop/pkg/common/interceptor"
 	"demoshop/pkg/frontend"
 	"demoshop/pkg/frontend/graphql/admin"
 	"demoshop/pkg/frontend/graphql/customer"
@@ -33,6 +34,9 @@ func NewCustomerHandler(app *frontend.App) (http.Handler, error) {
 	schema := customer.NewExecutableSchema(customer.Config{Resolvers: resolver})
 
 	srv := handler.NewDefaultServer(schema)
+	
+	// Add logging extension
+	srv.Use(interceptor.GraphQLLoggingExtension{})
 
 	// Wrap with session middleware
 	return sessionMiddleware(app, srv), nil
@@ -49,6 +53,9 @@ func NewAdminHandler(app *frontend.App) (http.Handler, error) {
 	schema := admin.NewExecutableSchema(admin.Config{Resolvers: resolver})
 
 	srv := handler.NewDefaultServer(schema)
+	
+	// Add logging extension
+	srv.Use(interceptor.GraphQLLoggingExtension{})
 
 	return srv, nil
 }

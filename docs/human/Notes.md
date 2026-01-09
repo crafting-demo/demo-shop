@@ -17,3 +17,4 @@
   - Use GraphQL APIs rather than mock data;
   - Directly use data types generated from GraphQL schema rather than redefine with convertion logic.
 - Ask agent to update frontend service with `--web-root` flag and serving different index pages for different endpoints.
+- Ask agent to add API tracing and logging (Claude Sonnet automatically verified the changes by testing the APIs and it fixed other issues during this process).

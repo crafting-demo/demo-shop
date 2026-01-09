@@ -19,8 +19,13 @@ type Config struct {
 }
 
 func (c *Config) ConnectionString() string {
-	return fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=%s",
-		c.Host, c.Port, c.User, c.Password, c.DBName, c.SSLMode)
+	connStr := fmt.Sprintf("host=%s port=%d user=%s dbname=%s sslmode=%s search_path=public",
+		c.Host, c.Port, c.User, c.DBName, c.SSLMode)
+	if c.Password != "" {
+		connStr = fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=%s search_path=public",
+			c.Host, c.Port, c.User, c.Password, c.DBName, c.SSLMode)
+	}
+	return connStr
 }
 
 func NewConnection(config *Config) (*sql.DB, error) {

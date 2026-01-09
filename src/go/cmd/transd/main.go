@@ -11,6 +11,7 @@ import (
 	"google.golang.org/grpc/reflection"
 
 	pb "demoshop/gen/proto/demoshop/v1"
+	"demoshop/pkg/common/interceptor"
 	"demoshop/pkg/transaction/db"
 	"demoshop/pkg/transaction/repository"
 	"demoshop/pkg/transaction/service"
@@ -76,7 +77,9 @@ func main() {
 	cartServer := service.NewCartServer(cartRepo, productRepo)
 	orderServer := service.NewOrderServer(orderRepo, cartRepo)
 
-	grpcServer := grpc.NewServer()
+	grpcServer := grpc.NewServer(
+		grpc.UnaryInterceptor(interceptor.UnaryServerLoggingInterceptor),
+	)
 
 	pb.RegisterInventoryServiceServer(grpcServer, inventoryServer)
 	pb.RegisterCartServiceServer(grpcServer, cartServer)
@@ -90,6 +93,7 @@ func main() {
 	}
 
 	fmt.Printf("Transaction service listening on port %s\n", *listenAddr)
+	log.Println("gRPC request tracing and logging enabled")
 
 	if err := grpcServer.Serve(listener); err != nil {
 		log.Fatalf("Failed to serve gRPC: %v", err)
