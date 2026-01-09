@@ -1,0 +1,79 @@
+.order-admin {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.order-table {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.order-table .table-header,
+.order-table .table-row {
+  display: grid;
+  grid-template-columns: 100px 180px 120px 120px 150px 200px 80px;
+  gap: 12px;
+  padding: 12px;
+  align-items: center;
+}
+
+.order-table .table-header {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+}
+
+.order-table .table-row {
+  border-bottom: 1px solid #eee;
+}
+
+.order-table .table-row:hover {
+  background: #f8f9fa;
+}
+
+.col-id {
+  font-weight: 500;
+  color: #333;
+}
+
+.col-date {
+  font-size: 14px;
+  color: #666;
+}
+
+.col-price {
+  font-weight: 500;
+  color: #007bff;
+}
+
+.col-customer {
+  font-weight: 500;
+}
+
+.col-email {
+  font-size: 14px;
+  color: #666;
+}
+
+.state-badge.processing {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.state-badge.shipped {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.state-badge.completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.state-badge.canceled {
+  background: #f8d7da;
+  color: #721c24;
+}

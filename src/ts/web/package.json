@@ -1,0 +1,30 @@
+{
+  "name": "api-demo-web",
+  "version": "1.0.0",
+  "description": "Web interface for API Demo Shop",
+  "scripts": {
+    "build": "npm run codegen && tsc && vite build",
+    "dev": "vite",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit",
+    "codegen": "graphql-codegen --config codegen.ts"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.8.0",
+    "graphql": "^16.8.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/client-preset": "^4.1.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@graphql-codegen/typescript-react-apollo": "^4.1.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0"
+  }
+}

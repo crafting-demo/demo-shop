@@ -1,0 +1,47 @@
+.thankyou-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thankyou-card {
+  max-width: 500px;
+  padding: 48px;
+  text-align: center;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #28a745;
+  color: white;
+  font-size: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+
+.thankyou-card h1 {
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.thankyou-card p {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.thankyou-card .subtitle {
+  font-size: 16px;
+  margin-bottom: 32px;
+}
+
+.continue-btn {
+  padding: 16px 32px;
+  font-size: 18px;
+}

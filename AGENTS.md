@@ -12,6 +12,8 @@
     - `pkg`: shared packages
       - `transaction`: the transaction service
       - `frontend`: the frontend service
+  - `ts`: all TypeScript source code
+    - `web`: the [WebSite](#docs/WebSite.md)
   - `apis`: the API definitions
     - `graphql`: the GraphQL definition exposed by the frontend service
     - `proto`: the Protobuf and gRPC definition of backend APIs

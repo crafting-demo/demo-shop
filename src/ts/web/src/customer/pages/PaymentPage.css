@@ -1,0 +1,49 @@
+.payment-page {
+  min-height: 100vh;
+}
+
+.payment-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.payment-form h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 24px;
+}
+
+.required {
+  color: #dc3545;
+}
+
+.payment-summary {
+  margin: 32px 0;
+  padding: 24px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.payment-summary h2 {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-row .total-price {
+  font-size: 28px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.place-order-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 18px;
+}
