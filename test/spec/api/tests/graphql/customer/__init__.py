@@ -1,0 +1,1 @@
+"""Customer GraphQL API tests."""

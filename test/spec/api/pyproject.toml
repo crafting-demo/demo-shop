@@ -1,0 +1,53 @@
+[project]
+name = "api-tests"
+version = "0.1.0"
+description = "API test suite for Demo Shop - GraphQL and gRPC tests"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "requests>=2.31.0",
+    "grpcio>=1.60.0",
+    "grpcio-tools>=1.60.0",
+    "protobuf>=4.25.0",
+    "pydantic>=2.5.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest-cov>=4.1.0",
+    "pytest-xdist>=3.5.0",
+    "black>=24.0.0",
+    "ruff>=0.1.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+asyncio_mode = "auto"
+markers = [
+    "customer: Customer-facing API tests",
+    "admin: Admin-facing API tests",
+    "grpc: gRPC backend service tests",
+    "graphql: GraphQL API tests",
+    "slow: Slow running tests",
+    "integration: Integration tests requiring all services",
+]
+addopts = [
+    "-v",
+    "-ra",
+    "--strict-markers",
+    "--tb=short",
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py313"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"

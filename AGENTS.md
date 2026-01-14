@@ -20,6 +20,12 @@
   - `db`: the database schema and migrations
     - `migrations`: the SQL migrations
     - `examples`: the SQL script creating example products if they don't exist
+- `test`: the test case docs and test spec and code
+  - `docs`: all the test cases in markdown
+    - `api`: the test cases specially for testing the APIs
+    - `e2e`: the test cases covering the E2E user flows
+  - `spec`: the test specs according to the test cases in `docs` folder
+    - `api`: the test code in Python corresponding to the API cases
 
 ## Build All
 
