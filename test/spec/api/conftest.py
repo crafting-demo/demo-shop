@@ -51,7 +51,7 @@ def order_service_client() -> Generator[OrderServiceClient, None, None]:
 def unique_cart_id() -> str:
     """Generate unique cart ID for test isolation."""
     import uuid
-    return f"test-cart-{uuid.uuid4()}"
+    return str(uuid.uuid4())
 
 
 @pytest.fixture(scope="function")

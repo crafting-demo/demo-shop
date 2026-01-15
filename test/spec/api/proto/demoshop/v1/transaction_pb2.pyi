@@ -71,7 +71,7 @@ class OrderItem(_message.Message):
     def __init__(self, product: _Optional[_Union[Product, _Mapping]] = ..., quantity: _Optional[int] = ..., price_at_purchase: _Optional[int] = ...) -> None: ...
 
 class Order(_message.Message):
-    __slots__ = ("id", "items", "total_amount", "state", "created_at", "updated_at")
+    __slots__ = ("id", "items", "total_amount", "state", "created_at", "updated_at", "customer_name", "customer_email", "shipping_address")
     class State(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         UNSPECIFIED: _ClassVar[Order.State]
@@ -90,13 +90,19 @@ class Order(_message.Message):
     STATE_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     UPDATED_AT_FIELD_NUMBER: _ClassVar[int]
+    CUSTOMER_NAME_FIELD_NUMBER: _ClassVar[int]
+    CUSTOMER_EMAIL_FIELD_NUMBER: _ClassVar[int]
+    SHIPPING_ADDRESS_FIELD_NUMBER: _ClassVar[int]
     id: str
     items: _containers.RepeatedCompositeFieldContainer[OrderItem]
     total_amount: int
     state: Order.State
     created_at: _timestamp_pb2.Timestamp
     updated_at: _timestamp_pb2.Timestamp
-    def __init__(self, id: _Optional[str] = ..., items: _Optional[_Iterable[_Union[OrderItem, _Mapping]]] = ..., total_amount: _Optional[int] = ..., state: _Optional[_Union[Order.State, str]] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., updated_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+    customer_name: str
+    customer_email: str
+    shipping_address: str
+    def __init__(self, id: _Optional[str] = ..., items: _Optional[_Iterable[_Union[OrderItem, _Mapping]]] = ..., total_amount: _Optional[int] = ..., state: _Optional[_Union[Order.State, str]] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., updated_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., customer_name: _Optional[str] = ..., customer_email: _Optional[str] = ..., shipping_address: _Optional[str] = ...) -> None: ...
 
 class PageInfo(_message.Message):
     __slots__ = ("has_next_page", "has_previous_page", "start_cursor", "end_cursor")
@@ -119,12 +125,14 @@ class PaginationRequest(_message.Message):
     def __init__(self, first: _Optional[int] = ..., after: _Optional[str] = ...) -> None: ...
 
 class QueryProductsRequest(_message.Message):
-    __slots__ = ("pagination", "state_filter")
+    __slots__ = ("pagination", "state_filter", "search_name")
     PAGINATION_FIELD_NUMBER: _ClassVar[int]
     STATE_FILTER_FIELD_NUMBER: _ClassVar[int]
+    SEARCH_NAME_FIELD_NUMBER: _ClassVar[int]
     pagination: PaginationRequest
     state_filter: Product.State
-    def __init__(self, pagination: _Optional[_Union[PaginationRequest, _Mapping]] = ..., state_filter: _Optional[_Union[Product.State, str]] = ...) -> None: ...
+    search_name: str
+    def __init__(self, pagination: _Optional[_Union[PaginationRequest, _Mapping]] = ..., state_filter: _Optional[_Union[Product.State, str]] = ..., search_name: _Optional[str] = ...) -> None: ...
 
 class QueryProductsResponse(_message.Message):
     __slots__ = ("products", "page_info", "total_count")
@@ -289,10 +297,16 @@ class ClearCartResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class CreateOrderRequest(_message.Message):
-    __slots__ = ("cart_id",)
+    __slots__ = ("cart_id", "customer_name", "customer_email", "shipping_address")
     CART_ID_FIELD_NUMBER: _ClassVar[int]
+    CUSTOMER_NAME_FIELD_NUMBER: _ClassVar[int]
+    CUSTOMER_EMAIL_FIELD_NUMBER: _ClassVar[int]
+    SHIPPING_ADDRESS_FIELD_NUMBER: _ClassVar[int]
     cart_id: str
-    def __init__(self, cart_id: _Optional[str] = ...) -> None: ...
+    customer_name: str
+    customer_email: str
+    shipping_address: str
+    def __init__(self, cart_id: _Optional[str] = ..., customer_name: _Optional[str] = ..., customer_email: _Optional[str] = ..., shipping_address: _Optional[str] = ...) -> None: ...
 
 class CreateOrderResponse(_message.Message):
     __slots__ = ("order",)
@@ -301,7 +315,7 @@ class CreateOrderResponse(_message.Message):
     def __init__(self, order: _Optional[_Union[Order, _Mapping]] = ...) -> None: ...
 
 class QueryOrdersRequest(_message.Message):
-    __slots__ = ("pagination", "state_filter")
+    __slots__ = ("pagination", "state_filter", "customer_email")
     class StateFilter(_message.Message):
         __slots__ = ("value",)
         VALUE_FIELD_NUMBER: _ClassVar[int]
@@ -309,9 +323,11 @@ class QueryOrdersRequest(_message.Message):
         def __init__(self, value: _Optional[_Union[Order.State, str]] = ...) -> None: ...
     PAGINATION_FIELD_NUMBER: _ClassVar[int]
     STATE_FILTER_FIELD_NUMBER: _ClassVar[int]
+    CUSTOMER_EMAIL_FIELD_NUMBER: _ClassVar[int]
     pagination: PaginationRequest
     state_filter: QueryOrdersRequest.StateFilter
-    def __init__(self, pagination: _Optional[_Union[PaginationRequest, _Mapping]] = ..., state_filter: _Optional[_Union[QueryOrdersRequest.StateFilter, _Mapping]] = ...) -> None: ...
+    customer_email: str
+    def __init__(self, pagination: _Optional[_Union[PaginationRequest, _Mapping]] = ..., state_filter: _Optional[_Union[QueryOrdersRequest.StateFilter, _Mapping]] = ..., customer_email: _Optional[str] = ...) -> None: ...
 
 class QueryOrdersResponse(_message.Message):
     __slots__ = ("orders", "page_info", "total_count")

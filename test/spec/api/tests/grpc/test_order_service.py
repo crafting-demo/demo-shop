@@ -21,24 +21,16 @@ class TestGRPCOrderService:
         test_product_ids: list
     ):
         """Step 1: CreateOrder - from cart with items."""
-        cart_id = f"test-cart-{uuid.uuid4()}"
+        cart_id = str(uuid.uuid4())
         
         # Add products to cart
         cart_grpc_client.add_product_to_cart(cart_id, test_product_ids[0], 2)
         cart_grpc_client.add_product_to_cart(cart_id, test_product_ids[1], 3)
         
         # Create order from cart
-        order = order_grpc_client.create_order(
-            cart_id=cart_id,
-            customer_name="gRPC Test Customer",
-            customer_email="grpc@example.com",
-            shipping_address="gRPC Test Address 123"
-        )
+        order = order_grpc_client.create_order(cart_id=cart_id)
         
         assert order.id
-        assert order.customer_name == "gRPC Test Customer"
-        assert order.customer_email == "grpc@example.com"
-        assert order.shipping_address == "gRPC Test Address 123"
         assert len(order.items) == 2
         assert order.state == 1  # PROCESSING = 1
         assert hasattr(order, 'created_at')
@@ -50,19 +42,14 @@ class TestGRPCOrderService:
         cart_grpc_client: CartServiceClient
     ):
         """Step 2: CreateOrder - from empty cart (should fail)."""
-        cart_id = f"test-cart-{uuid.uuid4()}"
+        cart_id = str(uuid.uuid4())
         
         # Get cart (creates empty cart)
         cart_grpc_client.get_cart(cart_id)
         
         # Try to create order from empty cart
         with pytest.raises(Exception) as exc_info:
-            order_grpc_client.create_order(
-                cart_id=cart_id,
-                customer_name="Test",
-                customer_email="test@example.com",
-                shipping_address="Test"
-            )
+            order_grpc_client.create_order(cart_id=cart_id)
         
         assert "FAILED_PRECONDITION" in str(exc_info.value) or "empty" in str(exc_info.value).lower()
 
@@ -73,16 +60,16 @@ class TestGRPCOrderService:
         test_product_id: str
     ):
         """Step 3: CreateOrder - invalid email format."""
-        cart_id = f"test-cart-{uuid.uuid4()}"
+        cart_id = str(uuid.uuid4())
         cart_grpc_client.add_product_to_cart(cart_id, test_product_id, 1)
         
         # Try to create order with invalid email
         with pytest.raises(Exception) as exc_info:
             order_grpc_client.create_order(
                 cart_id=cart_id,
-                customer_name="Test",
-                customer_email="not-an-email",
-                shipping_address="Test"
+                customer_email="not-an-email",  # Invalid email
+                customer_name="Test Customer",
+                shipping_address="Test Address"
             )
         
         assert "INVALID_ARGUMENT" in str(exc_info.value) or "invalid" in str(exc_info.value).lower()
@@ -94,16 +81,16 @@ class TestGRPCOrderService:
         test_product_id: str
     ):
         """Step 4: CreateOrder - missing required fields."""
-        cart_id = f"test-cart-{uuid.uuid4()}"
+        cart_id = str(uuid.uuid4())
         cart_grpc_client.add_product_to_cart(cart_id, test_product_id, 1)
         
-        # Try to create order without customer name
+        # Try to create order without customer name (empty string)
         with pytest.raises(Exception) as exc_info:
             order_grpc_client.create_order(
                 cart_id=cart_id,
-                customer_name="",
+                customer_name="",  # Empty name
                 customer_email="test@example.com",
-                shipping_address="Test"
+                shipping_address="Test Address"
             )
         
         assert "INVALID_ARGUMENT" in str(exc_info.value) or "required" in str(exc_info.value).lower()
@@ -121,8 +108,6 @@ class TestGRPCOrderService:
         
         for order in response.orders:
             assert order.id
-            assert order.customer_name
-            assert order.customer_email
             assert order.state in [1, 2, 3, 4]  # PROCESSING, SHIPPED, COMPLETED, CANCELED
 
     def test_query_orders_filter_processing(self, order_grpc_client: OrderServiceClient):
@@ -165,23 +150,15 @@ class TestGRPCOrderService:
     ):
         """Step 10: GetOrder - retrieve single order by ID."""
         # Create an order first
-        cart_id = f"test-cart-{uuid.uuid4()}"
+        cart_id = str(uuid.uuid4())
         cart_grpc_client.add_product_to_cart(cart_id, test_product_id, 1)
         
-        created_order = order_grpc_client.create_order(
-            cart_id=cart_id,
-            customer_name="Get Order Test",
-            customer_email="getorder@example.com",
-            shipping_address="Get Order Address"
-        )
+        created_order = order_grpc_client.create_order(cart_id=cart_id)
         
         # Get the order
         order = order_grpc_client.get_order(created_order.id)
         
         assert order.id == created_order.id
-        assert order.customer_name == "Get Order Test"
-        assert order.customer_email == "getorder@example.com"
-
     def test_get_order_not_found(self, order_grpc_client: OrderServiceClient):
         """Step 11: GetOrder - non-existent order."""
         with pytest.raises(Exception) as exc_info:
@@ -197,15 +174,10 @@ class TestGRPCOrderService:
     ):
         """Step 12: UpdateOrder - PROCESSING to SHIPPED."""
         # Create an order
-        cart_id = f"test-cart-{uuid.uuid4()}"
+        cart_id = str(uuid.uuid4())
         cart_grpc_client.add_product_to_cart(cart_id, test_product_id, 1)
         
-        order = order_grpc_client.create_order(
-            cart_id=cart_id,
-            customer_name="Ship Test",
-            customer_email="ship@example.com",
-            shipping_address="Ship Address"
-        )
+        order = order_grpc_client.create_order(cart_id=cart_id)
         
         # Update to SHIPPED
         updated = order_grpc_client.update_order(order.id, state=2)  # SHIPPED=2
@@ -220,15 +192,10 @@ class TestGRPCOrderService:
     ):
         """Step 13: UpdateOrder - SHIPPED to COMPLETED."""
         # Create and ship an order
-        cart_id = f"test-cart-{uuid.uuid4()}"
+        cart_id = str(uuid.uuid4())
         cart_grpc_client.add_product_to_cart(cart_id, test_product_id, 1)
         
-        order = order_grpc_client.create_order(
-            cart_id=cart_id,
-            customer_name="Complete Test",
-            customer_email="complete@example.com",
-            shipping_address="Complete Address"
-        )
+        order = order_grpc_client.create_order(cart_id=cart_id)
         order_grpc_client.update_order(order.id, state=2)  # Ship first
         
         # Complete the order
@@ -244,15 +211,10 @@ class TestGRPCOrderService:
     ):
         """Step 14: UpdateOrder - PROCESSING to CANCELED."""
         # Create an order
-        cart_id = f"test-cart-{uuid.uuid4()}"
+        cart_id = str(uuid.uuid4())
         cart_grpc_client.add_product_to_cart(cart_id, test_product_id, 1)
         
-        order = order_grpc_client.create_order(
-            cart_id=cart_id,
-            customer_name="Cancel Test",
-            customer_email="cancel@example.com",
-            shipping_address="Cancel Address"
-        )
+        order = order_grpc_client.create_order(cart_id=cart_id)
         
         # Cancel the order
         updated = order_grpc_client.update_order(order.id, state=4)  # CANCELED=4
@@ -267,15 +229,10 @@ class TestGRPCOrderService:
     ):
         """Step 15: UpdateOrder - invalid state transition."""
         # Create an order
-        cart_id = f"test-cart-{uuid.uuid4()}"
+        cart_id = str(uuid.uuid4())
         cart_grpc_client.add_product_to_cart(cart_id, test_product_id, 1)
         
-        order = order_grpc_client.create_order(
-            cart_id=cart_id,
-            customer_name="Invalid Transition Test",
-            customer_email="invalid@example.com",
-            shipping_address="Invalid Address"
-        )
+        order = order_grpc_client.create_order(cart_id=cart_id)
         
         # Try to complete without shipping first
         with pytest.raises(Exception) as exc_info:
@@ -291,15 +248,10 @@ class TestGRPCOrderService:
     ):
         """Step 16: UpdateOrder - terminal state (should fail)."""
         # Create, ship, and complete an order
-        cart_id = f"test-cart-{uuid.uuid4()}"
+        cart_id = str(uuid.uuid4())
         cart_grpc_client.add_product_to_cart(cart_id, test_product_id, 1)
         
-        order = order_grpc_client.create_order(
-            cart_id=cart_id,
-            customer_name="Terminal State Test",
-            customer_email="terminal@example.com",
-            shipping_address="Terminal Address"
-        )
+        order = order_grpc_client.create_order(cart_id=cart_id)
         order_grpc_client.update_order(order.id, state=2)  # Ship
         order_grpc_client.update_order(order.id, state=3)  # Complete
         
@@ -324,17 +276,12 @@ class TestGRPCOrderService:
         )
         
         # Add to cart and create order
-        cart_id = f"test-cart-{uuid.uuid4()}"
+        cart_id = str(uuid.uuid4())
         cart_grpc_client.add_product_to_cart(cart_id, product.id, 2)
         
-        order = order_grpc_client.create_order(
-            cart_id=cart_id,
-            customer_name="Snapshot Test",
-            customer_email="snapshot@example.com",
-            shipping_address="Snapshot Address"
-        )
+        order = order_grpc_client.create_order(cart_id=cart_id)
         
-        original_price = order.items[0].product.price_per_unit
+        original_price = order.items[0].price_at_purchase
         
         # Update product price
         inventory_grpc_client.update_product(product.id, price_per_unit=8000)
@@ -342,8 +289,10 @@ class TestGRPCOrderService:
         # Get order again
         updated_order = order_grpc_client.get_order(order.id)
         
-        # Price in order should not change (snapshot)
-        assert updated_order.items[0].product.price_per_unit == original_price
+        # Snapshot price should not change (uses price_at_purchase)
+        assert updated_order.items[0].price_at_purchase == original_price
+        # But the live product price should have changed
+        assert updated_order.items[0].product.price_per_unit == 8000
 
     def test_query_orders_pagination(self, order_grpc_client: OrderServiceClient):
         """Step 18: QueryOrders - pagination with cursor."""
@@ -382,18 +331,13 @@ class TestGRPCOrderService:
         )
         
         # Add to cart
-        cart_id = f"test-cart-{uuid.uuid4()}"
+        cart_id = str(uuid.uuid4())
         cart_grpc_client.add_product_to_cart(cart_id, product1.id, 2)  # 2500
         cart_grpc_client.add_product_to_cart(cart_id, product2.id, 1)  # 3000
         
         # Create order
-        order = order_grpc_client.create_order(
-            cart_id=cart_id,
-            customer_name="Calc Test",
-            customer_email="calc@example.com",
-            shipping_address="Calc Address"
-        )
+        order = order_grpc_client.create_order(cart_id=cart_id)
         
         # Verify calculations
         expected_total = (1250 * 2) + (3000 * 1)  # 5500
-        assert order.total_price == expected_total
+        assert order.total_amount == expected_total

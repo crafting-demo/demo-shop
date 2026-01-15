@@ -81,13 +81,14 @@ class InventoryServiceClient(GRPCClient):
             product_id: Product ID
             
         Returns:
-            GetProductResponse
+            Product
         """
         if not self.stub:
             raise RuntimeError("Protobuf stubs not compiled.")
         
         request = transaction_pb2.GetProductRequest(id=product_id)
-        return self.stub.GetProduct(request)
+        response = self.stub.GetProduct(request)
+        return response.product
 
     def create_product(
         self,
@@ -122,7 +123,8 @@ class InventoryServiceClient(GRPCClient):
             count_in_stock=count_in_stock,
             state=state,
         )
-        return self.stub.CreateProduct(request)
+        response = self.stub.CreateProduct(request)
+        return response.product
 
     def update_product(
         self,
@@ -166,7 +168,8 @@ class InventoryServiceClient(GRPCClient):
         if state is not None:
             request.state.value = state
         
-        return self.stub.UpdateProduct(request)
+        response = self.stub.UpdateProduct(request)
+        return response.product
 
     def delete_product(self, product_id: str) -> Any:
         """Delete product.
@@ -202,13 +205,14 @@ class CartServiceClient(GRPCClient):
             cart_id: Cart ID
             
         Returns:
-            GetCartResponse
+            Cart
         """
         if not self.stub:
             raise RuntimeError("Protobuf stubs not compiled.")
         
         request = transaction_pb2.GetCartRequest(cart_id=cart_id)
-        return self.stub.GetCart(request)
+        response = self.stub.GetCart(request)
+        return response.cart
 
     def add_product_to_cart(
         self, cart_id: str, product_id: str, quantity: int
@@ -221,7 +225,7 @@ class CartServiceClient(GRPCClient):
             quantity: Quantity to add
             
         Returns:
-            AddProductToCartResponse
+            Cart
         """
         if not self.stub:
             raise RuntimeError("Protobuf stubs not compiled.")
@@ -231,7 +235,8 @@ class CartServiceClient(GRPCClient):
             product_id=product_id,
             quantity=quantity,
         )
-        return self.stub.AddProductToCart(request)
+        response = self.stub.AddProductToCart(request)
+        return response.cart
 
     def update_product_in_cart(
         self, cart_id: str, product_id: str, quantity: int
@@ -244,7 +249,7 @@ class CartServiceClient(GRPCClient):
             quantity: New quantity (0 to remove)
             
         Returns:
-            UpdateProductInCartResponse
+            Cart
         """
         if not self.stub:
             raise RuntimeError("Protobuf stubs not compiled.")
@@ -254,7 +259,8 @@ class CartServiceClient(GRPCClient):
             product_id=product_id,
             quantity=quantity,
         )
-        return self.stub.UpdateProductInCart(request)
+        response = self.stub.UpdateProductInCart(request)
+        return response.cart
 
     def clear_cart(self, cart_id: str) -> Any:
         """Clear cart.
@@ -283,20 +289,35 @@ class OrderServiceClient(GRPCClient):
         else:
             self.stub = None
 
-    def create_order(self, cart_id: str) -> Any:
+    def create_order(
+        self, 
+        cart_id: str, 
+        customer_name: str = "Test Customer",
+        customer_email: str = "test@example.com",
+        shipping_address: str = "Test Address"
+    ) -> Any:
         """Create order from cart.
         
         Args:
             cart_id: Cart ID
+            customer_name: Customer name
+            customer_email: Customer email
+            shipping_address: Shipping address
             
         Returns:
-            CreateOrderResponse
+            Order
         """
         if not self.stub:
             raise RuntimeError("Protobuf stubs not compiled.")
         
-        request = transaction_pb2.CreateOrderRequest(cart_id=cart_id)
-        return self.stub.CreateOrder(request)
+        request = transaction_pb2.CreateOrderRequest(
+            cart_id=cart_id,
+            customer_name=customer_name,
+            customer_email=customer_email,
+            shipping_address=shipping_address
+        )
+        response = self.stub.CreateOrder(request)
+        return response.order
 
     def query_orders(
         self,
@@ -332,13 +353,14 @@ class OrderServiceClient(GRPCClient):
             order_id: Order ID
             
         Returns:
-            GetOrderResponse
+            Order
         """
         if not self.stub:
             raise RuntimeError("Protobuf stubs not compiled.")
         
         request = transaction_pb2.GetOrderRequest(id=order_id)
-        return self.stub.GetOrder(request)
+        response = self.stub.GetOrder(request)
+        return response.order
 
     def update_order(self, order_id: str, state: int) -> Any:
         """Update order state.
@@ -357,4 +379,5 @@ class OrderServiceClient(GRPCClient):
             id=order_id,
             state=state,
         )
-        return self.stub.UpdateOrder(request)
+        response = self.stub.UpdateOrder(request)
+        return response.order

@@ -5,12 +5,21 @@ package customer
 import (
 	"context"
 	"fmt"
+	"regexp"
 
 	demoshopv1 "demoshop/gen/proto/demoshop/v1"
 	"demoshop/pkg/frontend"
 	"demoshop/pkg/frontend/graphql/convert"
 	"demoshop/pkg/frontend/graphql/types"
 )
+
+// Email validation regex
+// Matches standard email format: local-part@domain
+// - Local part: alphanumeric, dots, hyphens, underscores
+// - Must have @ symbol
+// - Domain: alphanumeric, dots, hyphens
+// - Must have at least one dot in domain
+var emailRegex = regexp.MustCompile(`^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$`)
 
 type Resolver struct {
 	app *frontend.App
@@ -117,13 +126,31 @@ func (r *mutationResolver) ClearCart(ctx context.Context) (*types.Cart, error) {
 
 // PlaceOrder is the resolver for the placeOrder field.
 func (r *mutationResolver) PlaceOrder(ctx context.Context, input PlaceOrderInput) (*types.Order, error) {
+	// Validate input
+	if input.CustomerName == "" {
+		return nil, fmt.Errorf("customer name is required")
+	}
+	if input.CustomerEmail == "" {
+		return nil, fmt.Errorf("customer email is required")
+	}
+	// Validate email format using regex
+	if !emailRegex.MatchString(input.CustomerEmail) {
+		return nil, fmt.Errorf("invalid email format")
+	}
+	if input.ShippingAddress == "" {
+		return nil, fmt.Errorf("shipping address is required")
+	}
+
 	cartID := r.getCartID(ctx)
 	if cartID == "" {
 		return nil, fmt.Errorf("no cart session found")
 	}
 
 	resp, err := r.app.TransactionClient().OrderService().CreateOrder(ctx, &demoshopv1.CreateOrderRequest{
-		CartId: cartID,
+		CartId:          cartID,
+		CustomerName:    input.CustomerName,
+		CustomerEmail:   input.CustomerEmail,
+		ShippingAddress: input.ShippingAddress,
 	})
 	if err != nil {
 		return nil, fmt.Errorf("failed to create order: %w", err)
@@ -162,13 +189,12 @@ func (r *queryResolver) Products(ctx context.Context, first *int, after *string)
 	}
 
 	edges := make([]*types.ProductEdge, 0, len(resp.Products))
-	for i, product := range resp.Products {
+	for _, product := range resp.Products {
 		// Filter out products with no stock
 		if product.CountInStock > 0 {
-			cursor := fmt.Sprintf("product_%d", i)
 			edges = append(edges, &types.ProductEdge{
 				Node:   convert.ProductFromProto(product),
-				Cursor: cursor,
+				Cursor: product.Id,
 			})
 		}
 	}

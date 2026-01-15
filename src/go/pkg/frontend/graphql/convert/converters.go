@@ -180,11 +180,25 @@ func OrderFromProto(o *demoshopv1.Order, customerName, customerEmail, shippingAd
 		items[i] = OrderItemFromProto(item)
 	}
 
+	// Use proto fields if available, otherwise fall back to parameters (for compatibility)
+	name := o.CustomerName
+	if name == "" {
+		name = customerName
+	}
+	email := o.CustomerEmail
+	if email == "" {
+		email = customerEmail
+	}
+	address := o.ShippingAddress
+	if address == "" {
+		address = shippingAddress
+	}
+
 	return &types.Order{
 		ID:              o.Id,
-		CustomerName:    customerName,
-		CustomerEmail:   customerEmail,
-		ShippingAddress: shippingAddress,
+		CustomerName:    name,
+		CustomerEmail:   email,
+		ShippingAddress: address,
 		Items:           items,
 		TotalPrice:      int(o.TotalAmount),
 		State:           OrderStateFromProto(o.State),

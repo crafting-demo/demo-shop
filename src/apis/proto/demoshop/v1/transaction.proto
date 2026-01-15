@@ -74,6 +74,9 @@ message Order {
   State state = 4;
   google.protobuf.Timestamp created_at = 5;
   google.protobuf.Timestamp updated_at = 6;
+  string customer_name = 7;
+  string customer_email = 8;
+  string shipping_address = 9;
 }
 
 // =============================================================================
@@ -101,6 +104,7 @@ message PaginationRequest {
 message QueryProductsRequest {
   PaginationRequest pagination = 1;
   Product.State state_filter = 2; // Optional filter by product state
+  string search_name = 3; // Optional search by name (case-insensitive partial match)
 }
 
 message QueryProductsResponse {
@@ -220,6 +224,9 @@ message ClearCartResponse {
 
 message CreateOrderRequest {
   string cart_id = 1; // Create order from cart contents
+  string customer_name = 2;
+  string customer_email = 3;
+  string shipping_address = 4;
 }
 
 message CreateOrderResponse {
@@ -234,6 +241,7 @@ message QueryOrdersRequest {
   }
 
   StateFilter state_filter = 2; // Optional filter by order state
+  string customer_email = 3; // Optional filter by customer email
 }
 
 message QueryOrdersResponse {

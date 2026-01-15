@@ -195,8 +195,13 @@ func (r *queryResolver) Products(ctx context.Context, first *int, after *string,
 	}
 
 	// Apply filters
-	if filter != nil && filter.State != nil {
-		req.StateFilter = convert.ProductStateToProto(*filter.State)
+	if filter != nil {
+		if filter.State != nil {
+			req.StateFilter = convert.ProductStateToProto(*filter.State)
+		}
+		if filter.SearchName != nil {
+			req.SearchName = *filter.SearchName
+		}
 	}
 
 	resp, err := r.app.TransactionClient().InventoryService().QueryProducts(ctx, req)
@@ -205,11 +210,10 @@ func (r *queryResolver) Products(ctx context.Context, first *int, after *string,
 	}
 
 	edges := make([]*types.ProductEdge, len(resp.Products))
-	for i, product := range resp.Products {
-		cursor := fmt.Sprintf("product_%d", i)
-		edges[i] = &types.ProductEdge{
+	for idx, product := range resp.Products {
+		edges[idx] = &types.ProductEdge{
 			Node:   convert.ProductFromProto(product),
-			Cursor: cursor,
+			Cursor: product.Id,
 		}
 	}
 
@@ -263,9 +267,14 @@ func (r *queryResolver) Orders(ctx context.Context, first *int, after *string, f
 	}
 
 	// Apply filters
-	if filter != nil && filter.State != nil {
-		req.StateFilter = &demoshopv1.QueryOrdersRequest_StateFilter{
-			Value: convert.OrderStateToProto(*filter.State),
+	if filter != nil {
+		if filter.State != nil {
+			req.StateFilter = &demoshopv1.QueryOrdersRequest_StateFilter{
+				Value: convert.OrderStateToProto(*filter.State),
+			}
+		}
+		if filter.CustomerEmail != nil {
+			req.CustomerEmail = *filter.CustomerEmail
 		}
 	}
 
@@ -275,11 +284,10 @@ func (r *queryResolver) Orders(ctx context.Context, first *int, after *string, f
 	}
 
 	edges := make([]*types.OrderEdge, len(resp.Orders))
-	for i, order := range resp.Orders {
-		cursor := fmt.Sprintf("order_%d", i)
-		edges[i] = &types.OrderEdge{
+	for idx, order := range resp.Orders {
+		edges[idx] = &types.OrderEdge{
 			Node:   convert.OrderFromProto(order, "", "", ""),
-			Cursor: cursor,
+			Cursor: order.Id,
 		}
 	}
 

@@ -41,6 +41,11 @@ func (s *CartServer) GetCart(ctx context.Context, req *pb.GetCartRequest) (*pb.G
 }
 
 func (s *CartServer) AddProductToCart(ctx context.Context, req *pb.AddProductToCartRequest) (*pb.AddProductToCartResponse, error) {
+	// Validate quantity
+	if req.Quantity <= 0 {
+		return nil, status.Error(codes.InvalidArgument, "quantity must be greater than 0")
+	}
+
 	product, err := s.productRepo.GetProduct(ctx, req.ProductId)
 	if err == repository.ErrProductNotFound {
 		return nil, status.Errorf(codes.NotFound, "product with id %s not found", req.ProductId)

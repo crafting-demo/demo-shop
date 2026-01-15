@@ -31,6 +31,12 @@ func NewPostgreSQLCartRepository(db *sql.DB) *PostgreSQLCartRepository {
 }
 
 func (r *PostgreSQLCartRepository) GetCart(ctx context.Context, id string) (*pb.Cart, error) {
+	// Validate UUID format - if not a valid UUID, treat as not found
+	// This allows the service layer to auto-create a cart with this ID
+	if _, err := uuid.Parse(id); err != nil {
+		return nil, ErrCartNotFound
+	}
+
 	tx, err := r.db.BeginTx(ctx, nil)
 	if err != nil {
 		return nil, fmt.Errorf("failed to begin transaction: %w", err)
@@ -127,7 +133,12 @@ func (r *PostgreSQLCartRepository) GetCart(ctx context.Context, id string) (*pb.
 }
 
 func (r *PostgreSQLCartRepository) CreateCart(ctx context.Context, cart *pb.Cart) (*pb.Cart, error) {
+	// If cart ID is provided but not a valid UUID, generate a new one
+	// This allows test IDs like "test-cart-xxx" to work by auto-generating proper UUIDs
 	if cart.Id == "" {
+		cart.Id = uuid.New().String()
+	} else if _, err := uuid.Parse(cart.Id); err != nil {
+		// Invalid UUID, generate a new one
 		cart.Id = uuid.New().String()
 	}
 

@@ -242,15 +242,21 @@ class TestGRPCInventoryService:
 
     def test_create_product_with_image_data(self, inventory_grpc_client: InventoryServiceClient):
         """Step 18: CreateProduct - with image data."""
-        image_data = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+        # Create base64 image data (not data URI, just raw bytes)
+        import base64
+        # Decode the base64 string to bytes
+        image_bytes = base64.b64decode(
+            "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+        )
         
         product = inventory_grpc_client.create_product(
             name="Product with Image",
             description="Has image data",
-            image_data=image_data,
+            image_data=image_bytes,
             price_per_unit=2500,
             count_in_stock=7
         )
         
         assert product.id
-        assert product.image_data == image_data
+        # The protobuf field is bytes, so compare bytes
+        assert product.image_data == image_bytes

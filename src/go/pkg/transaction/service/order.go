@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"regexp"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -9,6 +10,8 @@ import (
 	pb "demoshop/gen/proto/demoshop/v1"
 	"demoshop/pkg/transaction/repository"
 )
+
+var emailRegex = regexp.MustCompile(`^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$`)
 
 type OrderServer struct {
 	pb.UnimplementedOrderServiceServer
@@ -24,6 +27,20 @@ func NewOrderServer(orderRepo repository.OrderRepository, cartRepo repository.Ca
 }
 
 func (s *OrderServer) CreateOrder(ctx context.Context, req *pb.CreateOrderRequest) (*pb.CreateOrderResponse, error) {
+	// Validate input
+	if req.CustomerName == "" {
+		return nil, status.Error(codes.InvalidArgument, "customer name is required")
+	}
+	if req.CustomerEmail == "" {
+		return nil, status.Error(codes.InvalidArgument, "customer email is required")
+	}
+	if !emailRegex.MatchString(req.CustomerEmail) {
+		return nil, status.Error(codes.InvalidArgument, "invalid email format")
+	}
+	if req.ShippingAddress == "" {
+		return nil, status.Error(codes.InvalidArgument, "shipping address is required")
+	}
+
 	cart, err := s.cartRepo.GetCart(ctx, req.CartId)
 	if err == repository.ErrCartNotFound {
 		return nil, status.Errorf(codes.NotFound, "cart with id %s not found", req.CartId)
@@ -50,9 +67,12 @@ func (s *OrderServer) CreateOrder(ctx context.Context, req *pb.CreateOrderReques
 	}
 
 	order := &pb.Order{
-		Items:       orderItems,
-		TotalAmount: totalAmount,
-		State:       pb.Order_PROCESSING,
+		Items:           orderItems,
+		TotalAmount:     totalAmount,
+		State:           pb.Order_PROCESSING,
+		CustomerName:    req.CustomerName,
+		CustomerEmail:   req.CustomerEmail,
+		ShippingAddress: req.ShippingAddress,
 	}
 
 	createdOrder, err := s.orderRepo.CreateOrder(ctx, order)
@@ -81,7 +101,7 @@ func (s *OrderServer) QueryOrders(ctx context.Context, req *pb.QueryOrdersReques
 		stateFilter = &req.StateFilter.Value
 	}
 
-	orders, totalCount, err := s.orderRepo.QueryOrders(ctx, stateFilter, first, req.Pagination.After)
+	orders, totalCount, err := s.orderRepo.QueryOrders(ctx, stateFilter, req.CustomerEmail, first, req.Pagination.After)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to query orders: %v", err)
 	}

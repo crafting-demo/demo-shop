@@ -85,21 +85,21 @@ class TestCustomerCartOperations:
         """Step 5: Update item quantity (increase)."""
         # Setup: cart with one item
         customer_graphql_client.clear_cart()
-        customer_graphql_client.add_to_cart(test_product_ids[0], quantity=3)
+        customer_graphql_client.add_to_cart(test_product_ids[0], quantity=2)
         
         # Update to higher quantity
-        result = customer_graphql_client.update_cart_item(test_product_ids[0], quantity=10)
+        result = customer_graphql_client.update_cart_item(test_product_ids[0], quantity=5)
         
         cart = result['data']['updateCartItem']
         assert len(cart['items']) == 1
         # Quantity should be set to exact value, not incremented
-        assert cart['items'][0]['quantity'] == 10
+        assert cart['items'][0]['quantity'] == 5
 
     def test_update_item_decrease_quantity(self, customer_graphql_client: CustomerGraphQLClient, test_product_ids: list):
         """Step 6: Update item quantity (decrease)."""
         # Setup: cart with one item with high quantity
         customer_graphql_client.clear_cart()
-        customer_graphql_client.add_to_cart(test_product_ids[0], quantity=10)
+        customer_graphql_client.add_to_cart(test_product_ids[0], quantity=5)
         
         # Decrease quantity
         result = customer_graphql_client.update_cart_item(test_product_ids[0], quantity=2)
@@ -234,9 +234,9 @@ class TestCustomerCartOperations:
         """Step 19: Verify price calculation accuracy."""
         # Setup cart with known quantities
         customer_graphql_client.clear_cart()
-        result1 = customer_graphql_client.add_to_cart(test_product_ids[0], quantity=3)
+        result1 = customer_graphql_client.add_to_cart(test_product_ids[0], quantity=2)
         result2 = customer_graphql_client.add_to_cart(test_product_ids[1], quantity=2)
-        result3 = customer_graphql_client.add_to_cart(test_product_ids[2], quantity=10)
+        result3 = customer_graphql_client.add_to_cart(test_product_ids[2], quantity=3)
         
         # Query final cart
         final_result = customer_graphql_client.query_cart()

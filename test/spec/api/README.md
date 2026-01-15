@@ -79,9 +79,6 @@ If you need to regenerate the proto files manually:
 ```bash
 # Generate proto files
 ./gen-proto.sh
-
-# Or fix imports in existing generated files
-python3 fix_proto_imports.py
 ```
 
 ### Configuration
@@ -109,6 +106,12 @@ ENABLE_SLOW_TESTS=false
 
 ```bash
 uv run pytest
+```
+
+With test report:
+
+```bash
+uv run pytest --junit-xml=test-results.xml
 ```
 
 ### Run specific test categories

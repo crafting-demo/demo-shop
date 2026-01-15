@@ -128,7 +128,7 @@ def validate_data_uri(data_uri: str, expected_mime_type: Optional[str] = None) -
     
     Args:
         data_uri: Data URI string
-        expected_mime_type: Expected MIME type (e.g., 'image/png')
+        expected_mime_type: Expected MIME type or prefix (e.g., 'image/png' or 'image/')
         
     Returns:
         True if valid data URI
@@ -140,8 +140,10 @@ def validate_data_uri(data_uri: str, expected_mime_type: Optional[str] = None) -
         parts = data_uri.split(";", 1)
         mime_type = parts[0][5:]  # Remove "data:" prefix
         
-        if expected_mime_type and mime_type != expected_mime_type:
-            return False
+        if expected_mime_type:
+            # Support both exact match and prefix match
+            if not (mime_type == expected_mime_type or mime_type.startswith(expected_mime_type)):
+                return False
         
         if len(parts) > 1:
             encoding_and_data = parts[1].split(",", 1)

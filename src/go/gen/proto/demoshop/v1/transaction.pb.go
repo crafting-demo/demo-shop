@@ -429,15 +429,18 @@ func (x *OrderItem) GetPriceAtPurchase() int64 {
 
 // Order represents a customer order
 type Order struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Items         []*OrderItem           `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
-	TotalAmount   int64                  `protobuf:"varint,3,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
-	State         Order_State            `protobuf:"varint,4,opt,name=state,proto3,enum=demoshop.v1.Order_State" json:"state,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Id              string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Items           []*OrderItem           `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
+	TotalAmount     int64                  `protobuf:"varint,3,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	State           Order_State            `protobuf:"varint,4,opt,name=state,proto3,enum=demoshop.v1.Order_State" json:"state,omitempty"`
+	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt       *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CustomerName    string                 `protobuf:"bytes,7,opt,name=customer_name,json=customerName,proto3" json:"customer_name,omitempty"`
+	CustomerEmail   string                 `protobuf:"bytes,8,opt,name=customer_email,json=customerEmail,proto3" json:"customer_email,omitempty"`
+	ShippingAddress string                 `protobuf:"bytes,9,opt,name=shipping_address,json=shippingAddress,proto3" json:"shipping_address,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *Order) Reset() {
@@ -510,6 +513,27 @@ func (x *Order) GetUpdatedAt() *timestamppb.Timestamp {
 		return x.UpdatedAt
 	}
 	return nil
+}
+
+func (x *Order) GetCustomerName() string {
+	if x != nil {
+		return x.CustomerName
+	}
+	return ""
+}
+
+func (x *Order) GetCustomerEmail() string {
+	if x != nil {
+		return x.CustomerEmail
+	}
+	return ""
+}
+
+func (x *Order) GetShippingAddress() string {
+	if x != nil {
+		return x.ShippingAddress
+	}
+	return ""
 }
 
 type PageInfo struct {
@@ -636,6 +660,7 @@ type QueryProductsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Pagination    *PaginationRequest     `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
 	StateFilter   Product_State          `protobuf:"varint,2,opt,name=state_filter,json=stateFilter,proto3,enum=demoshop.v1.Product_State" json:"state_filter,omitempty"` // Optional filter by product state
+	SearchName    string                 `protobuf:"bytes,3,opt,name=search_name,json=searchName,proto3" json:"search_name,omitempty"`                                    // Optional search by name (case-insensitive partial match)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -682,6 +707,13 @@ func (x *QueryProductsRequest) GetStateFilter() Product_State {
 		return x.StateFilter
 	}
 	return Product_UNSPECIFIED
+}
+
+func (x *QueryProductsRequest) GetSearchName() string {
+	if x != nil {
+		return x.SearchName
+	}
+	return ""
 }
 
 type QueryProductsResponse struct {
@@ -1553,10 +1585,13 @@ func (*ClearCartResponse) Descriptor() ([]byte, []int) {
 }
 
 type CreateOrderRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	CartId        string                 `protobuf:"bytes,1,opt,name=cart_id,json=cartId,proto3" json:"cart_id,omitempty"` // Create order from cart contents
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	CartId          string                 `protobuf:"bytes,1,opt,name=cart_id,json=cartId,proto3" json:"cart_id,omitempty"` // Create order from cart contents
+	CustomerName    string                 `protobuf:"bytes,2,opt,name=customer_name,json=customerName,proto3" json:"customer_name,omitempty"`
+	CustomerEmail   string                 `protobuf:"bytes,3,opt,name=customer_email,json=customerEmail,proto3" json:"customer_email,omitempty"`
+	ShippingAddress string                 `protobuf:"bytes,4,opt,name=shipping_address,json=shippingAddress,proto3" json:"shipping_address,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *CreateOrderRequest) Reset() {
@@ -1592,6 +1627,27 @@ func (*CreateOrderRequest) Descriptor() ([]byte, []int) {
 func (x *CreateOrderRequest) GetCartId() string {
 	if x != nil {
 		return x.CartId
+	}
+	return ""
+}
+
+func (x *CreateOrderRequest) GetCustomerName() string {
+	if x != nil {
+		return x.CustomerName
+	}
+	return ""
+}
+
+func (x *CreateOrderRequest) GetCustomerEmail() string {
+	if x != nil {
+		return x.CustomerEmail
+	}
+	return ""
+}
+
+func (x *CreateOrderRequest) GetShippingAddress() string {
+	if x != nil {
+		return x.ShippingAddress
 	}
 	return ""
 }
@@ -1643,7 +1699,8 @@ func (x *CreateOrderResponse) GetOrder() *Order {
 type QueryOrdersRequest struct {
 	state         protoimpl.MessageState          `protogen:"open.v1"`
 	Pagination    *PaginationRequest              `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
-	StateFilter   *QueryOrdersRequest_StateFilter `protobuf:"bytes,2,opt,name=state_filter,json=stateFilter,proto3" json:"state_filter,omitempty"` // Optional filter by order state
+	StateFilter   *QueryOrdersRequest_StateFilter `protobuf:"bytes,2,opt,name=state_filter,json=stateFilter,proto3" json:"state_filter,omitempty"`       // Optional filter by order state
+	CustomerEmail string                          `protobuf:"bytes,3,opt,name=customer_email,json=customerEmail,proto3" json:"customer_email,omitempty"` // Optional filter by customer email
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1690,6 +1747,13 @@ func (x *QueryOrdersRequest) GetStateFilter() *QueryOrdersRequest_StateFilter {
 		return x.StateFilter
 	}
 	return nil
+}
+
+func (x *QueryOrdersRequest) GetCustomerEmail() string {
+	if x != nil {
+		return x.CustomerEmail
+	}
+	return ""
 }
 
 type QueryOrdersResponse struct {
@@ -2279,7 +2343,7 @@ const file_demoshop_v1_transaction_proto_rawDesc = "" +
 	"\tOrderItem\x12.\n" +
 	"\aproduct\x18\x01 \x01(\v2\x14.demoshop.v1.ProductR\aproduct\x12\x1a\n" +
 	"\bquantity\x18\x02 \x01(\x05R\bquantity\x12*\n" +
-	"\x11price_at_purchase\x18\x03 \x01(\x03R\x0fpriceAtPurchase\"\xe2\x02\n" +
+	"\x11price_at_purchase\x18\x03 \x01(\x03R\x0fpriceAtPurchase\"\xd9\x03\n" +
 	"\x05Order\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12,\n" +
 	"\x05items\x18\x02 \x03(\v2\x16.demoshop.v1.OrderItemR\x05items\x12!\n" +
@@ -2288,7 +2352,10 @@ const file_demoshop_v1_transaction_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"R\n" +
+	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12#\n" +
+	"\rcustomer_name\x18\a \x01(\tR\fcustomerName\x12%\n" +
+	"\x0ecustomer_email\x18\b \x01(\tR\rcustomerEmail\x12)\n" +
+	"\x10shipping_address\x18\t \x01(\tR\x0fshippingAddress\"R\n" +
 	"\x05State\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +
@@ -2304,12 +2371,14 @@ const file_demoshop_v1_transaction_proto_rawDesc = "" +
 	"end_cursor\x18\x04 \x01(\tR\tendCursor\"?\n" +
 	"\x11PaginationRequest\x12\x14\n" +
 	"\x05first\x18\x01 \x01(\x05R\x05first\x12\x14\n" +
-	"\x05after\x18\x02 \x01(\tR\x05after\"\x95\x01\n" +
+	"\x05after\x18\x02 \x01(\tR\x05after\"\xb6\x01\n" +
 	"\x14QueryProductsRequest\x12>\n" +
 	"\n" +
 	"pagination\x18\x01 \x01(\v2\x1e.demoshop.v1.PaginationRequestR\n" +
 	"pagination\x12=\n" +
-	"\fstate_filter\x18\x02 \x01(\x0e2\x1a.demoshop.v1.Product.StateR\vstateFilter\"\x9e\x01\n" +
+	"\fstate_filter\x18\x02 \x01(\x0e2\x1a.demoshop.v1.Product.StateR\vstateFilter\x12\x1f\n" +
+	"\vsearch_name\x18\x03 \x01(\tR\n" +
+	"searchName\"\x9e\x01\n" +
 	"\x15QueryProductsResponse\x120\n" +
 	"\bproducts\x18\x01 \x03(\v2\x14.demoshop.v1.ProductR\bproducts\x122\n" +
 	"\tpage_info\x18\x02 \x01(\v2\x15.demoshop.v1.PageInfoR\bpageInfo\x12\x1f\n" +
@@ -2376,16 +2445,20 @@ const file_demoshop_v1_transaction_proto_rawDesc = "" +
 	"\x04cart\x18\x01 \x01(\v2\x11.demoshop.v1.CartR\x04cart\"+\n" +
 	"\x10ClearCartRequest\x12\x17\n" +
 	"\acart_id\x18\x01 \x01(\tR\x06cartId\"\x13\n" +
-	"\x11ClearCartResponse\"-\n" +
+	"\x11ClearCartResponse\"\xa4\x01\n" +
 	"\x12CreateOrderRequest\x12\x17\n" +
-	"\acart_id\x18\x01 \x01(\tR\x06cartId\"?\n" +
+	"\acart_id\x18\x01 \x01(\tR\x06cartId\x12#\n" +
+	"\rcustomer_name\x18\x02 \x01(\tR\fcustomerName\x12%\n" +
+	"\x0ecustomer_email\x18\x03 \x01(\tR\rcustomerEmail\x12)\n" +
+	"\x10shipping_address\x18\x04 \x01(\tR\x0fshippingAddress\"?\n" +
 	"\x13CreateOrderResponse\x12(\n" +
-	"\x05order\x18\x01 \x01(\v2\x12.demoshop.v1.OrderR\x05order\"\xe3\x01\n" +
+	"\x05order\x18\x01 \x01(\v2\x12.demoshop.v1.OrderR\x05order\"\x8a\x02\n" +
 	"\x12QueryOrdersRequest\x12>\n" +
 	"\n" +
 	"pagination\x18\x01 \x01(\v2\x1e.demoshop.v1.PaginationRequestR\n" +
 	"pagination\x12N\n" +
-	"\fstate_filter\x18\x02 \x01(\v2+.demoshop.v1.QueryOrdersRequest.StateFilterR\vstateFilter\x1a=\n" +
+	"\fstate_filter\x18\x02 \x01(\v2+.demoshop.v1.QueryOrdersRequest.StateFilterR\vstateFilter\x12%\n" +
+	"\x0ecustomer_email\x18\x03 \x01(\tR\rcustomerEmail\x1a=\n" +
 	"\vStateFilter\x12.\n" +
 	"\x05value\x18\x01 \x01(\x0e2\x18.demoshop.v1.Order.StateR\x05value\"\x96\x01\n" +
 	"\x13QueryOrdersResponse\x12*\n" +

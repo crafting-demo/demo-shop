@@ -656,6 +656,7 @@ class AdminGraphQLClient(GraphQLClient):
                 shipOrder(id: $id) {
                     id
                     state
+                    createdAt
                     updatedAt
                 }
             }

@@ -17,7 +17,7 @@ type ProductRepository interface {
 	CreateProduct(ctx context.Context, product *pb.Product) (*pb.Product, error)
 	UpdateProduct(ctx context.Context, product *pb.Product) (*pb.Product, error)
 	DeleteProduct(ctx context.Context, id string) error
-	QueryProducts(ctx context.Context, stateFilter pb.Product_State, limit int, after string) ([]*pb.Product, int32, error)
+	QueryProducts(ctx context.Context, stateFilter pb.Product_State, searchName string, limit int, after string) ([]*pb.Product, int32, error)
 }
 
 type PostgreSQLProductRepository struct {
@@ -29,6 +29,11 @@ func NewPostgreSQLProductRepository(db *sql.DB) *PostgreSQLProductRepository {
 }
 
 func (r *PostgreSQLProductRepository) GetProduct(ctx context.Context, id string) (*pb.Product, error) {
+	// Validate UUID format
+	if _, err := uuid.Parse(id); err != nil {
+		return nil, ErrProductNotFound
+	}
+
 	query := `
 		SELECT id, name, description, image_data, price_per_unit, count_in_stock, state, created_at, updated_at
 		FROM products
@@ -158,6 +163,11 @@ func (r *PostgreSQLProductRepository) UpdateProduct(ctx context.Context, product
 }
 
 func (r *PostgreSQLProductRepository) DeleteProduct(ctx context.Context, id string) error {
+	// Validate UUID format
+	if _, err := uuid.Parse(id); err != nil {
+		return ErrProductNotFound
+	}
+
 	query := `
 		UPDATE products
 		SET state = $2, is_deleted = TRUE
@@ -181,13 +191,21 @@ func (r *PostgreSQLProductRepository) DeleteProduct(ctx context.Context, id stri
 	return nil
 }
 
-func (r *PostgreSQLProductRepository) QueryProducts(ctx context.Context, stateFilter pb.Product_State, limit int, after string) ([]*pb.Product, int32, error) {
+func (r *PostgreSQLProductRepository) QueryProducts(ctx context.Context, stateFilter pb.Product_State, searchName string, limit int, after string) ([]*pb.Product, int32, error) {
 	var args []interface{}
 	whereClause := "WHERE is_deleted = FALSE"
 
+	argIndex := 1
 	if stateFilter != pb.Product_UNSPECIFIED {
-		whereClause += " AND state = $1"
+		whereClause += fmt.Sprintf(" AND state = $%d", argIndex)
 		args = append(args, stateFilter)
+		argIndex++
+	}
+
+	if searchName != "" {
+		whereClause += fmt.Sprintf(" AND LOWER(name) LIKE LOWER($%d)", argIndex)
+		args = append(args, "%"+searchName+"%")
+		argIndex++
 	}
 
 	countQuery := fmt.Sprintf("SELECT COUNT(*) FROM products %s", whereClause)
@@ -204,22 +222,30 @@ func (r *PostgreSQLProductRepository) QueryProducts(ctx context.Context, stateFi
 		%s
 		ORDER BY created_at DESC
 		LIMIT $%d
-	`, whereClause, len(args)+1)
+	`, whereClause, argIndex)
 
-	args = append(args, limit)
+	queryArgs := append([]interface{}(nil), args...)
+	queryArgs = append(queryArgs, limit)
 
 	if after != "" {
+		// Validate cursor is a UUID
+		if _, err := uuid.Parse(after); err != nil {
+			return nil, 0, fmt.Errorf("invalid cursor format: %w", err)
+		}
+
 		query = fmt.Sprintf(`
 			SELECT id, name, description, image_data, price_per_unit, count_in_stock, state, created_at, updated_at
 			FROM products
-			%s AND created_at < (SELECT created_at FROM products WHERE id = $%d)
+			%s AND created_at < (SELECT created_at FROM products WHERE id = $%d::uuid)
 			ORDER BY created_at DESC
 			LIMIT $%d
-		`, whereClause, len(args)+1, len(args)+2)
-		args = append(args, after, limit)
+		`, whereClause, argIndex, argIndex+1)
+		// Replace queryArgs - include filter args, cursor, then limit
+		queryArgs = append([]interface{}(nil), args...)
+		queryArgs = append(queryArgs, after, limit)
 	}
 
-	rows, err := r.db.QueryContext(ctx, query, args...)
+	rows, err := r.db.QueryContext(ctx, query, queryArgs...)
 	if err != nil {
 		return nil, 0, fmt.Errorf("failed to query products: %w", err)
 	}

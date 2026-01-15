@@ -16,7 +16,7 @@ type OrderRepository interface {
 	GetOrder(ctx context.Context, id string) (*pb.Order, error)
 	CreateOrder(ctx context.Context, order *pb.Order) (*pb.Order, error)
 	UpdateOrder(ctx context.Context, order *pb.Order) (*pb.Order, error)
-	QueryOrders(ctx context.Context, stateFilter *pb.Order_State, limit int, after string) ([]*pb.Order, int32, error)
+	QueryOrders(ctx context.Context, stateFilter *pb.Order_State, customerEmail string, limit int, after string) ([]*pb.Order, int32, error)
 }
 
 type PostgreSQLOrderRepository struct {
@@ -28,6 +28,11 @@ func NewPostgreSQLOrderRepository(db *sql.DB) *PostgreSQLOrderRepository {
 }
 
 func (r *PostgreSQLOrderRepository) GetOrder(ctx context.Context, id string) (*pb.Order, error) {
+	// Validate UUID format
+	if _, err := uuid.Parse(id); err != nil {
+		return nil, ErrOrderNotFound
+	}
+
 	tx, err := r.db.BeginTx(ctx, nil)
 	if err != nil {
 		return nil, fmt.Errorf("failed to begin transaction: %w", err)
@@ -35,7 +40,7 @@ func (r *PostgreSQLOrderRepository) GetOrder(ctx context.Context, id string) (*p
 	defer tx.Rollback()
 
 	orderQuery := `
-		SELECT id, total_amount, state, created_at, updated_at
+		SELECT id, total_amount, state, customer_name, customer_email, shipping_address, created_at, updated_at
 		FROM orders
 		WHERE id = $1
 	`
@@ -47,6 +52,9 @@ func (r *PostgreSQLOrderRepository) GetOrder(ctx context.Context, id string) (*p
 		&order.Id,
 		&order.TotalAmount,
 		&order.State,
+		&order.CustomerName,
+		&order.CustomerEmail,
+		&order.ShippingAddress,
 		&createdAt,
 		&updatedAt,
 	)
@@ -138,13 +146,14 @@ func (r *PostgreSQLOrderRepository) CreateOrder(ctx context.Context, order *pb.O
 	}
 
 	orderQuery := `
-		INSERT INTO orders (id, total_amount, state)
-		VALUES ($1, $2, $3)
+		INSERT INTO orders (id, total_amount, state, customer_name, customer_email, shipping_address)
+		VALUES ($1, $2, $3, $4, $5, $6)
 		RETURNING created_at, updated_at
 	`
 
 	var createdAt, updatedAt time.Time
-	err = tx.QueryRowContext(ctx, orderQuery, order.Id, order.TotalAmount, order.State).Scan(&createdAt, &updatedAt)
+	err = tx.QueryRowContext(ctx, orderQuery, order.Id, order.TotalAmount, order.State, 
+		order.CustomerName, order.CustomerEmail, order.ShippingAddress).Scan(&createdAt, &updatedAt)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create order: %w", err)
 	}
@@ -210,13 +219,25 @@ func (r *PostgreSQLOrderRepository) UpdateOrder(ctx context.Context, order *pb.O
 	return order, nil
 }
 
-func (r *PostgreSQLOrderRepository) QueryOrders(ctx context.Context, stateFilter *pb.Order_State, limit int, after string) ([]*pb.Order, int32, error) {
+func (r *PostgreSQLOrderRepository) QueryOrders(ctx context.Context, stateFilter *pb.Order_State, customerEmail string, limit int, after string) ([]*pb.Order, int32, error) {
 	var args []interface{}
 	whereClause := ""
+	argIndex := 1
 
 	if stateFilter != nil {
-		whereClause = "WHERE state = $1"
+		whereClause = fmt.Sprintf("WHERE state = $%d", argIndex)
 		args = append(args, *stateFilter)
+		argIndex++
+	}
+
+	if customerEmail != "" {
+		if whereClause == "" {
+			whereClause = fmt.Sprintf("WHERE customer_email = $%d", argIndex)
+		} else {
+			whereClause += fmt.Sprintf(" AND customer_email = $%d", argIndex)
+		}
+		args = append(args, customerEmail)
+		argIndex++
 	}
 
 	countQuery := fmt.Sprintf("SELECT COUNT(*) FROM orders %s", whereClause)
@@ -228,29 +249,50 @@ func (r *PostgreSQLOrderRepository) QueryOrders(ctx context.Context, stateFilter
 	}
 
 	query := fmt.Sprintf(`
-		SELECT id, total_amount, state, created_at, updated_at
+		SELECT id, total_amount, state, customer_name, customer_email, shipping_address, created_at, updated_at
 		FROM orders
 		%s
 		ORDER BY created_at DESC
 		LIMIT $%d
-	`, whereClause, len(args)+1)
+	`, whereClause, argIndex)
 
 	args = append(args, limit)
 
 	if after != "" {
+		// Validate cursor is a UUID
+		if _, err := uuid.Parse(after); err != nil {
+			return nil, 0, fmt.Errorf("invalid cursor format: %w", err)
+		}
+
 		if whereClause == "" {
 			whereClause = "WHERE"
 		} else {
 			whereClause += " AND"
 		}
+		
+		// Rebuild args from scratch for cursor query
+		baseArgs := []interface{}{}
+		cursorArgIndex := 1
+		
+		if stateFilter != nil {
+			baseArgs = append(baseArgs, *stateFilter)
+			cursorArgIndex++
+		}
+		
+		if customerEmail != "" {
+			baseArgs = append(baseArgs, customerEmail)
+			cursorArgIndex++
+		}
+		
 		query = fmt.Sprintf(`
-			SELECT id, total_amount, state, created_at, updated_at
+			SELECT id, total_amount, state, customer_name, customer_email, shipping_address, created_at, updated_at
 			FROM orders
-			%s created_at < (SELECT created_at FROM orders WHERE id = $%d)
+			%s created_at < (SELECT created_at FROM orders WHERE id = $%d::uuid)
 			ORDER BY created_at DESC
 			LIMIT $%d
-		`, whereClause, len(args)+1, len(args)+2)
-		args = append(args, after, limit)
+		`, whereClause, cursorArgIndex, cursorArgIndex+1)
+		
+		args = append(baseArgs, after, limit)
 	}
 
 	rows, err := r.db.QueryContext(ctx, query, args...)
@@ -268,6 +310,9 @@ func (r *PostgreSQLOrderRepository) QueryOrders(ctx context.Context, stateFilter
 			&order.Id,
 			&order.TotalAmount,
 			&order.State,
+			&order.CustomerName,
+			&order.CustomerEmail,
+			&order.ShippingAddress,
 			&createdAt,
 			&updatedAt,
 		)

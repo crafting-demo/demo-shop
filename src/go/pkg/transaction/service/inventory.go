@@ -23,11 +23,23 @@ func NewInventoryServer(productRepo repository.ProductRepository) *InventoryServ
 
 func (s *InventoryServer) QueryProducts(ctx context.Context, req *pb.QueryProductsRequest) (*pb.QueryProductsResponse, error) {
 	first := int(req.Pagination.First)
-	if first <= 0 {
+	
+	// Handle zero or negative limit
+	if first < 0 {
 		first = 20
+	} else if first == 0 {
+		// Return empty results for zero page size
+		return &pb.QueryProductsResponse{
+			Products: []*pb.Product{},
+			PageInfo: &pb.PageInfo{
+				HasNextPage:     false,
+				HasPreviousPage: req.Pagination.After != "",
+			},
+			TotalCount: 0,
+		}, nil
 	}
 
-	products, totalCount, err := s.productRepo.QueryProducts(ctx, req.StateFilter, first, req.Pagination.After)
+	products, totalCount, err := s.productRepo.QueryProducts(ctx, req.StateFilter, req.SearchName, first, req.Pagination.After)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to query products: %v", err)
 	}
@@ -64,6 +76,17 @@ func (s *InventoryServer) GetProduct(ctx context.Context, req *pb.GetProductRequ
 }
 
 func (s *InventoryServer) CreateProduct(ctx context.Context, req *pb.CreateProductRequest) (*pb.CreateProductResponse, error) {
+	// Validate input
+	if req.Name == "" {
+		return nil, status.Error(codes.InvalidArgument, "product name cannot be empty")
+	}
+	if req.PricePerUnit <= 0 {
+		return nil, status.Error(codes.InvalidArgument, "price per unit must be greater than 0")
+	}
+	if req.CountInStock < 0 {
+		return nil, status.Error(codes.InvalidArgument, "count in stock cannot be negative")
+	}
+
 	product := &pb.Product{
 		Name:         req.Name,
 		Description:  req.Description,
@@ -93,6 +116,9 @@ func (s *InventoryServer) UpdateProduct(ctx context.Context, req *pb.UpdateProdu
 	}
 
 	if req.Name != nil {
+		if req.Name.Value == "" {
+			return nil, status.Error(codes.InvalidArgument, "product name cannot be empty")
+		}
 		product.Name = req.Name.Value
 	}
 	if req.Description != nil {
@@ -102,6 +128,9 @@ func (s *InventoryServer) UpdateProduct(ctx context.Context, req *pb.UpdateProdu
 		product.ImageData = req.ImageData.Value
 	}
 	if req.PricePerUnit != nil {
+		if req.PricePerUnit.Value <= 0 {
+			return nil, status.Error(codes.InvalidArgument, "price per unit must be greater than 0")
+		}
 		product.PricePerUnit = req.PricePerUnit.Value
 	}
 	if req.CountInStock != nil {
