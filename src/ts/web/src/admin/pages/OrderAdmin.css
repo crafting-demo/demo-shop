@@ -1,11 +1,12 @@
 .order-admin {
-  background: white;
+  background: var(--bg-primary);
   border-radius: 8px;
   padding: 24px;
+  transition: background-color 0.3s ease;
 }
 
 .order-table {
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -20,60 +21,63 @@
 }
 
 .order-table .table-header {
-  background: #f8f9fa;
+  background: var(--bg-tertiary);
   font-weight: 600;
-  color: #333;
-  border-bottom: 2px solid #ddd;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-color);
 }
 
 .order-table .table-row {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  transition: background-color 0.2s;
 }
 
 .order-table .table-row:hover {
-  background: #f8f9fa;
+  background: var(--bg-tertiary);
 }
 
 .col-id {
   font-weight: 500;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .col-date {
   font-size: 14px;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .col-price {
   font-weight: 500;
-  color: #007bff;
+  color: var(--primary-color);
 }
 
 .col-customer {
   font-weight: 500;
+  color: var(--text-primary);
 }
 
 .col-email {
   font-size: 14px;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .state-badge.processing {
-  background: #fff3cd;
-  color: #856404;
+  background: #ffc107;
+  color: #000;
 }
 
 .state-badge.shipped {
-  background: #cce5ff;
-  color: #004085;
+  background: #17a2b8;
+  color: white;
 }
 
 .state-badge.completed {
-  background: #d4edda;
-  color: #155724;
+  background: var(--success-color);
+  color: white;
 }
 
 .state-badge.canceled {
-  background: #f8d7da;
-  color: #721c24;
+  background: var(--danger-color);
+  color: white;
 }
