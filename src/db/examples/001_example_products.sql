@@ -15,16 +15,16 @@ VALUES
     ('11111111-1111-1111-1111-111111111111',
      'Wireless Bluetooth Headphones',
      'Premium noise-canceling wireless headphones with 30-hour battery life. Features active noise cancellation, ambient sound mode, and premium audio quality.',
-     decode('iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAAAVklEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOBnAL4AAAFX3C0NAAAAAElFTkSuQmCC', 'base64'),
+     decode('iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAp0lEQVR42u3RQREAMAjAsDFbczfRfMEGx6USmng/62hM1wIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgQAREQIAICBAB2V4DEvsDesH+f0kAAAAASUVORK5CYII=', 'base64'),
      14999, -- $149.99
      45,
      1, -- AVAILABLE
      false),
 
     ('22222222-2222-2222-2222-222222222222',
-     'Smart Fitness Watch',
-     'Track your health and fitness with this advanced smartwatch. Features heart rate monitoring, GPS tracking, sleep analysis, and 50+ workout modes.',
-     decode('iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAAAVklEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOBnAL4AAAFX3C0NAAAAAElFTkSuQmCC', 'base64'),
+     'Gold Mesh Band Watch',
+     'Elegant minimalist watch with gold-tone case and fine mesh bracelet band. Clean dial with slim profile. Japanese quartz movement. Water resistant.',
+     decode('iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAp0lEQVR42u3RQREAMAjAsDFbczfRfMEGx6USmng/62hM1wIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgQAREQIAICBAB2V4DEvsDesH+f0kAAAAASUVORK5CYII=', 'base64'),
      29999, -- $299.99
      32,
      1, -- AVAILABLE
@@ -33,7 +33,7 @@ VALUES
     ('33333333-3333-3333-3333-333333333333',
      'Portable Wireless Speaker',
      'Waterproof Bluetooth speaker with 360-degree sound. Perfect for outdoor adventures with 12-hour battery life and rugged design.',
-     decode('iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAAAVklEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOBnAL4AAAFX3C0NAAAAAElFTkSuQmCC', 'base64'),
+     decode('iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAp0lEQVR42u3RQREAMAjAsDFbczfRfMEGx6USmng/62hM1wIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgQAREQIAICBAB2V4DEvsDesH+f0kAAAAASUVORK5CYII=', 'base64'),
      7999, -- $79.99
      67,
      1, -- AVAILABLE
@@ -42,7 +42,7 @@ VALUES
     ('44444444-4444-4444-4444-444444444444',
      '4K Webcam',
      'Professional 4K webcam with auto-focus and dual microphones. Perfect for video conferencing, streaming, and content creation.',
-     decode('iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAAAVklEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOBnAL4AAAFX3C0NAAAAAElFTkSuQmCC', 'base64'),
+     decode('iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAp0lEQVR42u3RQREAMAjAsDFbczfRfMEGx6USmng/62hM1wIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgQAREQIAICBAB2V4DEvsDesH+f0kAAAAASUVORK5CYII=', 'base64'),
      12999, -- $129.99
      28,
      1, -- AVAILABLE
@@ -52,16 +52,16 @@ VALUES
     ('55555555-5555-5555-5555-555555555555',
      'Ergonomic Office Chair',
      'Premium ergonomic office chair with lumbar support, adjustable armrests, and breathable mesh back. Designed for all-day comfort.',
-     decode('iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAAAVklEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOBnAJQAAAEgTii4AAAAAElFTkSuQmCC', 'base64'),
+     decode('iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAp0lEQVR42u3RAQ0AMAjAsHMB13SNGAYbhHQS1sj/6mhM1wIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgQAREQIAICBAB2V4D8xYCp60Ck18AAAAASUVORK5CYII=', 'base64'),
      34999, -- $349.99
      15,
      1, -- AVAILABLE
      false),
 
     ('66666666-6666-6666-6666-666666666666',
-     'LED Desk Lamp',
-     'Modern LED desk lamp with adjustable brightness and color temperature. USB charging port included for convenient device charging.',
-     decode('iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAAAVklEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOBnAJQAAAEgTii4AAAAAElFTkSuQmCC', 'base64'),
+     'Hammered Metal Votive Holder',
+     'Decorative hammered metal votive candle holder with faceted texture and brushed silver finish. Creates beautiful ambient lighting. Suitable for tea lights and small pillar candles.',
+     decode('iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAp0lEQVR42u3RAQ0AMAjAsHMB13SNGAYbhHQS1sj/6mhM1wIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgAgJEQIAICBABASIgQAREQIAICBAB2V4D8xYCp60Ck18AAAAASUVORK5CYII=', 'base64'),
      4999, -- $49.99
      89,
      1, -- AVAILABLE
@@ -97,8 +97,8 @@ VALUES
 
 -- Sports & Outdoors (Green #16A34A)
     ('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
-     'Yoga Mat Premium',
-     'Extra-thick yoga mat with non-slip surface and carrying strap. Made from eco-friendly materials for comfortable and safe practice.',
+     'Metallic Knit Tank Top',
+     'Fitted metallic knit tank top with subtle shimmer. Ribbed texture with a comfortable square neckline and wide shoulder straps. Versatile wardrobe staple that pairs with jeans, trousers, or skirts.',
      decode('iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAAAVklEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOBnABajAAEd9TKnAAAAAElFTkSuQmCC', 'base64'),
      3499, -- $34.99
      78,
@@ -115,8 +115,8 @@ VALUES
      false),
 
     ('cccccccc-cccc-cccc-cccc-cccccccccccc',
-     'Running Shoes',
-     'Lightweight running shoes with responsive cushioning and breathable mesh upper. Designed for comfort and performance.',
+     'Perforated Slip-On Shoes',
+     'Breathable perforated slip-on shoes in natural suede. Flexible sole with tassel accent. Easy on-off design with a comfortable fit for all-day wear.',
      decode('iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAAAVklEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOBnABajAAEd9TKnAAAAAElFTkSuQmCC', 'base64'),
      8999, -- $89.99
      64,
@@ -125,8 +125,8 @@ VALUES
 
 -- Fashion & Accessories (Purple #9333EA)
     ('dddddddd-dddd-dddd-dddd-dddddddddddd',
-     'Leather Backpack',
-     'Premium leather backpack with padded laptop compartment and multiple pockets. Professional design suitable for work or travel.',
+     'Suede Tassel Loafers',
+     'Classic suede loafers with decorative tassel detail and perforated upper. Lightweight construction with cushioned insole. Versatile slip-on style suitable for casual or smart-casual occasions.',
      decode('iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAAAVklEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOBnAJM+AAEOYaJkAAAAAElFTkSuQmCC', 'base64'),
      12999, -- $129.99
      37,
@@ -153,8 +153,8 @@ VALUES
 
 -- Kitchen & Dining (Red #DC2626)
     ('10101010-1010-1010-1010-101010101010',
-     'Stainless Steel Coffee Maker',
-     'Programmable coffee maker with thermal carafe. Brews up to 12 cups with adjustable strength control and auto-shutoff.',
+     'Matte Black Coffee Mug',
+     'Stylish matte black ceramic coffee mug with contrasting golden interior. 14oz capacity. Ergonomic handle design. Microwave and dishwasher safe.',
      decode('iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAAAVklEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOBnANwmAAHzl19QAAAAAElFTkSuQmCC', 'base64'),
      7999, -- $79.99
      56,
@@ -162,8 +162,8 @@ VALUES
      false),
 
     ('20202020-2020-2020-2020-202020202020',
-     'Chef Knife Set',
-     'Professional chef knife set with 8 pieces. High-carbon stainless steel blades with ergonomic handles and wooden storage block.',
+     'Salt & Pepper Mill Set',
+     'Elegant acrylic salt and pepper mill set with stainless steel tops. Twist-action grinders with adjustable coarseness settings. Clear body lets you see when refill is needed.',
      decode('iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAAAVklEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOBnANwmAAHzl19QAAAAAElFTkSuQmCC', 'base64'),
      14999, -- $149.99
      29,
@@ -171,8 +171,8 @@ VALUES
      false),
 
     ('30303030-3030-3030-3030-303030303030',
-     'Non-Stick Cookware Set',
-     '10-piece non-stick cookware set with tempered glass lids. Dishwasher safe with even heat distribution.',
+     'Acrylic Spice Grinder Duo',
+     'Matching pair of acrylic spice grinders for salt and peppercorns. Classic design with premium grinding mechanism. Dishwasher-safe reservoir for easy cleaning.',
      decode('iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAAAVklEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOBnANwmAAHzl19QAAAAAElFTkSuQmCC', 'base64'),
      9999, -- $99.99
      42,
@@ -238,8 +238,8 @@ VALUES
 
 -- High-End Items (Gold #CA8A04)
     ('a1a1a1a1-a1a1-a1a1-a1a1-a1a1a1a1a1a1',
-     'Espresso Machine',
-     'Professional espresso machine with built-in grinder and milk frother. Features digital temperature control and pressure gauge.',
+     'Two-Tone Ceramic Mug',
+     'Modern two-tone ceramic mug with matte black exterior and warm yellow interior. 12oz capacity. Microwave and dishwasher safe. Perfect for coffee, tea, or any hot beverage.',
      decode('iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAAAVklEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOBnAMqKCAEn0PprAAAAAElFTkSuQmCC', 'base64'),
      49999, -- $499.99
      6,
