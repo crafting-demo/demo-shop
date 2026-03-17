@@ -4,6 +4,7 @@ import { Product } from '../../shared/types';
 import { GET_PRODUCTS } from '../queries';
 import { GetProductsQuery, GetProductsQueryVariables } from '../../generated/graphql';
 import { getImageUrl } from '../../shared/helpers';
+import ThemeToggle from '../../shared/ThemeToggle';
 import './LandingPage.css';
 
 interface LandingPageProps {
@@ -60,12 +61,15 @@ const LandingPage: React.FC<LandingPageProps> = ({
     <div className="landing-page">
       <header className="header">
         <h1>Shop</h1>
-        <button className="cart-button" onClick={onCartClick}>
-          <span className="cart-icon">🛒</span>
-          {cartItemCount > 0 && (
-            <span className="cart-badge">{cartItemCount}</span>
-          )}
-        </button>
+        <div className="header-controls">
+          <ThemeToggle />
+          <button className="cart-button" onClick={onCartClick}>
+            <span className="cart-icon">🛒</span>
+            {cartItemCount > 0 && (
+              <span className="cart-badge">{cartItemCount}</span>
+            )}
+          </button>
+        </div>
       </header>
 
       <div className="container">
