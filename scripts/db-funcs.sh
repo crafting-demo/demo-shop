@@ -1,6 +1,7 @@
-SRC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SRC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}"))/.." && pwd)"
 
 MIGRATIONS_DIR="$SRC_DIR/src/db/migrations"
+EXAMPLES_DIR="$SRC_DIR/src/db/examples"
 
 # Database configuration (with defaults)
 DB_HOST="${DB_HOST:-localhost}"
