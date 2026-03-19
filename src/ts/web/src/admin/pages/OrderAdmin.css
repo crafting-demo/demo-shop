@@ -1,11 +1,11 @@
 .order-admin {
-  background: white;
+  background: var(--bg-card);
   border-radius: 8px;
   padding: 24px;
 }
 
 .order-table {
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -20,42 +20,43 @@
 }
 
 .order-table .table-header {
-  background: #f8f9fa;
+  background: var(--bg-hover);
   font-weight: 600;
-  color: #333;
-  border-bottom: 2px solid #ddd;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-color);
 }
 
 .order-table .table-row {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .order-table .table-row:hover {
-  background: #f8f9fa;
+  background: var(--bg-hover);
 }
 
 .col-id {
   font-weight: 500;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .col-date {
   font-size: 14px;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .col-price {
   font-weight: 500;
-  color: #007bff;
+  color: var(--primary-color);
 }
 
 .col-customer {
   font-weight: 500;
+  color: var(--text-primary);
 }
 
 .col-email {
   font-size: 14px;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .state-badge.processing {
@@ -63,9 +64,19 @@
   color: #856404;
 }
 
+[data-theme='dark'] .state-badge.processing {
+  background: #5a4a1a;
+  color: #ffd966;
+}
+
 .state-badge.shipped {
   background: #cce5ff;
   color: #004085;
+}
+
+[data-theme='dark'] .state-badge.shipped {
+  background: #1a334a;
+  color: #66b3ff;
 }
 
 .state-badge.completed {
@@ -73,7 +84,17 @@
   color: #155724;
 }
 
+[data-theme='dark'] .state-badge.completed {
+  background: #1e4620;
+  color: #7fd67f;
+}
+
 .state-badge.canceled {
   background: #f8d7da;
   color: #721c24;
+}
+
+[data-theme='dark'] .state-badge.canceled {
+  background: #5a1a1a;
+  color: #ff9999;
 }
