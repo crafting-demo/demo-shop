@@ -1,7 +1,56 @@
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-card: #ffffff;
+  --bg-hover: #f8f9fa;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-muted: #999999;
+  --border-color: #dddddd;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --primary-color: #007bff;
+  --primary-hover: #0056b3;
+  --secondary-color: #6c757d;
+  --secondary-hover: #545b62;
+  --danger-color: #dc3545;
+  --danger-hover: #c82333;
+  --success-color: #28a745;
+  --input-bg: #ffffff;
+  --input-border: #dddddd;
+  --input-focus: #007bff;
+  --hover-bg: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='dark'] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #0d0d0d;
+  --bg-card: #2d2d2d;
+  --bg-hover: #3a3a3a;
+  --text-primary: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --text-muted: #808080;
+  --border-color: #404040;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+  --primary-color: #4d9fff;
+  --primary-hover: #3385ff;
+  --secondary-color: #8e969d;
+  --secondary-hover: #7a8288;
+  --danger-color: #ff4d5c;
+  --danger-hover: #e63946;
+  --success-color: #48c774;
+  --input-bg: #2d2d2d;
+  --input-border: #404040;
+  --input-focus: #4d9fff;
+  --hover-bg: rgba(255, 255, 255, 0.05);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 body {
@@ -10,7 +59,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f5f5;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 button {
@@ -40,48 +90,48 @@ input, textarea {
 }
 
 .btn-primary {
-  background-color: #007bff;
+  background-color: var(--primary-color);
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: var(--primary-hover);
 }
 
 .btn-primary:disabled {
-  background-color: #ccc;
+  background-color: var(--text-muted);
   cursor: not-allowed;
 }
 
 .btn-secondary {
-  background-color: #6c757d;
+  background-color: var(--secondary-color);
   color: white;
 }
 
 .btn-secondary:hover {
-  background-color: #545b62;
+  background-color: var(--secondary-hover);
 }
 
 .btn-danger {
-  background-color: #dc3545;
+  background-color: var(--danger-color);
   color: white;
 }
 
 .btn-danger:hover {
-  background-color: #c82333;
+  background-color: var(--danger-hover);
 }
 
 .card {
-  background: white;
+  background: var(--bg-card);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
   padding: 16px;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-md);
 }
 
 .modal-overlay {
@@ -98,7 +148,7 @@ input, textarea {
 }
 
 .modal-content {
-  background: white;
+  background: var(--bg-card);
   border-radius: 8px;
   max-width: 90%;
   max-height: 90%;
@@ -114,23 +164,25 @@ input, textarea {
   display: block;
   margin-bottom: 4px;
   font-weight: 500;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .form-input {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--input-border);
   border-radius: 4px;
   font-size: 14px;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
 }
 
 .form-input:focus {
-  border-color: #007bff;
+  border-color: var(--input-focus);
 }
 
 .error-message {
-  color: #dc3545;
+  color: var(--danger-color);
   font-size: 14px;
   margin-top: 4px;
 }
