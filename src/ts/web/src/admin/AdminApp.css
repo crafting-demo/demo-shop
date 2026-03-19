@@ -1,19 +1,21 @@
 .admin-app {
   display: flex;
   min-height: 100vh;
+  background-color: var(--bg-secondary);
 }
 
 .sidebar {
   width: 250px;
-  background: #2c3e50;
-  color: white;
+  background: var(--bg-card);
+  color: var(--text-primary);
   padding: 24px;
+  box-shadow: var(--shadow-sm);
 }
 
 .sidebar h1 {
   font-size: 24px;
   margin-bottom: 32px;
-  color: white;
+  color: var(--text-primary);
 }
 
 .sidebar nav {
@@ -25,7 +27,7 @@
 .nav-item {
   padding: 12px 16px;
   background: transparent;
-  color: white;
+  color: var(--text-primary);
   text-align: left;
   border-radius: 4px;
   font-size: 16px;
@@ -33,11 +35,12 @@
 }
 
 .nav-item:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
 }
 
 .nav-item.active {
-  background: #3498db;
+  background: var(--primary-color);
+  color: white;
 }
 
 .main-content {
