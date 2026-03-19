@@ -3,6 +3,7 @@ import { Product } from '../shared/types';
 import InventoryAdmin from './pages/InventoryAdmin';
 import ProductEdit from './pages/ProductEdit';
 import OrderAdmin from './pages/OrderAdmin';
+import ThemeToggle from '../shared/ThemeToggle';
 import './AdminApp.css';
 
 type Tab = 'inventory' | 'orders';
@@ -57,6 +58,9 @@ const AdminApp: React.FC = () => {
             Orders
           </button>
         </nav>
+        <div style={{ marginTop: 'auto', paddingTop: '24px' }}>
+          <ThemeToggle />
+        </div>
       </div>
 
       <div className="main-content">
