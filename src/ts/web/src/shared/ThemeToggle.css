@@ -1,0 +1,22 @@
+.theme-toggle {
+  background: var(--toggle-bg);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 20px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  background: var(--toggle-bg-hover);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
