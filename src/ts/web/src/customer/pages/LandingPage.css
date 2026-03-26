@@ -1,10 +1,11 @@
 .landing-page {
   min-height: 100vh;
+  background-color: var(--bg-primary);
 }
 
 .header {
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: var(--bg-secondary);
+  box-shadow: 0 2px 4px var(--card-shadow);
   padding: 16px 20px;
   display: flex;
   justify-content: space-between;
@@ -12,16 +13,23 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  transition: background-color 0.3s ease;
 }
 
 .header h1 {
   font-size: 24px;
-  color: #333;
+  color: var(--text-primary);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .cart-button {
   position: relative;
-  background: #007bff;
+  background: var(--primary-color);
   color: white;
   padding: 10px 16px;
   border-radius: 20px;
@@ -32,7 +40,7 @@
 }
 
 .cart-button:hover {
-  background: #0056b3;
+  background: var(--primary-hover);
 }
 
 .cart-icon {
@@ -40,7 +48,7 @@
 }
 
 .cart-badge {
-  background: #dc3545;
+  background: var(--badge-bg);
   color: white;
   border-radius: 50%;
   width: 20px;
@@ -74,22 +82,29 @@
 
 .product-card h3 {
   font-size: 18px;
-  color: #333;
+  color: var(--text-primary);
   margin-bottom: 8px;
 }
 
 .product-card .price {
   font-size: 20px;
   font-weight: bold;
-  color: #007bff;
+  color: var(--primary-color);
   margin-bottom: 4px;
 }
 
 .product-card .stock {
   font-size: 14px;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .observer-target {
   height: 20px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-secondary);
+  font-size: 18px;
 }
