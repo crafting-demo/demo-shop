@@ -11,7 +11,7 @@
 
 .page-header h1 {
   font-size: 28px;
-  color: #333;
+  color: var(--color-text-primary);
 }
 
 .header-actions {
@@ -29,10 +29,10 @@
 
 .form-section h2 {
   font-size: 20px;
-  color: #333;
+  color: var(--color-text-primary);
   margin-bottom: 24px;
   padding-bottom: 12px;
-  border-bottom: 2px solid #eee;
+  border-bottom: 2px solid var(--color-border);
 }
 
 .form-row {
@@ -60,5 +60,5 @@
 
 .form-actions {
   padding-top: 24px;
-  border-top: 2px solid #eee;
+  border-top: 2px solid var(--color-border);
 }
