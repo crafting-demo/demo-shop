@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Product } from '../shared/types';
+import { ThemeProvider } from '../shared/ThemeContext';
+import ThemeToggle from '../shared/ThemeToggle';
 import InventoryAdmin from './pages/InventoryAdmin';
 import ProductEdit from './pages/ProductEdit';
 import OrderAdmin from './pages/OrderAdmin';
@@ -34,46 +36,49 @@ const AdminApp: React.FC = () => {
   };
 
   return (
-    <div className="admin-app">
-      <div className="sidebar">
-        <h1>Admin Panel</h1>
-        <nav>
-          <button
-            className={`nav-item ${currentTab === 'inventory' ? 'active' : ''}`}
-            onClick={() => {
-              setCurrentTab('inventory');
-              setCurrentView('list');
-            }}
-          >
-            Inventory
-          </button>
-          <button
-            className={`nav-item ${currentTab === 'orders' ? 'active' : ''}`}
-            onClick={() => {
-              setCurrentTab('orders');
-              setCurrentView('list');
-            }}
-          >
-            Orders
-          </button>
-        </nav>
-      </div>
+    <ThemeProvider>
+      <ThemeToggle />
+      <div className="admin-app">
+        <div className="sidebar">
+          <h1>Admin Panel</h1>
+          <nav>
+            <button
+              className={`nav-item ${currentTab === 'inventory' ? 'active' : ''}`}
+              onClick={() => {
+                setCurrentTab('inventory');
+                setCurrentView('list');
+              }}
+            >
+              Inventory
+            </button>
+            <button
+              className={`nav-item ${currentTab === 'orders' ? 'active' : ''}`}
+              onClick={() => {
+                setCurrentTab('orders');
+                setCurrentView('list');
+              }}
+            >
+              Orders
+            </button>
+          </nav>
+        </div>
 
-      <div className="main-content">
-        {currentTab === 'inventory' && currentView === 'list' && (
-          <InventoryAdmin onEdit={handleEditProduct} />
-        )}
-        {currentTab === 'inventory' && currentView === 'edit' && selectedProduct && (
-          <ProductEdit
-            product={selectedProduct}
-            onSave={handleSaveProduct}
-            onCancel={handleCancelEdit}
-            onRemove={handleRemoveProduct}
-          />
-        )}
-        {currentTab === 'orders' && <OrderAdmin />}
+        <div className="main-content">
+          {currentTab === 'inventory' && currentView === 'list' && (
+            <InventoryAdmin onEdit={handleEditProduct} />
+          )}
+          {currentTab === 'inventory' && currentView === 'edit' && selectedProduct && (
+            <ProductEdit
+              product={selectedProduct}
+              onSave={handleSaveProduct}
+              onCancel={handleCancelEdit}
+              onRemove={handleRemoveProduct}
+            />
+          )}
+          {currentTab === 'orders' && <OrderAdmin />}
+        </div>
       </div>
-    </div>
+    </ThemeProvider>
   );
 };
 

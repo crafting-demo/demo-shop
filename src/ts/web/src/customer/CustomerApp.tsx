@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { Product } from '../shared/types';
+import { ThemeProvider } from '../shared/ThemeContext';
+import ThemeToggle from '../shared/ThemeToggle';
 import LandingPage from './pages/LandingPage';
 import ProductPage from './pages/ProductPage';
 import CheckoutPage from './pages/CheckoutPage';
@@ -57,40 +59,43 @@ const CustomerApp: React.FC = () => {
   };
 
   return (
-    <div>
-      {currentPage === 'landing' && (
-        <LandingPage
-          cartItemCount={cartItemCount}
-          onProductClick={handleProductClick}
-          onCartClick={handleGoToCheckout}
-        />
-      )}
-      {currentPage === 'product' && selectedProduct && (
-        <ProductPage
-          product={selectedProduct}
-          onAddToCart={handleAddToCart}
-          onClose={handleCloseProductPage}
-        />
-      )}
-      {currentPage === 'checkout' && cart && (
-        <CheckoutPage
-          cart={cart}
-          onUpdateQuantity={handleUpdateQuantity}
-          onCheckout={handleGoToPayment}
-          onBack={handleBackToLanding}
-        />
-      )}
-      {currentPage === 'payment' && cart && (
-        <PaymentPage
-          totalPrice={cart.totalPrice}
-          onPlaceOrder={handlePlaceOrder}
-          onBack={() => setCurrentPage('checkout')}
-        />
-      )}
-      {currentPage === 'thankyou' && (
-        <ThankYouPage onContinueShopping={handleBackToLanding} />
-      )}
-    </div>
+    <ThemeProvider>
+      <ThemeToggle />
+      <div>
+        {currentPage === 'landing' && (
+          <LandingPage
+            cartItemCount={cartItemCount}
+            onProductClick={handleProductClick}
+            onCartClick={handleGoToCheckout}
+          />
+        )}
+        {currentPage === 'product' && selectedProduct && (
+          <ProductPage
+            product={selectedProduct}
+            onAddToCart={handleAddToCart}
+            onClose={handleCloseProductPage}
+          />
+        )}
+        {currentPage === 'checkout' && cart && (
+          <CheckoutPage
+            cart={cart}
+            onUpdateQuantity={handleUpdateQuantity}
+            onCheckout={handleGoToPayment}
+            onBack={handleBackToLanding}
+          />
+        )}
+        {currentPage === 'payment' && cart && (
+          <PaymentPage
+            totalPrice={cart.totalPrice}
+            onPlaceOrder={handlePlaceOrder}
+            onBack={() => setCurrentPage('checkout')}
+          />
+        )}
+        {currentPage === 'thankyou' && (
+          <ThankYouPage onContinueShopping={handleBackToLanding} />
+        )}
+      </div>
+    </ThemeProvider>
   );
 };
 
