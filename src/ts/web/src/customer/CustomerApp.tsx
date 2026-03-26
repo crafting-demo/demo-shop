@@ -8,6 +8,7 @@ import PaymentPage from './pages/PaymentPage';
 import ThankYouPage from './pages/ThankYouPage';
 import { GET_CART } from './queries';
 import { GetCartQuery } from '../generated/graphql';
+import { DarkModeProvider } from '../shared/DarkModeContext';
 
 type Page = 'landing' | 'product' | 'checkout' | 'payment' | 'thankyou';
 
@@ -57,40 +58,42 @@ const CustomerApp: React.FC = () => {
   };
 
   return (
-    <div>
-      {currentPage === 'landing' && (
-        <LandingPage
-          cartItemCount={cartItemCount}
-          onProductClick={handleProductClick}
-          onCartClick={handleGoToCheckout}
-        />
-      )}
-      {currentPage === 'product' && selectedProduct && (
-        <ProductPage
-          product={selectedProduct}
-          onAddToCart={handleAddToCart}
-          onClose={handleCloseProductPage}
-        />
-      )}
-      {currentPage === 'checkout' && cart && (
-        <CheckoutPage
-          cart={cart}
-          onUpdateQuantity={handleUpdateQuantity}
-          onCheckout={handleGoToPayment}
-          onBack={handleBackToLanding}
-        />
-      )}
-      {currentPage === 'payment' && cart && (
-        <PaymentPage
-          totalPrice={cart.totalPrice}
-          onPlaceOrder={handlePlaceOrder}
-          onBack={() => setCurrentPage('checkout')}
-        />
-      )}
-      {currentPage === 'thankyou' && (
-        <ThankYouPage onContinueShopping={handleBackToLanding} />
-      )}
-    </div>
+    <DarkModeProvider>
+      <div>
+        {currentPage === 'landing' && (
+          <LandingPage
+            cartItemCount={cartItemCount}
+            onProductClick={handleProductClick}
+            onCartClick={handleGoToCheckout}
+          />
+        )}
+        {currentPage === 'product' && selectedProduct && (
+          <ProductPage
+            product={selectedProduct}
+            onAddToCart={handleAddToCart}
+            onClose={handleCloseProductPage}
+          />
+        )}
+        {currentPage === 'checkout' && cart && (
+          <CheckoutPage
+            cart={cart}
+            onUpdateQuantity={handleUpdateQuantity}
+            onCheckout={handleGoToPayment}
+            onBack={handleBackToLanding}
+          />
+        )}
+        {currentPage === 'payment' && cart && (
+          <PaymentPage
+            totalPrice={cart.totalPrice}
+            onPlaceOrder={handlePlaceOrder}
+            onBack={() => setCurrentPage('checkout')}
+          />
+        )}
+        {currentPage === 'thankyou' && (
+          <ThankYouPage onContinueShopping={handleBackToLanding} />
+        )}
+      </div>
+    </DarkModeProvider>
   );
 };
 
