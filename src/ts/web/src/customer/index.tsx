@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { ApolloProvider } from '@apollo/client';
 import CustomerApp from './CustomerApp';
 import { apolloClient } from '../shared/apolloClient';
+import { ThemeProvider } from '../shared/ThemeContext';
 import '../shared/styles.css';
 
 const root = ReactDOM.createRoot(
@@ -11,8 +12,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <ApolloProvider client={apolloClient}>
-      <CustomerApp />
-    </ApolloProvider>
+    <ThemeProvider>
+      <ApolloProvider client={apolloClient}>
+        <CustomerApp />
+      </ApolloProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
