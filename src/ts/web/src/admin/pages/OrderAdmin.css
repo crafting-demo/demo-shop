@@ -1,11 +1,11 @@
 .order-admin {
-  background: white;
+  background: var(--bg-secondary);
   border-radius: 8px;
   padding: 24px;
 }
 
 .order-table {
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -20,33 +20,33 @@
 }
 
 .order-table .table-header {
-  background: #f8f9fa;
+  background: var(--bg-tertiary);
   font-weight: 600;
-  color: #333;
-  border-bottom: 2px solid #ddd;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-color);
 }
 
 .order-table .table-row {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .order-table .table-row:hover {
-  background: #f8f9fa;
+  background: var(--bg-tertiary);
 }
 
 .col-id {
   font-weight: 500;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .col-date {
   font-size: 14px;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .col-price {
   font-weight: 500;
-  color: #007bff;
+  color: var(--btn-primary-bg);
 }
 
 .col-customer {
@@ -55,7 +55,7 @@
 
 .col-email {
   font-size: 14px;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .state-badge.processing {
