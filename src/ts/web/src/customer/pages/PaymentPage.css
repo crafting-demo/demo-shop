@@ -10,7 +10,7 @@
 
 .payment-form h2 {
   font-size: 24px;
-  color: #333;
+  color: var(--text-tertiary);
   margin-bottom: 24px;
 }
 
@@ -21,8 +21,9 @@
 .payment-summary {
   margin: 32px 0;
   padding: 24px;
-  background: #f8f9fa;
+  background: var(--bg-tertiary);
   border-radius: 8px;
+  transition: background-color 0.3s ease;
 }
 
 .payment-summary h2 {
