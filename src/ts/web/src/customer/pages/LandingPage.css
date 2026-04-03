@@ -3,8 +3,8 @@
 }
 
 .header {
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: var(--bg-secondary);
+  box-shadow: 0 2px 4px var(--shadow-color);
   padding: 16px 20px;
   display: flex;
   justify-content: space-between;
@@ -16,12 +16,12 @@
 
 .header h1 {
   font-size: 24px;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .cart-button {
   position: relative;
-  background: #007bff;
+  background: var(--btn-primary-bg);
   color: white;
   padding: 10px 16px;
   border-radius: 20px;
@@ -32,7 +32,7 @@
 }
 
 .cart-button:hover {
-  background: #0056b3;
+  background: var(--btn-primary-hover);
 }
 
 .cart-icon {
@@ -40,7 +40,7 @@
 }
 
 .cart-badge {
-  background: #dc3545;
+  background: var(--btn-danger-bg);
   color: white;
   border-radius: 50%;
   width: 20px;
@@ -74,20 +74,20 @@
 
 .product-card h3 {
   font-size: 18px;
-  color: #333;
+  color: var(--text-primary);
   margin-bottom: 8px;
 }
 
 .product-card .price {
   font-size: 20px;
   font-weight: bold;
-  color: #007bff;
+  color: var(--btn-primary-bg);
   margin-bottom: 4px;
 }
 
 .product-card .stock {
   font-size: 14px;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .observer-target {
