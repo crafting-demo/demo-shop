@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Product } from '../shared/types';
+import ThemeToggle from '../shared/ThemeToggle';
 import InventoryAdmin from './pages/InventoryAdmin';
 import ProductEdit from './pages/ProductEdit';
 import OrderAdmin from './pages/OrderAdmin';
@@ -36,7 +37,10 @@ const AdminApp: React.FC = () => {
   return (
     <div className="admin-app">
       <div className="sidebar">
-        <h1>Admin Panel</h1>
+        <div className="sidebar-header">
+          <h1>Admin Panel</h1>
+          <ThemeToggle />
+        </div>
         <nav>
           <button
             className={`nav-item ${currentTab === 'inventory' ? 'active' : ''}`}
