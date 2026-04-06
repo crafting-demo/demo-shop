@@ -15,8 +15,8 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: #28a745;
-  color: white;
+  background: var(--color-success);
+  color: var(--text-on-primary);
   font-size: 48px;
   display: flex;
   align-items: center;
@@ -26,13 +26,13 @@
 
 .thankyou-card h1 {
   font-size: 32px;
-  color: #333;
+  color: var(--text-primary);
   margin-bottom: 16px;
 }
 
 .thankyou-card p {
   font-size: 18px;
-  color: #666;
+  color: var(--text-secondary);
   margin-bottom: 8px;
 }
 
