@@ -5,15 +5,22 @@
 
 .sidebar {
   width: 250px;
-  background: #2c3e50;
-  color: white;
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
   padding: 24px;
+  border-right: 1px solid var(--color-border);
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
 }
 
 .sidebar h1 {
   font-size: 24px;
-  margin-bottom: 32px;
-  color: white;
+  color: var(--color-text-primary);
 }
 
 .sidebar nav {
@@ -25,19 +32,20 @@
 .nav-item {
   padding: 12px 16px;
   background: transparent;
-  color: white;
+  color: var(--color-text-primary);
   text-align: left;
   border-radius: 4px;
   font-size: 16px;
-  transition: background 0.2s;
+  transition: background 0.3s ease;
 }
 
 .nav-item:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-bg-hover);
 }
 
 .nav-item.active {
-  background: #3498db;
+  background: var(--color-primary);
+  color: var(--color-bg-primary);
 }
 
 .main-content {
