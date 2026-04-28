@@ -3,8 +3,8 @@
 }
 
 .header {
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: var(--bg-primary);
+  box-shadow: 0 2px 4px var(--shadow-sm);
   padding: 16px 20px;
   display: flex;
   justify-content: space-between;
@@ -12,27 +12,36 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .header h1 {
   font-size: 24px;
-  color: #333;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .cart-button {
   position: relative;
-  background: #007bff;
-  color: white;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
   padding: 10px 16px;
   border-radius: 20px;
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 18px;
+  transition: background-color 0.3s ease;
 }
 
 .cart-button:hover {
-  background: #0056b3;
+  background: var(--btn-primary-hover);
 }
 
 .cart-icon {
@@ -40,8 +49,8 @@
 }
 
 .cart-badge {
-  background: #dc3545;
-  color: white;
+  background: var(--btn-danger-bg);
+  color: var(--btn-danger-text);
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -50,6 +59,7 @@
   justify-content: center;
   font-size: 12px;
   font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .product-grid {
@@ -74,20 +84,23 @@
 
 .product-card h3 {
   font-size: 18px;
-  color: #333;
+  color: var(--text-primary);
   margin-bottom: 8px;
+  transition: color 0.3s ease;
 }
 
 .product-card .price {
   font-size: 20px;
   font-weight: bold;
-  color: #007bff;
+  color: var(--primary);
   margin-bottom: 4px;
+  transition: color 0.3s ease;
 }
 
 .product-card .stock {
   font-size: 14px;
-  color: #666;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
 }
 
 .observer-target {
