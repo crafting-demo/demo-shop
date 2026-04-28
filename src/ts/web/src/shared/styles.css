@@ -1,3 +1,79 @@
+:root[data-theme='light'] {
+  /* Backgrounds */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-tertiary: #e9ecef;
+  --bg-hover: #f8f9fa;
+
+  /* Text */
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-tertiary: #999999;
+
+  /* Borders & Shadows */
+  --border-color: #ddd;
+  --shadow-sm: rgba(0, 0, 0, 0.1);
+  --shadow-md: rgba(0, 0, 0, 0.15);
+  --overlay: rgba(0, 0, 0, 0.5);
+
+  /* Buttons */
+  --btn-primary-bg: #007bff;
+  --btn-primary-hover: #0056b3;
+  --btn-primary-text: #ffffff;
+  --btn-secondary-bg: #6c757d;
+  --btn-secondary-hover: #545b62;
+  --btn-secondary-text: #ffffff;
+  --btn-danger-bg: #dc3545;
+  --btn-danger-hover: #c82333;
+  --btn-danger-text: #ffffff;
+  --btn-disabled-bg: #ccc;
+
+  /* Semantic Colors */
+  --primary: #007bff;
+  --success: #28a745;
+  --danger: #dc3545;
+  --warning: #ffc107;
+  --info: #17a2b8;
+}
+
+:root[data-theme='dark'] {
+  /* Backgrounds */
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #3a3a3a;
+  --bg-hover: #404040;
+
+  /* Text */
+  --text-primary: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --text-tertiary: #808080;
+
+  /* Borders & Shadows */
+  --border-color: #444;
+  --shadow-sm: rgba(0, 0, 0, 0.3);
+  --shadow-md: rgba(0, 0, 0, 0.5);
+  --overlay: rgba(0, 0, 0, 0.7);
+
+  /* Buttons */
+  --btn-primary-bg: #4d9fff;
+  --btn-primary-hover: #3a8eef;
+  --btn-primary-text: #ffffff;
+  --btn-secondary-bg: #5a6268;
+  --btn-secondary-hover: #4a5056;
+  --btn-secondary-text: #ffffff;
+  --btn-danger-bg: #e74c3c;
+  --btn-danger-hover: #c0392b;
+  --btn-danger-text: #ffffff;
+  --btn-disabled-bg: #555;
+
+  /* Semantic Colors */
+  --primary: #4d9fff;
+  --success: #2ecc71;
+  --danger: #e74c3c;
+  --warning: #f39c12;
+  --info: #3498db;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +86,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f5f5;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 button {
@@ -40,48 +118,51 @@ input, textarea {
 }
 
 .btn-primary {
-  background-color: #007bff;
-  color: white;
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  transition: background-color 0.3s ease;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: var(--btn-primary-hover);
 }
 
 .btn-primary:disabled {
-  background-color: #ccc;
+  background-color: var(--btn-disabled-bg);
   cursor: not-allowed;
 }
 
 .btn-secondary {
-  background-color: #6c757d;
-  color: white;
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  transition: background-color 0.3s ease;
 }
 
 .btn-secondary:hover {
-  background-color: #545b62;
+  background-color: var(--btn-secondary-hover);
 }
 
 .btn-danger {
-  background-color: #dc3545;
-  color: white;
+  background-color: var(--btn-danger-bg);
+  color: var(--btn-danger-text);
+  transition: background-color 0.3s ease;
 }
 
 .btn-danger:hover {
-  background-color: #c82333;
+  background-color: var(--btn-danger-hover);
 }
 
 .card {
-  background: white;
+  background: var(--bg-primary);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--shadow-sm);
   padding: 16px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 8px var(--shadow-md);
 }
 
 .modal-overlay {
@@ -90,7 +171,7 @@ input, textarea {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--overlay);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,12 +179,13 @@ input, textarea {
 }
 
 .modal-content {
-  background: white;
+  background: var(--bg-primary);
   border-radius: 8px;
   max-width: 90%;
   max-height: 90%;
   overflow: auto;
   padding: 24px;
+  transition: background-color 0.3s ease;
 }
 
 .form-group {
@@ -114,23 +196,27 @@ input, textarea {
   display: block;
   margin-bottom: 4px;
   font-weight: 500;
-  color: #333;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
 .form-input {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   font-size: 14px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 .form-input:focus {
-  border-color: #007bff;
+  border-color: var(--primary);
 }
 
 .error-message {
-  color: #dc3545;
+  color: var(--danger);
   font-size: 14px;
   margin-top: 4px;
 }
