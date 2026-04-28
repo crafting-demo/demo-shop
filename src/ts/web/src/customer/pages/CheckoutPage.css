@@ -9,8 +9,9 @@
 
 .empty-cart p {
   font-size: 24px;
-  color: #666;
+  color: var(--text-secondary);
   margin-bottom: 24px;
+  transition: color 0.3s ease;
 }
 
 .cart-items {
@@ -40,13 +41,15 @@
 
 .item-info h3 {
   font-size: 18px;
-  color: #333;
+  color: var(--text-primary);
   margin-bottom: 8px;
+  transition: color 0.3s ease;
 }
 
 .item-info .price {
   font-size: 16px;
-  color: #666;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
 }
 
 .quantity-controls {
@@ -59,13 +62,14 @@
   width: 32px;
   height: 32px;
   border-radius: 4px;
-  background: #f5f5f5;
+  background: var(--bg-secondary);
   font-size: 18px;
-  color: #333;
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .quantity-controls button:hover:not(:disabled) {
-  background: #e0e0e0;
+  background: var(--bg-tertiary);
 }
 
 .quantity-controls button:disabled {
@@ -78,6 +82,8 @@
   font-weight: 500;
   min-width: 30px;
   text-align: center;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
 .item-total {
@@ -88,7 +94,8 @@
 .item-total p {
   font-size: 20px;
   font-weight: bold;
-  color: #007bff;
+  color: var(--primary);
+  transition: color 0.3s ease;
 }
 
 .cart-summary {
@@ -99,8 +106,9 @@
 
 .cart-summary h2 {
   font-size: 24px;
-  color: #333;
+  color: var(--text-primary);
   margin-bottom: 16px;
+  transition: color 0.3s ease;
 }
 
 .summary-row {
@@ -108,13 +116,15 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px 0;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--border-color);
+  transition: border-color 0.3s ease;
 }
 
 .summary-row .total-price {
   font-size: 28px;
   font-weight: bold;
-  color: #007bff;
+  color: var(--primary);
+  transition: color 0.3s ease;
 }
 
 .checkout-btn {
