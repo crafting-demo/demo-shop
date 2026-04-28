@@ -1,7 +1,8 @@
 .inventory-admin {
-  background: white;
+  background: var(--bg-primary);
   border-radius: 8px;
   padding: 24px;
+  transition: background-color 0.3s ease;
 }
 
 .page-header {
@@ -13,7 +14,8 @@
 
 .page-header h1 {
   font-size: 28px;
-  color: #333;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
 .page-size-selector {
@@ -24,20 +26,25 @@
 
 .page-size-selector label {
   font-size: 14px;
-  color: #666;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
 }
 
 .page-size-selector select {
   padding: 8px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   font-size: 14px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 .inventory-table {
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   overflow: hidden;
+  transition: border-color 0.3s ease;
 }
 
 .table-header,
@@ -50,18 +57,20 @@
 }
 
 .table-header {
-  background: #f8f9fa;
+  background: var(--bg-secondary);
   font-weight: 600;
-  color: #333;
-  border-bottom: 2px solid #ddd;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-color);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .table-row {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .table-row:hover {
-  background: #f8f9fa;
+  background: var(--bg-hover);
 }
 
 .col-image img {
@@ -73,17 +82,20 @@
 
 .col-id {
   font-size: 14px;
-  color: #666;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
 }
 
 .col-name {
   font-weight: 500;
-  color: #333;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
 .col-price {
   font-weight: 500;
-  color: #007bff;
+  color: var(--primary);
+  transition: color 0.3s ease;
 }
 
 .state-badge {
@@ -94,13 +106,13 @@
 }
 
 .state-badge.available {
-  background: #d4edda;
-  color: #155724;
+  background: var(--success);
+  color: white;
 }
 
 .state-badge.off-shelf {
-  background: #f8d7da;
-  color: #721c24;
+  background: var(--danger);
+  color: white;
 }
 
 .col-actions {
@@ -108,28 +120,30 @@
 }
 
 .action-button {
-  background: #f5f5f5;
+  background: var(--bg-secondary);
   border-radius: 4px;
   width: 32px;
   height: 32px;
   font-size: 20px;
-  color: #666;
+  color: var(--text-secondary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .action-button:hover {
-  background: #e0e0e0;
+  background: var(--bg-tertiary);
 }
 
 .action-menu {
   position: absolute;
   top: 100%;
   right: 0;
-  background: white;
-  border: 1px solid #ddd;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
   border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px var(--shadow-sm);
   z-index: 10;
   min-width: 150px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .action-menu button {
@@ -137,10 +151,11 @@
   width: 100%;
   padding: 12px 16px;
   text-align: left;
-  background: white;
-  color: #333;
+  background: var(--bg-primary);
+  color: var(--text-primary);
   border: none;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .action-menu button:last-child {
@@ -148,7 +163,7 @@
 }
 
 .action-menu button:hover {
-  background: #f8f9fa;
+  background: var(--bg-hover);
 }
 
 .pagination {
@@ -161,21 +176,23 @@
 
 .pagination button {
   padding: 8px 16px;
-  background: #007bff;
-  color: white;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
   border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
 .pagination button:disabled {
-  background: #ccc;
+  background: var(--btn-disabled-bg);
   cursor: not-allowed;
 }
 
 .pagination button:not(:disabled):hover {
-  background: #0056b3;
+  background: var(--btn-primary-hover);
 }
 
 .pagination span {
   font-size: 14px;
-  color: #666;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
 }
