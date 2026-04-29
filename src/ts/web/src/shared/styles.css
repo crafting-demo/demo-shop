@@ -1,3 +1,92 @@
+:root,
+[data-theme="light"] {
+  --color-bg: #f5f5f5;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f8f9fa;
+  --color-border: #dddddd;
+  --color-border-light: #eeeeee;
+  --color-text-primary: #333333;
+  --color-text-secondary: #666666;
+  --color-text-muted: #999999;
+  --color-accent: #007bff;
+  --color-accent-hover: #0056b3;
+  --color-accent-disabled: #cccccc;
+  --color-danger: #dc3545;
+  --color-danger-hover: #c82333;
+  --color-secondary: #6c757d;
+  --color-secondary-hover: #545b62;
+  --color-success: #28a745;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-shadow-hover: rgba(0, 0, 0, 0.15);
+  --color-overlay: rgba(0, 0, 0, 0.5);
+  --color-quantity-btn-bg: #f5f5f5;
+  --color-quantity-btn-hover: #e0e0e0;
+  --color-payment-summary-bg: #f8f9fa;
+  --color-badge-available-bg: #d4edda;
+  --color-badge-available-text: #155724;
+  --color-badge-offshelf-bg: #f8d7da;
+  --color-badge-offshelf-text: #721c24;
+  --color-badge-processing-bg: #fff3cd;
+  --color-badge-processing-text: #856404;
+  --color-badge-shipped-bg: #cce5ff;
+  --color-badge-shipped-text: #004085;
+  --color-badge-completed-bg: #d4edda;
+  --color-badge-completed-text: #155724;
+  --color-badge-canceled-bg: #f8d7da;
+  --color-badge-canceled-text: #721c24;
+  --color-sidebar-bg: #2c3e50;
+  --color-sidebar-text: #ffffff;
+  --color-sidebar-active: #3498db;
+  --color-action-btn-bg: #f5f5f5;
+  --color-action-btn-hover: #e0e0e0;
+  --color-toggle-bg: #e2e8f0;
+  --color-toggle-knob: #ffffff;
+}
+
+[data-theme="dark"] {
+  --color-bg: #121212;
+  --color-surface: #1e1e1e;
+  --color-surface-alt: #2a2a2a;
+  --color-border: #444444;
+  --color-border-light: #333333;
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: #aaaaaa;
+  --color-text-muted: #777777;
+  --color-accent: #4da6ff;
+  --color-accent-hover: #2979d4;
+  --color-accent-disabled: #555555;
+  --color-danger: #ff6b6b;
+  --color-danger-hover: #e53535;
+  --color-secondary: #8a9bae;
+  --color-secondary-hover: #6c7f8e;
+  --color-success: #4caf50;
+  --color-shadow: rgba(0, 0, 0, 0.4);
+  --color-shadow-hover: rgba(0, 0, 0, 0.6);
+  --color-overlay: rgba(0, 0, 0, 0.7);
+  --color-quantity-btn-bg: #2a2a2a;
+  --color-quantity-btn-hover: #3a3a3a;
+  --color-payment-summary-bg: #2a2a2a;
+  --color-badge-available-bg: #1a3a25;
+  --color-badge-available-text: #81c784;
+  --color-badge-offshelf-bg: #3a1a1d;
+  --color-badge-offshelf-text: #ef9a9a;
+  --color-badge-processing-bg: #3a3010;
+  --color-badge-processing-text: #ffd54f;
+  --color-badge-shipped-bg: #0d2a4a;
+  --color-badge-shipped-text: #90caf9;
+  --color-badge-completed-bg: #1a3a25;
+  --color-badge-completed-text: #81c784;
+  --color-badge-canceled-bg: #3a1a1d;
+  --color-badge-canceled-text: #ef9a9a;
+  --color-sidebar-bg: #1a2533;
+  --color-sidebar-text: #d0d8e4;
+  --color-sidebar-active: #2979d4;
+  --color-action-btn-bg: #2a2a2a;
+  --color-action-btn-hover: #3a3a3a;
+  --color-toggle-bg: #4da6ff;
+  --color-toggle-knob: #ffffff;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +99,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f5f5;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 button {
@@ -40,48 +131,48 @@ input, textarea {
 }
 
 .btn-primary {
-  background-color: #007bff;
+  background-color: var(--color-accent);
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: var(--color-accent-hover);
 }
 
 .btn-primary:disabled {
-  background-color: #ccc;
+  background-color: var(--color-accent-disabled);
   cursor: not-allowed;
 }
 
 .btn-secondary {
-  background-color: #6c757d;
+  background-color: var(--color-secondary);
   color: white;
 }
 
 .btn-secondary:hover {
-  background-color: #545b62;
+  background-color: var(--color-secondary-hover);
 }
 
 .btn-danger {
-  background-color: #dc3545;
+  background-color: var(--color-danger);
   color: white;
 }
 
 .btn-danger:hover {
-  background-color: #c82333;
+  background-color: var(--color-danger-hover);
 }
 
 .card {
-  background: white;
+  background: var(--color-surface);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--color-shadow);
   padding: 16px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s ease;
 }
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 8px var(--color-shadow-hover);
 }
 
 .modal-overlay {
@@ -90,7 +181,7 @@ input, textarea {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--color-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,7 +189,7 @@ input, textarea {
 }
 
 .modal-content {
-  background: white;
+  background: var(--color-surface);
   border-radius: 8px;
   max-width: 90%;
   max-height: 90%;
@@ -114,23 +205,69 @@ input, textarea {
   display: block;
   margin-bottom: 4px;
   font-weight: 500;
-  color: #333;
+  color: var(--color-text-primary);
 }
 
 .form-input {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   font-size: 14px;
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .form-input:focus {
-  border-color: #007bff;
+  border-color: var(--color-accent);
 }
 
 .error-message {
-  color: #dc3545;
+  color: var(--color-danger);
   font-size: 14px;
   margin-top: 4px;
+}
+
+/* ── Theme toggle button ── */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 24px;
+}
+
+.theme-toggle-track {
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  background: var(--color-toggle-bg);
+  position: relative;
+  transition: background 0.3s ease;
+  flex-shrink: 0;
+}
+
+.theme-toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-toggle-knob);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+[data-theme="dark"] .theme-toggle-knob {
+  transform: translateX(20px);
+}
+
+.theme-toggle-icon {
+  font-size: 16px;
+  line-height: 1;
 }

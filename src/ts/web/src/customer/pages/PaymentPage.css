@@ -10,19 +10,20 @@
 
 .payment-form h2 {
   font-size: 24px;
-  color: #333;
+  color: var(--color-text-primary);
   margin-bottom: 24px;
 }
 
 .required {
-  color: #dc3545;
+  color: var(--color-danger);
 }
 
 .payment-summary {
   margin: 32px 0;
   padding: 24px;
-  background: #f8f9fa;
+  background: var(--color-payment-summary-bg);
   border-radius: 8px;
+  transition: background-color 0.2s ease;
 }
 
 .payment-summary h2 {
@@ -39,7 +40,7 @@
 .summary-row .total-price {
   font-size: 28px;
   font-weight: bold;
-  color: #007bff;
+  color: var(--color-accent);
 }
 
 .place-order-btn {
