@@ -8,12 +8,27 @@
   background: #2c3e50;
   color: white;
   padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .sidebar {
+  background: #1a252f;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
 }
 
 .sidebar h1 {
   font-size: 24px;
-  margin-bottom: 32px;
   color: white;
+  margin-bottom: 0;
 }
 
 .sidebar nav {
@@ -40,8 +55,14 @@
   background: #3498db;
 }
 
+[data-theme='dark'] .nav-item.active {
+  background: #2980b9;
+}
+
 .main-content {
   flex: 1;
   padding: 24px;
   overflow: auto;
+  background: var(--color-bg);
+  transition: background-color 0.2s;
 }

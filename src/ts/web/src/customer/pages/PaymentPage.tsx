@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { PLACE_ORDER } from '../queries';
 import { PlaceOrderMutation, PlaceOrderMutationVariables } from '../../generated/graphql';
+import DarkModeToggle from '../../shared/DarkModeToggle';
 import './PaymentPage.css';
 
 interface PaymentPageProps {
@@ -84,12 +85,14 @@ const PaymentPage: React.FC<PaymentPageProps> = ({
 
   return (
     <div className="payment-page">
-      <header className="header">
+      <header className="payment-header">
         <button className="btn btn-secondary" onClick={onBack}>
           ← Back
         </button>
         <h1>Payment</h1>
-        <div></div>
+        <div className="payment-header-actions">
+          <DarkModeToggle />
+        </div>
       </header>
 
       <div className="container">

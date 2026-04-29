@@ -9,6 +9,7 @@ import {
   RemoveFromCartMutationVariables,
 } from '../../generated/graphql';
 import { getImageUrl } from '../../shared/helpers';
+import DarkModeToggle from '../../shared/DarkModeToggle';
 import './CheckoutPage.css';
 
 interface CheckoutPageProps {
@@ -50,12 +51,14 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({
 
   return (
     <div className="checkout-page">
-      <header className="header">
+      <header className="checkout-header">
         <button className="btn btn-secondary" onClick={onBack}>
           ← Back
         </button>
         <h1>Shopping Cart</h1>
-        <div></div>
+        <div className="checkout-header-actions">
+          <DarkModeToggle />
+        </div>
       </header>
 
       <div className="container">

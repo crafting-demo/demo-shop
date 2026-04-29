@@ -3,6 +3,7 @@ import { Product } from '../shared/types';
 import InventoryAdmin from './pages/InventoryAdmin';
 import ProductEdit from './pages/ProductEdit';
 import OrderAdmin from './pages/OrderAdmin';
+import DarkModeToggle from '../shared/DarkModeToggle';
 import './AdminApp.css';
 
 type Tab = 'inventory' | 'orders';
@@ -36,7 +37,10 @@ const AdminApp: React.FC = () => {
   return (
     <div className="admin-app">
       <div className="sidebar">
-        <h1>Admin Panel</h1>
+        <div className="sidebar-header">
+          <h1>Admin Panel</h1>
+          <DarkModeToggle />
+        </div>
         <nav>
           <button
             className={`nav-item ${currentTab === 'inventory' ? 'active' : ''}`}

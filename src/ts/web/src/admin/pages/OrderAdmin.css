@@ -1,11 +1,17 @@
 .order-admin {
-  background: white;
+  background: var(--color-surface);
   border-radius: 8px;
   padding: 24px;
+  transition: background-color 0.2s;
+}
+
+.order-admin .page-header h1 {
+  font-size: 28px;
+  color: var(--color-text-primary);
 }
 
 .order-table {
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -20,60 +26,62 @@
 }
 
 .order-table .table-header {
-  background: #f8f9fa;
+  background: var(--color-table-header-bg);
   font-weight: 600;
-  color: #333;
-  border-bottom: 2px solid #ddd;
+  color: var(--color-text-primary);
+  border-bottom: 2px solid var(--color-border);
+  transition: background-color 0.2s;
 }
 
 .order-table .table-row {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border-light);
 }
 
 .order-table .table-row:hover {
-  background: #f8f9fa;
+  background: var(--color-table-header-bg);
 }
 
 .col-id {
   font-weight: 500;
-  color: #333;
+  color: var(--color-text-primary);
 }
 
 .col-date {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .col-price {
   font-weight: 500;
-  color: #007bff;
+  color: var(--color-accent);
 }
 
 .col-customer {
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .col-email {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .state-badge.processing {
-  background: #fff3cd;
-  color: #856404;
+  background: var(--color-badge-processing-bg);
+  color: var(--color-badge-processing-text);
 }
 
 .state-badge.shipped {
-  background: #cce5ff;
-  color: #004085;
+  background: var(--color-badge-shipped-bg);
+  color: var(--color-badge-shipped-text);
 }
 
 .state-badge.completed {
-  background: #d4edda;
-  color: #155724;
+  background: var(--color-badge-completed-bg);
+  color: var(--color-badge-completed-text);
 }
 
 .state-badge.canceled {
-  background: #f8d7da;
-  color: #721c24;
+  background: var(--color-badge-canceled-bg);
+  color: var(--color-badge-canceled-text);
 }
