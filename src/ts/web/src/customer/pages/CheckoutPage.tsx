@@ -9,6 +9,7 @@ import {
   RemoveFromCartMutationVariables,
 } from '../../generated/graphql';
 import { getImageUrl } from '../../shared/helpers';
+import { useTheme } from '../../shared/ThemeContext';
 import './CheckoutPage.css';
 
 interface CheckoutPageProps {
@@ -24,6 +25,7 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({
   onCheckout,
   onBack,
 }) => {
+  const { theme, toggleTheme } = useTheme();
   const [updateCartItem] = useMutation<UpdateCartItemMutation, UpdateCartItemMutationVariables>(
     UPDATE_CART_ITEM
   );
@@ -55,7 +57,9 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({
           ← Back
         </button>
         <h1>Shopping Cart</h1>
-        <div></div>
+        <button className="theme-toggle" onClick={toggleTheme} title="Toggle theme">
+          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
+        </button>
       </header>
 
       <div className="container">

@@ -4,6 +4,7 @@ import { Product } from '../../shared/types';
 import { GET_PRODUCTS } from '../queries';
 import { GetProductsQuery, GetProductsQueryVariables } from '../../generated/graphql';
 import { getImageUrl } from '../../shared/helpers';
+import { useTheme } from '../../shared/ThemeContext';
 import './LandingPage.css';
 
 interface LandingPageProps {
@@ -18,6 +19,7 @@ const LandingPage: React.FC<LandingPageProps> = ({
   onCartClick,
 }) => {
   const observerTarget = useRef<HTMLDivElement>(null);
+  const { theme, toggleTheme } = useTheme();
 
   const { data, loading, fetchMore } = useQuery<GetProductsQuery, GetProductsQueryVariables>(
     GET_PRODUCTS,
@@ -60,12 +62,17 @@ const LandingPage: React.FC<LandingPageProps> = ({
     <div className="landing-page">
       <header className="header">
         <h1>Shop</h1>
-        <button className="cart-button" onClick={onCartClick}>
-          <span className="cart-icon">🛒</span>
-          {cartItemCount > 0 && (
-            <span className="cart-badge">{cartItemCount}</span>
-          )}
-        </button>
+        <div className="header-actions">
+          <button className="theme-toggle" onClick={toggleTheme} title="Toggle theme">
+            {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
+          </button>
+          <button className="cart-button" onClick={onCartClick}>
+            <span className="cart-icon">🛒</span>
+            {cartItemCount > 0 && (
+              <span className="cart-badge">{cartItemCount}</span>
+            )}
+          </button>
+        </div>
       </header>
 
       <div className="container">

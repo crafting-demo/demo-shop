@@ -1,3 +1,98 @@
+/* Light mode (default) */
+:root,
+[data-theme="light"] {
+  --color-bg: #f5f5f5;
+  --color-bg-secondary: #f8f9fa;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f8f9fa;
+  --color-border: #ddd;
+  --color-border-light: #eee;
+  --color-text-primary: #333333;
+  --color-text-secondary: #666666;
+  --color-text-muted: #999999;
+  --color-accent: #007bff;
+  --color-accent-hover: #0056b3;
+  --color-accent-disabled: #ccc;
+  --color-danger: #dc3545;
+  --color-danger-hover: #c82333;
+  --color-secondary: #6c757d;
+  --color-secondary-hover: #545b62;
+  --color-success: #28a745;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-shadow-hover: rgba(0, 0, 0, 0.15);
+  --color-overlay: rgba(0, 0, 0, 0.5);
+  --color-sidebar-bg: #2c3e50;
+  --color-sidebar-text: #ffffff;
+  --color-sidebar-active: #3498db;
+  --color-sidebar-hover: rgba(255, 255, 255, 0.1);
+  --color-quantity-btn-bg: #f5f5f5;
+  --color-quantity-btn-hover: #e0e0e0;
+  --color-badge-processing-bg: #fff3cd;
+  --color-badge-processing-text: #856404;
+  --color-badge-shipped-bg: #cce5ff;
+  --color-badge-shipped-text: #004085;
+  --color-badge-available-bg: #d4edda;
+  --color-badge-available-text: #155724;
+  --color-badge-offshelf-bg: #f8d7da;
+  --color-badge-offshelf-text: #721c24;
+  --color-badge-canceled-bg: #f8d7da;
+  --color-badge-canceled-text: #721c24;
+  --color-badge-completed-bg: #d4edda;
+  --color-badge-completed-text: #155724;
+  --color-payment-summary-bg: #f8f9fa;
+  --color-close-btn-bg: #f5f5f5;
+  --color-close-btn-hover: #e0e0e0;
+  --color-action-btn-bg: #f5f5f5;
+  --color-action-btn-hover: #e0e0e0;
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+  --color-bg: #1a1a2e;
+  --color-bg-secondary: #16213e;
+  --color-surface: #0f3460;
+  --color-surface-hover: #1a4a7a;
+  --color-border: #2d4a6e;
+  --color-border-light: #1e3a5f;
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: #b0b8c8;
+  --color-text-muted: #8090a8;
+  --color-accent: #4da3ff;
+  --color-accent-hover: #2980ff;
+  --color-accent-disabled: #4a5568;
+  --color-danger: #ff6b7a;
+  --color-danger-hover: #e63950;
+  --color-secondary: #8090a8;
+  --color-secondary-hover: #6a7a8a;
+  --color-success: #48bb78;
+  --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-shadow-hover: rgba(0, 0, 0, 0.4);
+  --color-overlay: rgba(0, 0, 0, 0.7);
+  --color-sidebar-bg: #0f1b2d;
+  --color-sidebar-text: #e0e0e0;
+  --color-sidebar-active: #4da3ff;
+  --color-sidebar-hover: rgba(255, 255, 255, 0.08);
+  --color-quantity-btn-bg: #1e3a5f;
+  --color-quantity-btn-hover: #2d4a6e;
+  --color-badge-processing-bg: #3d3010;
+  --color-badge-processing-text: #ffd04a;
+  --color-badge-shipped-bg: #0a2a4a;
+  --color-badge-shipped-text: #7ec8ff;
+  --color-badge-available-bg: #0d2d1a;
+  --color-badge-available-text: #6be09a;
+  --color-badge-offshelf-bg: #2d0d10;
+  --color-badge-offshelf-text: #ff8a94;
+  --color-badge-canceled-bg: #2d0d10;
+  --color-badge-canceled-text: #ff8a94;
+  --color-badge-completed-bg: #0d2d1a;
+  --color-badge-completed-text: #6be09a;
+  --color-payment-summary-bg: #0f3460;
+  --color-close-btn-bg: #1e3a5f;
+  --color-close-btn-hover: #2d4a6e;
+  --color-action-btn-bg: #1e3a5f;
+  --color-action-btn-hover: #2d4a6e;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +105,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f5f5;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 button {
@@ -40,48 +137,48 @@ input, textarea {
 }
 
 .btn-primary {
-  background-color: #007bff;
+  background-color: var(--color-accent);
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: var(--color-accent-hover);
 }
 
 .btn-primary:disabled {
-  background-color: #ccc;
+  background-color: var(--color-accent-disabled);
   cursor: not-allowed;
 }
 
 .btn-secondary {
-  background-color: #6c757d;
+  background-color: var(--color-secondary);
   color: white;
 }
 
 .btn-secondary:hover {
-  background-color: #545b62;
+  background-color: var(--color-secondary-hover);
 }
 
 .btn-danger {
-  background-color: #dc3545;
+  background-color: var(--color-danger);
   color: white;
 }
 
 .btn-danger:hover {
-  background-color: #c82333;
+  background-color: var(--color-danger-hover);
 }
 
 .card {
-  background: white;
+  background: var(--color-surface);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--color-shadow);
   padding: 16px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 8px var(--color-shadow-hover);
 }
 
 .modal-overlay {
@@ -90,7 +187,7 @@ input, textarea {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--color-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,7 +195,7 @@ input, textarea {
 }
 
 .modal-content {
-  background: white;
+  background: var(--color-surface);
   border-radius: 8px;
   max-width: 90%;
   max-height: 90%;
@@ -114,23 +211,45 @@ input, textarea {
   display: block;
   margin-bottom: 4px;
   font-weight: 500;
-  color: #333;
+  color: var(--color-text-primary);
 }
 
 .form-input {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   font-size: 14px;
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .form-input:focus {
-  border-color: #007bff;
+  border-color: var(--color-accent);
 }
 
 .error-message {
-  color: #dc3545;
+  color: var(--color-danger);
   font-size: 14px;
   margin-top: 4px;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  background: var(--color-quantity-btn-bg);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.2s, border-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--color-quantity-btn-hover);
 }
