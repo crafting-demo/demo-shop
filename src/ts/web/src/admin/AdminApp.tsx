@@ -3,6 +3,7 @@ import { Product } from '../shared/types';
 import InventoryAdmin from './pages/InventoryAdmin';
 import ProductEdit from './pages/ProductEdit';
 import OrderAdmin from './pages/OrderAdmin';
+import DarkModeToggle from '../shared/DarkModeToggle';
 import './AdminApp.css';
 
 type Tab = 'inventory' | 'orders';
@@ -57,6 +58,7 @@ const AdminApp: React.FC = () => {
             Orders
           </button>
         </nav>
+        <DarkModeToggle />
       </div>
 
       <div className="main-content">
