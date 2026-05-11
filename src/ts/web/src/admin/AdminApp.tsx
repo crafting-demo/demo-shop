@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Product } from '../shared/types';
+import { useTheme } from '../shared/ThemeContext';
 import InventoryAdmin from './pages/InventoryAdmin';
 import ProductEdit from './pages/ProductEdit';
 import OrderAdmin from './pages/OrderAdmin';
@@ -12,6 +13,7 @@ const AdminApp: React.FC = () => {
   const [currentTab, setCurrentTab] = useState<Tab>('inventory');
   const [currentView, setCurrentView] = useState<View>('list');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const { theme, toggleTheme } = useTheme();
 
   const handleEditProduct = (product: Product) => {
     setSelectedProduct(product);
@@ -57,6 +59,9 @@ const AdminApp: React.FC = () => {
             Orders
           </button>
         </nav>
+        <button className="theme-toggle sidebar-theme-toggle" onClick={toggleTheme} title="Toggle dark mode">
+          {theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode'}
+        </button>
       </div>
 
       <div className="main-content">
