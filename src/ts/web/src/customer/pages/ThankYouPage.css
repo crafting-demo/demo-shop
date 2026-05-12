@@ -26,13 +26,13 @@
 
 .thankyou-card h1 {
   font-size: 32px;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   margin-bottom: 16px;
 }
 
 .thankyou-card p {
   font-size: 18px;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   margin-bottom: 8px;
 }
 

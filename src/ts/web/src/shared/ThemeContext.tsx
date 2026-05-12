@@ -12,10 +12,13 @@ const ThemeContext = createContext<ThemeContextValue>({
   toggleTheme: () => {},
 });
 
+export const useTheme = () => useContext(ThemeContext);
+
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(() => {
+    // Persist preference in localStorage; fall back to system preference
     const stored = localStorage.getItem('theme') as Theme | null;
-    if (stored === 'dark' || stored === 'light') return stored;
+    if (stored === 'light' || stored === 'dark') return stored;
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
 
@@ -24,7 +27,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+  const toggleTheme = () => setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
@@ -32,5 +35,3 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     </ThemeContext.Provider>
   );
 };
-
-export const useTheme = () => useContext(ThemeContext);

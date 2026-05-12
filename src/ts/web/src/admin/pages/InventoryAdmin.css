@@ -1,7 +1,8 @@
 .inventory-admin {
-  background: var(--bg-secondary);
+  background: var(--color-surface);
   border-radius: 8px;
   padding: 24px;
+  transition: background-color 0.2s;
 }
 
 .page-header {
@@ -13,7 +14,7 @@
 
 .page-header h1 {
   font-size: 28px;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 }
 
 .page-size-selector {
@@ -24,20 +25,21 @@
 
 .page-size-selector label {
   font-size: 14px;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .page-size-selector select {
   padding: 8px 12px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   font-size: 14px;
-  background: var(--bg-input);
-  color: var(--text-primary);
+  background-color: var(--color-input-bg);
+  color: var(--color-text-primary);
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
 .inventory-table {
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -52,18 +54,19 @@
 }
 
 .table-header {
-  background: var(--bg-tertiary);
+  background: var(--color-surface-alt);
   font-weight: 600;
-  color: var(--text-primary);
-  border-bottom: 2px solid var(--border-color);
+  color: var(--color-text-primary);
+  border-bottom: 2px solid var(--color-border);
 }
 
 .table-row {
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--color-border-light);
+  color: var(--color-text-primary);
 }
 
 .table-row:hover {
-  background: var(--bg-hover);
+  background: var(--color-surface-alt);
 }
 
 .col-image img {
@@ -75,17 +78,17 @@
 
 .col-id {
   font-size: 14px;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .col-name {
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 }
 
 .col-price {
   font-weight: 500;
-  color: var(--color-primary);
+  color: var(--color-accent);
 }
 
 .state-badge {
@@ -96,13 +99,13 @@
 }
 
 .state-badge.available {
-  background: var(--badge-available-bg);
-  color: var(--badge-available-text);
+  background: var(--color-badge-available-bg);
+  color: var(--color-badge-available-text);
 }
 
 .state-badge.off-shelf {
-  background: var(--badge-offshelf-bg);
-  color: var(--badge-offshelf-text);
+  background: var(--color-badge-off-shelf-bg);
+  color: var(--color-badge-off-shelf-text);
 }
 
 .col-actions {
@@ -110,26 +113,27 @@
 }
 
 .action-button {
-  background: var(--bg-button-muted);
+  background: var(--color-btn-qty-bg);
   border-radius: 4px;
   width: 32px;
   height: 32px;
   font-size: 20px;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
+  transition: background-color 0.2s;
 }
 
 .action-button:hover {
-  background: var(--bg-button-muted-hover);
+  background: var(--color-btn-qty-hover);
 }
 
 .action-menu {
   position: absolute;
   top: 100%;
   right: 0;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: 4px;
-  box-shadow: var(--shadow-menu);
+  box-shadow: 0 4px 8px var(--color-shadow);
   z-index: 10;
   min-width: 150px;
 }
@@ -139,10 +143,11 @@
   width: 100%;
   padding: 12px 16px;
   text-align: left;
-  background: var(--bg-secondary);
-  color: var(--text-primary);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
   border: none;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--color-border-light);
+  transition: background-color 0.2s;
 }
 
 .action-menu button:last-child {
@@ -150,7 +155,7 @@
 }
 
 .action-menu button:hover {
-  background: var(--bg-hover);
+  background: var(--color-surface-alt);
 }
 
 .pagination {
@@ -163,21 +168,21 @@
 
 .pagination button {
   padding: 8px 16px;
-  background: var(--color-primary);
+  background: var(--color-accent);
   color: white;
   border-radius: 4px;
 }
 
 .pagination button:disabled {
-  background: var(--color-disabled);
+  background: var(--color-accent-disabled);
   cursor: not-allowed;
 }
 
 .pagination button:not(:disabled):hover {
-  background: var(--color-primary-hover);
+  background: var(--color-accent-hover);
 }
 
 .pagination span {
   font-size: 14px;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }

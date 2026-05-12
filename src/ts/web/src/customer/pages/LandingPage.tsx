@@ -61,13 +61,20 @@ const LandingPage: React.FC<LandingPageProps> = ({
   return (
     <div className="landing-page">
       <header className="header">
-        <h1>Shop</h1>
-        <div className="header-controls">
-          <button className="theme-toggle" onClick={toggleTheme} title="Toggle dark mode">
-            {theme === 'dark' ? '☀️' : '🌙'}
+        <div className="header-left">
+          <h1>Shop</h1>
+        </div>
+        <div className="header-actions">
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            <span>{theme === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19'}</span>
+            <span className="theme-toggle-label">{theme === 'dark' ? 'Light' : 'Dark'}</span>
           </button>
           <button className="cart-button" onClick={onCartClick}>
-            <span className="cart-icon">🛒</span>
+            <span className="cart-icon">\uD83D\uDED2</span>
             {cartItemCount > 0 && (
               <span className="cart-badge">{cartItemCount}</span>
             )}

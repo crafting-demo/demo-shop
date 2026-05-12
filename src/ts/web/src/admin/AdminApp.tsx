@@ -59,9 +59,16 @@ const AdminApp: React.FC = () => {
             Orders
           </button>
         </nav>
-        <button className="theme-toggle sidebar-theme-toggle" onClick={toggleTheme} title="Toggle dark mode">
-          {theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode'}
-        </button>
+        <div className="sidebar-footer">
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            <span>{theme === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19'}</span>
+            <span className="theme-toggle-label">{theme === 'dark' ? 'Light' : 'Dark'}</span>
+          </button>
+        </div>
       </div>
 
       <div className="main-content">

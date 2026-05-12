@@ -11,7 +11,7 @@
 
 .page-header h1 {
   font-size: 28px;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 }
 
 .header-actions {
@@ -20,9 +20,10 @@
 }
 
 .edit-form {
-  background: var(--bg-secondary);
-  border-radius: 8px;
   padding: 32px;
+  background: var(--color-surface);
+  border-radius: 8px;
+  transition: background-color 0.2s;
 }
 
 .form-section {
@@ -31,10 +32,10 @@
 
 .form-section h2 {
   font-size: 20px;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   margin-bottom: 24px;
   padding-bottom: 12px;
-  border-bottom: 2px solid var(--border-light);
+  border-bottom: 2px solid var(--color-border);
 }
 
 .form-row {
@@ -58,10 +59,10 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 }
 
 .form-actions {
   padding-top: 24px;
-  border-top: 2px solid var(--border-light);
+  border-top: 2px solid var(--color-border);
 }
