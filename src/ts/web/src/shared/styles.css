@@ -1,3 +1,108 @@
+/* ── Theme tokens ─────────────────────────────────────────── */
+:root,
+[data-theme="light"] {
+  --bg-primary: #f5f5f5;
+  --bg-surface: #ffffff;
+  --bg-surface-alt: #f8f9fa;
+  --bg-hover: #f0f0f0;
+  --bg-input: #ffffff;
+  --bg-sidebar: #2c3e50;
+  --bg-sidebar-active: #3498db;
+  --bg-modal-overlay: rgba(0, 0, 0, 0.5);
+  --bg-close-btn: #f5f5f5;
+  --bg-close-btn-hover: #e0e0e0;
+  --bg-qty-btn: #f5f5f5;
+  --bg-qty-btn-hover: #e0e0e0;
+
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-muted: #888888;
+  --text-on-dark: #ffffff;
+  --text-label: #333333;
+
+  --border-color: #dddddd;
+  --border-light: #eeeeee;
+
+  --accent-primary: #007bff;
+  --accent-primary-hover: #0056b3;
+  --accent-danger: #dc3545;
+  --accent-danger-hover: #c82333;
+  --accent-secondary: #6c757d;
+  --accent-secondary-hover: #545b62;
+  --accent-success: #28a745;
+
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-card: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  --badge-available-bg: #d4edda;
+  --badge-available-color: #155724;
+  --badge-off-shelf-bg: #f8d7da;
+  --badge-off-shelf-color: #721c24;
+  --badge-processing-bg: #fff3cd;
+  --badge-processing-color: #856404;
+  --badge-shipped-bg: #cce5ff;
+  --badge-shipped-color: #004085;
+  --badge-completed-bg: #d4edda;
+  --badge-completed-color: #155724;
+  --badge-canceled-bg: #f8d7da;
+  --badge-canceled-color: #721c24;
+
+  --payment-summary-bg: #f8f9fa;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #121212;
+  --bg-surface: #1e1e1e;
+  --bg-surface-alt: #2a2a2a;
+  --bg-hover: #2e2e2e;
+  --bg-input: #2a2a2a;
+  --bg-sidebar: #1a2332;
+  --bg-sidebar-active: #2980b9;
+  --bg-modal-overlay: rgba(0, 0, 0, 0.75);
+  --bg-close-btn: #3a3a3a;
+  --bg-close-btn-hover: #4a4a4a;
+  --bg-qty-btn: #3a3a3a;
+  --bg-qty-btn-hover: #4a4a4a;
+
+  --text-primary: #e0e0e0;
+  --text-secondary: #aaaaaa;
+  --text-muted: #777777;
+  --text-on-dark: #ffffff;
+  --text-label: #cccccc;
+
+  --border-color: #404040;
+  --border-light: #333333;
+
+  --accent-primary: #4da3ff;
+  --accent-primary-hover: #1a88ff;
+  --accent-danger: #ff6b6b;
+  --accent-danger-hover: #e05555;
+  --accent-secondary: #8a9bb0;
+  --accent-secondary-hover: #6d7f91;
+  --accent-success: #4caf50;
+
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 4px 8px rgba(0, 0, 0, 0.4);
+
+  --badge-available-bg: #1a3d26;
+  --badge-available-color: #6fcf97;
+  --badge-off-shelf-bg: #3d1a1a;
+  --badge-off-shelf-color: #f28b82;
+  --badge-processing-bg: #3d2e00;
+  --badge-processing-color: #ffd166;
+  --badge-shipped-bg: #00204d;
+  --badge-shipped-color: #7ec8e3;
+  --badge-completed-bg: #1a3d26;
+  --badge-completed-color: #6fcf97;
+  --badge-canceled-bg: #3d1a1a;
+  --badge-canceled-color: #f28b82;
+
+  --payment-summary-bg: #2a2a2a;
+}
+
+/* ── Reset ────────────────────────────────────────────────── */
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +115,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f5f5;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.2s, color 0.2s;
 }
 
 button {
@@ -25,12 +132,32 @@ input, textarea {
   outline: none;
 }
 
+/* ── Dark mode toggle button ──────────────────────────────── */
+.theme-toggle {
+  background: var(--bg-close-btn);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s;
+}
+
+.theme-toggle:hover {
+  background: var(--bg-close-btn-hover);
+}
+
+/* ── Layout helpers ───────────────────────────────────────── */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
+/* ── Buttons ──────────────────────────────────────────────── */
 .btn {
   padding: 12px 24px;
   border-radius: 4px;
@@ -40,57 +167,59 @@ input, textarea {
 }
 
 .btn-primary {
-  background-color: #007bff;
+  background-color: var(--accent-primary);
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: var(--accent-primary-hover);
 }
 
 .btn-primary:disabled {
-  background-color: #ccc;
+  background-color: var(--accent-secondary);
   cursor: not-allowed;
 }
 
 .btn-secondary {
-  background-color: #6c757d;
+  background-color: var(--accent-secondary);
   color: white;
 }
 
 .btn-secondary:hover {
-  background-color: #545b62;
+  background-color: var(--accent-secondary-hover);
 }
 
 .btn-danger {
-  background-color: #dc3545;
+  background-color: var(--accent-danger);
   color: white;
 }
 
 .btn-danger:hover {
-  background-color: #c82333;
+  background-color: var(--accent-danger-hover);
 }
 
+/* ── Card ─────────────────────────────────────────────────── */
 .card {
-  background: white;
+  background: var(--bg-surface);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
   padding: 16px;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-md);
 }
 
+/* ── Modal ────────────────────────────────────────────────── */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--bg-modal-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,7 +227,7 @@ input, textarea {
 }
 
 .modal-content {
-  background: white;
+  background: var(--bg-surface);
   border-radius: 8px;
   max-width: 90%;
   max-height: 90%;
@@ -106,6 +235,7 @@ input, textarea {
   padding: 24px;
 }
 
+/* ── Form ─────────────────────────────────────────────────── */
 .form-group {
   margin-bottom: 16px;
 }
@@ -114,23 +244,25 @@ input, textarea {
   display: block;
   margin-bottom: 4px;
   font-weight: 500;
-  color: #333;
+  color: var(--text-label);
 }
 
 .form-input {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   font-size: 14px;
+  background: var(--bg-input);
+  color: var(--text-primary);
 }
 
 .form-input:focus {
-  border-color: #007bff;
+  border-color: var(--accent-primary);
 }
 
 .error-message {
-  color: #dc3545;
+  color: var(--accent-danger);
   font-size: 14px;
   margin-top: 4px;
 }

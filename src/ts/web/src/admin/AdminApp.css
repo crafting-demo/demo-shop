@@ -5,15 +5,21 @@
 
 .sidebar {
   width: 250px;
-  background: #2c3e50;
-  color: white;
+  background: var(--bg-sidebar);
+  color: var(--text-on-dark);
   padding: 24px;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar h1 {
   font-size: 24px;
+  margin-bottom: 8px;
+  color: var(--text-on-dark);
+}
+
+.sidebar-header {
   margin-bottom: 32px;
-  color: white;
 }
 
 .sidebar nav {
@@ -25,7 +31,7 @@
 .nav-item {
   padding: 12px 16px;
   background: transparent;
-  color: white;
+  color: var(--text-on-dark);
   text-align: left;
   border-radius: 4px;
   font-size: 16px;
@@ -37,11 +43,29 @@
 }
 
 .nav-item.active {
-  background: #3498db;
+  background: var(--bg-sidebar-active);
+}
+
+.sidebar-theme-toggle {
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.sidebar-theme-toggle .theme-toggle {
+  width: 100%;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-on-dark);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-theme-toggle .theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .main-content {
   flex: 1;
   padding: 24px;
   overflow: auto;
+  background: var(--bg-primary);
 }
