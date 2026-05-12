@@ -1,3 +1,131 @@
+:root {
+  --color-bg: #f5f5f5;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f8f9fa;
+  --color-surface-secondary: #f8f9fa;
+  --color-border: #dddddd;
+  --color-border-light: #eeeeee;
+  --color-text-primary: #333333;
+  --color-text-secondary: #666666;
+  --color-text-muted: #999999;
+  --color-primary: #007bff;
+  --color-primary-hover: #0056b3;
+  --color-primary-disabled: #cccccc;
+  --color-secondary: #6c757d;
+  --color-secondary-hover: #545b62;
+  --color-danger: #dc3545;
+  --color-danger-hover: #c82333;
+  --color-success: #28a745;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-shadow-hover: rgba(0, 0, 0, 0.15);
+  --color-overlay: rgba(0, 0, 0, 0.5);
+  --color-input-bg: #ffffff;
+  --color-badge-available-bg: #d4edda;
+  --color-badge-available-text: #155724;
+  --color-badge-offshelf-bg: #f8d7da;
+  --color-badge-offshelf-text: #721c24;
+  --color-badge-processing-bg: #fff3cd;
+  --color-badge-processing-text: #856404;
+  --color-badge-shipped-bg: #cce5ff;
+  --color-badge-shipped-text: #004085;
+  --color-badge-completed-bg: #d4edda;
+  --color-badge-completed-text: #155724;
+  --color-badge-canceled-bg: #f8d7da;
+  --color-badge-canceled-text: #721c24;
+  --color-qty-btn-bg: #f5f5f5;
+  --color-qty-btn-hover: #e0e0e0;
+  --color-close-btn-bg: #f5f5f5;
+  --color-close-btn-hover: #e0e0e0;
+  --color-action-btn-bg: #f5f5f5;
+  --color-action-btn-hover: #e0e0e0;
+}
+
+[data-theme="dark"] {
+  --color-bg: #121212;
+  --color-surface: #1e1e1e;
+  --color-surface-hover: #2a2a2a;
+  --color-surface-secondary: #252525;
+  --color-border: #3a3a3a;
+  --color-border-light: #2e2e2e;
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: #a0a0a0;
+  --color-text-muted: #707070;
+  --color-primary: #4da3ff;
+  --color-primary-hover: #2080e0;
+  --color-primary-disabled: #444444;
+  --color-secondary: #8a9199;
+  --color-secondary-hover: #6c757d;
+  --color-danger: #f06878;
+  --color-danger-hover: #d94f60;
+  --color-success: #4caf70;
+  --color-shadow: rgba(0, 0, 0, 0.4);
+  --color-shadow-hover: rgba(0, 0, 0, 0.5);
+  --color-overlay: rgba(0, 0, 0, 0.7);
+  --color-input-bg: #2c2c2c;
+  --color-badge-available-bg: #1a3a26;
+  --color-badge-available-text: #6fcf97;
+  --color-badge-offshelf-bg: #3a1a1e;
+  --color-badge-offshelf-text: #f06878;
+  --color-badge-processing-bg: #3a3010;
+  --color-badge-processing-text: #f0c040;
+  --color-badge-shipped-bg: #102040;
+  --color-badge-shipped-text: #70b8ff;
+  --color-badge-completed-bg: #1a3a26;
+  --color-badge-completed-text: #6fcf97;
+  --color-badge-canceled-bg: #3a1a1e;
+  --color-badge-canceled-text: #f06878;
+  --color-qty-btn-bg: #2c2c2c;
+  --color-qty-btn-hover: #3a3a3a;
+  --color-close-btn-bg: #2c2c2c;
+  --color-close-btn-hover: #3a3a3a;
+  --color-action-btn-bg: #2c2c2c;
+  --color-action-btn-hover: #3a3a3a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #121212;
+    --color-surface: #1e1e1e;
+    --color-surface-hover: #2a2a2a;
+    --color-surface-secondary: #252525;
+    --color-border: #3a3a3a;
+    --color-border-light: #2e2e2e;
+    --color-text-primary: #e0e0e0;
+    --color-text-secondary: #a0a0a0;
+    --color-text-muted: #707070;
+    --color-primary: #4da3ff;
+    --color-primary-hover: #2080e0;
+    --color-primary-disabled: #444444;
+    --color-secondary: #8a9199;
+    --color-secondary-hover: #6c757d;
+    --color-danger: #f06878;
+    --color-danger-hover: #d94f60;
+    --color-success: #4caf70;
+    --color-shadow: rgba(0, 0, 0, 0.4);
+    --color-shadow-hover: rgba(0, 0, 0, 0.5);
+    --color-overlay: rgba(0, 0, 0, 0.7);
+    --color-input-bg: #2c2c2c;
+    --color-badge-available-bg: #1a3a26;
+    --color-badge-available-text: #6fcf97;
+    --color-badge-offshelf-bg: #3a1a1e;
+    --color-badge-offshelf-text: #f06878;
+    --color-badge-processing-bg: #3a3010;
+    --color-badge-processing-text: #f0c040;
+    --color-badge-shipped-bg: #102040;
+    --color-badge-shipped-text: #70b8ff;
+    --color-badge-completed-bg: #1a3a26;
+    --color-badge-completed-text: #6fcf97;
+    --color-badge-canceled-bg: #3a1a1e;
+    --color-badge-canceled-text: #f06878;
+    --color-qty-btn-bg: #2c2c2c;
+    --color-qty-btn-hover: #3a3a3a;
+    --color-close-btn-bg: #2c2c2c;
+    --color-close-btn-hover: #3a3a3a;
+    --color-action-btn-bg: #2c2c2c;
+    --color-action-btn-hover: #3a3a3a;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +138,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f5f5;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  transition: background-color 0.2s, color 0.2s;
 }
 
 button {
@@ -40,48 +170,48 @@ input, textarea {
 }
 
 .btn-primary {
-  background-color: #007bff;
+  background-color: var(--color-primary);
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: var(--color-primary-hover);
 }
 
 .btn-primary:disabled {
-  background-color: #ccc;
+  background-color: var(--color-primary-disabled);
   cursor: not-allowed;
 }
 
 .btn-secondary {
-  background-color: #6c757d;
+  background-color: var(--color-secondary);
   color: white;
 }
 
 .btn-secondary:hover {
-  background-color: #545b62;
+  background-color: var(--color-secondary-hover);
 }
 
 .btn-danger {
-  background-color: #dc3545;
+  background-color: var(--color-danger);
   color: white;
 }
 
 .btn-danger:hover {
-  background-color: #c82333;
+  background-color: var(--color-danger-hover);
 }
 
 .card {
-  background: white;
+  background: var(--color-surface);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--color-shadow);
   padding: 16px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
 }
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 8px var(--color-shadow-hover);
 }
 
 .modal-overlay {
@@ -90,7 +220,7 @@ input, textarea {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--color-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,7 +228,7 @@ input, textarea {
 }
 
 .modal-content {
-  background: white;
+  background: var(--color-surface);
   border-radius: 8px;
   max-width: 90%;
   max-height: 90%;
@@ -114,23 +244,45 @@ input, textarea {
   display: block;
   margin-bottom: 4px;
   font-weight: 500;
-  color: #333;
+  color: var(--color-text-primary);
 }
 
 .form-input {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   font-size: 14px;
+  background-color: var(--color-input-bg);
+  color: var(--color-text-primary);
+  transition: border-color 0.2s, background-color 0.2s;
 }
 
 .form-input:focus {
-  border-color: #007bff;
+  border-color: var(--color-primary);
 }
 
 .error-message {
-  color: #dc3545;
+  color: var(--color-danger);
   font-size: 14px;
   margin-top: 4px;
+}
+
+/* Dark mode toggle button */
+.dark-mode-toggle {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 16px;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dark-mode-toggle:hover {
+  background-color: var(--color-surface-secondary);
 }

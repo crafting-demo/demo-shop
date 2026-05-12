@@ -16,6 +16,7 @@ interface CheckoutPageProps {
   onUpdateQuantity: () => void;
   onCheckout: () => void;
   onBack: () => void;
+  darkModeToggle?: React.ReactNode;
 }
 
 const CheckoutPage: React.FC<CheckoutPageProps> = ({
@@ -23,6 +24,7 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({
   onUpdateQuantity,
   onCheckout,
   onBack,
+  darkModeToggle,
 }) => {
   const [updateCartItem] = useMutation<UpdateCartItemMutation, UpdateCartItemMutationVariables>(
     UPDATE_CART_ITEM
@@ -55,7 +57,7 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({
           ← Back
         </button>
         <h1>Shopping Cart</h1>
-        <div></div>
+        <div className="header-right">{darkModeToggle}</div>
       </header>
 
       <div className="container">

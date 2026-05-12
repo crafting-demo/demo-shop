@@ -3,6 +3,7 @@ import { Product } from '../shared/types';
 import InventoryAdmin from './pages/InventoryAdmin';
 import ProductEdit from './pages/ProductEdit';
 import OrderAdmin from './pages/OrderAdmin';
+import { useDarkMode } from '../shared/useDarkMode';
 import './AdminApp.css';
 
 type Tab = 'inventory' | 'orders';
@@ -12,6 +13,7 @@ const AdminApp: React.FC = () => {
   const [currentTab, setCurrentTab] = useState<Tab>('inventory');
   const [currentView, setCurrentView] = useState<View>('list');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const { theme, toggleTheme } = useDarkMode();
 
   const handleEditProduct = (product: Product) => {
     setSelectedProduct(product);
@@ -57,6 +59,10 @@ const AdminApp: React.FC = () => {
             Orders
           </button>
         </nav>
+        <button className="dark-mode-toggle sidebar-toggle" onClick={toggleTheme} title="Toggle dark mode">
+          {theme === 'dark' ? '☀️' : '🌙'}
+          <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+        </button>
       </div>
 
       <div className="main-content">

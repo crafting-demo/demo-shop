@@ -3,11 +3,15 @@ import './ThankYouPage.css';
 
 interface ThankYouPageProps {
   onContinueShopping: () => void;
+  darkModeToggle?: React.ReactNode;
 }
 
-const ThankYouPage: React.FC<ThankYouPageProps> = ({ onContinueShopping }) => {
+const ThankYouPage: React.FC<ThankYouPageProps> = ({ onContinueShopping, darkModeToggle }) => {
   return (
     <div className="thankyou-page">
+      {darkModeToggle && (
+        <div className="thankyou-toggle">{darkModeToggle}</div>
+      )}
       <div className="container">
         <div className="thankyou-card card">
           <div className="success-icon">✓</div>

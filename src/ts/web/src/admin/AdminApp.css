@@ -8,6 +8,15 @@
   background: #2c3e50;
   color: white;
   padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition: background-color 0.2s;
+}
+
+[data-theme="dark"] .sidebar {
+  background: #1a252f;
+  border-right: 1px solid #2e2e2e;
 }
 
 .sidebar h1 {
@@ -20,6 +29,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  flex: 1;
 }
 
 .nav-item {
@@ -40,8 +50,30 @@
   background: #3498db;
 }
 
+.sidebar-toggle {
+  margin-top: 16px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  justify-content: flex-start;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  transition: background 0.2s;
+}
+
+.sidebar-toggle:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
 .main-content {
   flex: 1;
   padding: 24px;
   overflow: auto;
+  background-color: var(--color-bg);
+  transition: background-color 0.2s;
 }

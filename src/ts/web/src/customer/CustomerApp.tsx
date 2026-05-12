@@ -8,12 +8,14 @@ import PaymentPage from './pages/PaymentPage';
 import ThankYouPage from './pages/ThankYouPage';
 import { GET_CART } from './queries';
 import { GetCartQuery } from '../generated/graphql';
+import { useDarkMode } from '../shared/useDarkMode';
 
 type Page = 'landing' | 'product' | 'checkout' | 'payment' | 'thankyou';
 
 const CustomerApp: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('landing');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const { theme, toggleTheme } = useDarkMode();
 
   const { data: cartData, refetch: refetchCart } = useQuery<GetCartQuery>(GET_CART);
 
@@ -56,6 +58,12 @@ const CustomerApp: React.FC = () => {
     await refetchCart();
   };
 
+  const darkModeToggle = (
+    <button className="dark-mode-toggle" onClick={toggleTheme} title="Toggle dark mode">
+      {theme === 'dark' ? '☀️' : '🌙'}
+    </button>
+  );
+
   return (
     <div>
       {currentPage === 'landing' && (
@@ -63,6 +71,7 @@ const CustomerApp: React.FC = () => {
           cartItemCount={cartItemCount}
           onProductClick={handleProductClick}
           onCartClick={handleGoToCheckout}
+          darkModeToggle={darkModeToggle}
         />
       )}
       {currentPage === 'product' && selectedProduct && (
@@ -78,6 +87,7 @@ const CustomerApp: React.FC = () => {
           onUpdateQuantity={handleUpdateQuantity}
           onCheckout={handleGoToPayment}
           onBack={handleBackToLanding}
+          darkModeToggle={darkModeToggle}
         />
       )}
       {currentPage === 'payment' && cart && (
@@ -85,10 +95,14 @@ const CustomerApp: React.FC = () => {
           totalPrice={cart.totalPrice}
           onPlaceOrder={handlePlaceOrder}
           onBack={() => setCurrentPage('checkout')}
+          darkModeToggle={darkModeToggle}
         />
       )}
       {currentPage === 'thankyou' && (
-        <ThankYouPage onContinueShopping={handleBackToLanding} />
+        <ThankYouPage
+          onContinueShopping={handleBackToLanding}
+          darkModeToggle={darkModeToggle}
+        />
       )}
     </div>
   );

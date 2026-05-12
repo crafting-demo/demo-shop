@@ -8,6 +8,7 @@ interface PaymentPageProps {
   totalPrice: number; // in cents
   onPlaceOrder: () => void;
   onBack: () => void;
+  darkModeToggle?: React.ReactNode;
 }
 
 interface CustomerInfo {
@@ -20,6 +21,7 @@ const PaymentPage: React.FC<PaymentPageProps> = ({
   totalPrice,
   onPlaceOrder,
   onBack,
+  darkModeToggle,
 }) => {
   const [customerInfo, setCustomerInfo] = useState<CustomerInfo>({
     name: '',
@@ -89,7 +91,7 @@ const PaymentPage: React.FC<PaymentPageProps> = ({
           ← Back
         </button>
         <h1>Payment</h1>
-        <div></div>
+        <div className="header-right">{darkModeToggle}</div>
       </header>
 
       <div className="container">
