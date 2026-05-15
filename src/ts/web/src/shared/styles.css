@@ -1,3 +1,154 @@
+/* ── Theme tokens ─────────────────────────────────────────────────────────── */
+:root {
+  --color-bg-page:        #f5f5f5;
+  --color-bg-surface:     #ffffff;
+  --color-bg-muted:       #f8f9fa;
+  --color-bg-subtle:      #f5f5f5;
+  --color-bg-hover:       #e0e0e0;
+
+  --color-border:         #dddddd;
+  --color-border-strong:  #cccccc;
+
+  --color-text-primary:   #333333;
+  --color-text-secondary: #666666;
+  --color-text-muted:     #999999;
+
+  --color-accent:         #007bff;
+  --color-accent-hover:   #0056b3;
+  --color-danger:         #dc3545;
+  --color-danger-hover:   #c82333;
+  --color-success:        #28a745;
+  --color-secondary:      #6c757d;
+  --color-secondary-hover:#545b62;
+  --color-warning-bg:     #fff3cd;
+  --color-warning-text:   #856404;
+  --color-info-bg:        #cce5ff;
+  --color-info-text:      #004085;
+
+  --color-badge-ok-bg:    #d4edda;
+  --color-badge-ok-text:  #155724;
+  --color-badge-err-bg:   #f8d7da;
+  --color-badge-err-text: #721c24;
+
+  --shadow-card:          0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-card-hover:    0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-dropdown:      0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* OS-level dark preference (no explicit override stored yet) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg-page:        #121212;
+    --color-bg-surface:     #1e1e1e;
+    --color-bg-muted:       #252525;
+    --color-bg-subtle:      #2a2a2a;
+    --color-bg-hover:       #3a3a3a;
+
+    --color-border:         #383838;
+    --color-border-strong:  #4a4a4a;
+
+    --color-text-primary:   #e0e0e0;
+    --color-text-secondary: #aaaaaa;
+    --color-text-muted:     #777777;
+
+    --color-accent:         #4da6ff;
+    --color-accent-hover:   #2196f3;
+    --color-danger:         #ef5350;
+    --color-danger-hover:   #e53935;
+    --color-success:        #4caf50;
+    --color-secondary:      #8a9bae;
+    --color-secondary-hover:#6c7d8e;
+    --color-warning-bg:     #3d3000;
+    --color-warning-text:   #ffd54f;
+    --color-info-bg:        #002244;
+    --color-info-text:      #64b5f6;
+
+    --color-badge-ok-bg:    #1b3a24;
+    --color-badge-ok-text:  #66bb6a;
+    --color-badge-err-bg:   #3b1a1d;
+    --color-badge-err-text: #ef9a9a;
+
+    --shadow-card:          0 2px 4px rgba(0, 0, 0, 0.4);
+    --shadow-card-hover:    0 4px 8px rgba(0, 0, 0, 0.6);
+    --shadow-dropdown:      0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Explicit dark override (user toggled) */
+:root[data-theme="dark"] {
+  --color-bg-page:        #121212;
+  --color-bg-surface:     #1e1e1e;
+  --color-bg-muted:       #252525;
+  --color-bg-subtle:      #2a2a2a;
+  --color-bg-hover:       #3a3a3a;
+
+  --color-border:         #383838;
+  --color-border-strong:  #4a4a4a;
+
+  --color-text-primary:   #e0e0e0;
+  --color-text-secondary: #aaaaaa;
+  --color-text-muted:     #777777;
+
+  --color-accent:         #4da6ff;
+  --color-accent-hover:   #2196f3;
+  --color-danger:         #ef5350;
+  --color-danger-hover:   #e53935;
+  --color-success:        #4caf50;
+  --color-secondary:      #8a9bae;
+  --color-secondary-hover:#6c7d8e;
+  --color-warning-bg:     #3d3000;
+  --color-warning-text:   #ffd54f;
+  --color-info-bg:        #002244;
+  --color-info-text:      #64b5f6;
+
+  --color-badge-ok-bg:    #1b3a24;
+  --color-badge-ok-text:  #66bb6a;
+  --color-badge-err-bg:   #3b1a1d;
+  --color-badge-err-text: #ef9a9a;
+
+  --shadow-card:          0 2px 4px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover:    0 4px 8px rgba(0, 0, 0, 0.6);
+  --shadow-dropdown:      0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Explicit light override (user toggled back) */
+:root[data-theme="light"] {
+  --color-bg-page:        #f5f5f5;
+  --color-bg-surface:     #ffffff;
+  --color-bg-muted:       #f8f9fa;
+  --color-bg-subtle:      #f5f5f5;
+  --color-bg-hover:       #e0e0e0;
+
+  --color-border:         #dddddd;
+  --color-border-strong:  #cccccc;
+
+  --color-text-primary:   #333333;
+  --color-text-secondary: #666666;
+  --color-text-muted:     #999999;
+
+  --color-accent:         #007bff;
+  --color-accent-hover:   #0056b3;
+  --color-danger:         #dc3545;
+  --color-danger-hover:   #c82333;
+  --color-success:        #28a745;
+  --color-secondary:      #6c757d;
+  --color-secondary-hover:#545b62;
+  --color-warning-bg:     #fff3cd;
+  --color-warning-text:   #856404;
+  --color-info-bg:        #cce5ff;
+  --color-info-text:      #004085;
+
+  --color-badge-ok-bg:    #d4edda;
+  --color-badge-ok-text:  #155724;
+  --color-badge-err-bg:   #f8d7da;
+  --color-badge-err-text: #721c24;
+
+  --shadow-card:          0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-card-hover:    0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-dropdown:      0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Reset ────────────────────────────────────────────────────────────────── */
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +161,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f5f5;
+  background-color: var(--color-bg-page);
+  color: var(--color-text-primary);
+  transition: background-color 0.2s, color 0.2s;
 }
 
 button {
@@ -20,11 +173,12 @@ button {
   font-family: inherit;
 }
 
-input, textarea {
+input, textarea, select {
   font-family: inherit;
   outline: none;
 }
 
+/* ── Utility classes ──────────────────────────────────────────────────────── */
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -40,48 +194,48 @@ input, textarea {
 }
 
 .btn-primary {
-  background-color: #007bff;
-  color: white;
+  background-color: var(--color-accent);
+  color: #fff;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: var(--color-accent-hover);
 }
 
 .btn-primary:disabled {
-  background-color: #ccc;
+  background-color: var(--color-border-strong);
   cursor: not-allowed;
 }
 
 .btn-secondary {
-  background-color: #6c757d;
-  color: white;
+  background-color: var(--color-secondary);
+  color: #fff;
 }
 
 .btn-secondary:hover {
-  background-color: #545b62;
+  background-color: var(--color-secondary-hover);
 }
 
 .btn-danger {
-  background-color: #dc3545;
-  color: white;
+  background-color: var(--color-danger);
+  color: #fff;
 }
 
 .btn-danger:hover {
-  background-color: #c82333;
+  background-color: var(--color-danger-hover);
 }
 
 .card {
-  background: white;
+  background: var(--color-bg-surface);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-card);
   padding: 16px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
 }
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .modal-overlay {
@@ -98,7 +252,7 @@ input, textarea {
 }
 
 .modal-content {
-  background: white;
+  background: var(--color-bg-surface);
   border-radius: 8px;
   max-width: 90%;
   max-height: 90%;
@@ -114,23 +268,45 @@ input, textarea {
   display: block;
   margin-bottom: 4px;
   font-weight: 500;
-  color: #333;
+  color: var(--color-text-primary);
 }
 
 .form-input {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   font-size: 14px;
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  transition: border-color 0.2s, background-color 0.2s;
 }
 
 .form-input:focus {
-  border-color: #007bff;
+  border-color: var(--color-accent);
 }
 
 .error-message {
-  color: #dc3545;
+  color: var(--color-danger);
   font-size: 14px;
   margin-top: 4px;
+}
+
+/* ── Theme toggle button ──────────────────────────────────────────────────── */
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-primary);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.theme-toggle:hover {
+  background: var(--color-bg-hover);
 }

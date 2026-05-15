@@ -8,6 +8,13 @@
   background: #2c3e50;
   color: white;
   padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.2s;
+}
+
+[data-theme="dark"] .sidebar {
+  background: #1a252f;
 }
 
 .sidebar h1 {
@@ -20,6 +27,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  flex: 1;
 }
 
 .nav-item {
@@ -40,8 +48,31 @@
   background: #3498db;
 }
 
+[data-theme="dark"] .nav-item.active {
+  background: #2196f3;
+}
+
+.sidebar-footer {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sidebar-footer .theme-toggle {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  width: 100%;
+  justify-content: center;
+}
+
+.sidebar-footer .theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
 .main-content {
   flex: 1;
   padding: 24px;
   overflow: auto;
+  background: var(--color-bg-page);
+  transition: background-color 0.2s;
 }
