@@ -1,3 +1,89 @@
+/* =====================================================================
+   CSS Custom Properties – light (default) & dark themes
+   Applied to <html> via data-theme attribute by ThemeProvider
+   ===================================================================== */
+:root,
+[data-theme="light"] {
+  --color-bg:           #f5f5f5;
+  --color-surface:      #ffffff;
+  --color-surface-alt:  #f8f9fa;
+  --color-border:       #dddddd;
+  --color-border-light: #eeeeee;
+
+  --color-text-primary:   #333333;
+  --color-text-secondary: #666666;
+  --color-text-muted:     #999999;
+
+  --color-primary:        #007bff;
+  --color-primary-hover:  #0056b3;
+  --color-primary-soft:   #cce5ff;
+  --color-primary-text:   #004085;
+
+  --color-secondary:      #6c757d;
+  --color-secondary-hover:#545b62;
+
+  --color-danger:         #dc3545;
+  --color-danger-hover:   #c82333;
+  --color-danger-soft:    #f8d7da;
+  --color-danger-text:    #721c24;
+
+  --color-success:        #28a745;
+  --color-success-soft:   #d4edda;
+  --color-success-text:   #155724;
+
+  --color-warning-soft:   #fff3cd;
+  --color-warning-text:   #856404;
+
+  --color-disabled:       #cccccc;
+
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-overlay: rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --color-bg:           #121212;
+  --color-surface:      #1e1e1e;
+  --color-surface-alt:  #2a2a2a;
+  --color-border:       #3a3a3a;
+  --color-border-light: #2e2e2e;
+
+  --color-text-primary:   #e0e0e0;
+  --color-text-secondary: #a0a0a0;
+  --color-text-muted:     #6e6e6e;
+
+  --color-primary:        #4dabf7;
+  --color-primary-hover:  #339af0;
+  --color-primary-soft:   #1c3a5e;
+  --color-primary-text:   #90cff8;
+
+  --color-secondary:      #868e96;
+  --color-secondary-hover:#6c757d;
+
+  --color-danger:         #f06070;
+  --color-danger-hover:   #e84c5e;
+  --color-danger-soft:    #3d1a1e;
+  --color-danger-text:    #f4a0a8;
+
+  --color-success:        #51cf66;
+  --color-success-soft:   #1a3d22;
+  --color-success-text:   #8ee8a0;
+
+  --color-warning-soft:   #3d3010;
+  --color-warning-text:   #ffe066;
+
+  --color-disabled:       #4a4a4a;
+
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.5);
+  --shadow-overlay: rgba(0, 0, 0, 0.75);
+  --shadow-card: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* =====================================================================
+   Global resets & base styles
+   ===================================================================== */
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +96,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f5f5;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  transition: background-color 0.2s, color 0.2s;
 }
 
 button {
@@ -20,9 +108,12 @@ button {
   font-family: inherit;
 }
 
-input, textarea {
+input, textarea, select {
   font-family: inherit;
   outline: none;
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
 }
 
 .container {
@@ -31,6 +122,9 @@ input, textarea {
   padding: 20px;
 }
 
+/* =====================================================================
+   Shared button styles
+   ===================================================================== */
 .btn {
   padding: 12px 24px;
   border-radius: 4px;
@@ -40,57 +134,63 @@ input, textarea {
 }
 
 .btn-primary {
-  background-color: #007bff;
-  color: white;
+  background-color: var(--color-primary);
+  color: #ffffff;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: var(--color-primary-hover);
 }
 
 .btn-primary:disabled {
-  background-color: #ccc;
+  background-color: var(--color-disabled);
   cursor: not-allowed;
 }
 
 .btn-secondary {
-  background-color: #6c757d;
-  color: white;
+  background-color: var(--color-secondary);
+  color: #ffffff;
 }
 
 .btn-secondary:hover {
-  background-color: #545b62;
+  background-color: var(--color-secondary-hover);
 }
 
 .btn-danger {
-  background-color: #dc3545;
-  color: white;
+  background-color: var(--color-danger);
+  color: #ffffff;
 }
 
 .btn-danger:hover {
-  background-color: #c82333;
+  background-color: var(--color-danger-hover);
 }
 
+/* =====================================================================
+   Card
+   ===================================================================== */
 .card {
-  background: white;
+  background: var(--color-surface);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
   padding: 16px;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-card);
 }
 
+/* =====================================================================
+   Modal
+   ===================================================================== */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--shadow-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,7 +198,7 @@ input, textarea {
 }
 
 .modal-content {
-  background: white;
+  background: var(--color-surface);
   border-radius: 8px;
   max-width: 90%;
   max-height: 90%;
@@ -106,6 +206,9 @@ input, textarea {
   padding: 24px;
 }
 
+/* =====================================================================
+   Form
+   ===================================================================== */
 .form-group {
   margin-bottom: 16px;
 }
@@ -114,23 +217,46 @@ input, textarea {
   display: block;
   margin-bottom: 4px;
   font-weight: 500;
-  color: #333;
+  color: var(--color-text-primary);
 }
 
 .form-input {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   font-size: 14px;
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
 }
 
 .form-input:focus {
-  border-color: #007bff;
+  border-color: var(--color-primary);
 }
 
 .error-message {
-  color: #dc3545;
+  color: var(--color-danger);
   font-size: 14px;
   margin-top: 4px;
+}
+
+/* =====================================================================
+   Theme toggle button
+   ===================================================================== */
+.theme-toggle {
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.theme-toggle:hover {
+  opacity: 1;
 }
