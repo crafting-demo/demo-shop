@@ -5,9 +5,12 @@
 
 .sidebar {
   width: 250px;
-  background: #2c3e50;
+  background: var(--color-bg-sidebar);
   color: white;
   padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.2s;
 }
 
 .sidebar h1 {
@@ -20,6 +23,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  flex: 1;
 }
 
 .nav-item {
@@ -40,8 +44,17 @@
   background: #3498db;
 }
 
+.sidebar-theme-toggle {
+  margin-top: 24px;
+  border-color: rgba(255, 255, 255, 0.4);
+  width: 100%;
+  justify-content: center;
+}
+
 .main-content {
   flex: 1;
   padding: 24px;
   overflow: auto;
+  background: var(--color-bg-page);
+  transition: background-color 0.2s;
 }

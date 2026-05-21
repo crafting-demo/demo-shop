@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { PLACE_ORDER } from '../queries';
 import { PlaceOrderMutation, PlaceOrderMutationVariables } from '../../generated/graphql';
+import { useTheme } from '../../shared/ThemeContext';
 import './PaymentPage.css';
 
 interface PaymentPageProps {
@@ -21,6 +22,7 @@ const PaymentPage: React.FC<PaymentPageProps> = ({
   onPlaceOrder,
   onBack,
 }) => {
+  const { theme, toggleTheme } = useTheme();
   const [customerInfo, setCustomerInfo] = useState<CustomerInfo>({
     name: '',
     email: '',
@@ -89,7 +91,10 @@ const PaymentPage: React.FC<PaymentPageProps> = ({
           ← Back
         </button>
         <h1>Payment</h1>
-        <div></div>
+        <button className="theme-toggle" onClick={toggleTheme} title="Toggle dark mode">
+          <span>{theme === 'dark' ? '☀️' : '🌙'}</span>
+          <span className="theme-toggle-label">{theme === 'dark' ? 'Light' : 'Dark'}</span>
+        </button>
       </header>
 
       <div className="container">
