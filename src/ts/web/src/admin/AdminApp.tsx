@@ -4,6 +4,7 @@ import InventoryAdmin from './pages/InventoryAdmin';
 import ProductEdit from './pages/ProductEdit';
 import OrderAdmin from './pages/OrderAdmin';
 import './AdminApp.css';
+import ThemeToggle from '../shared/ThemeToggle';
 
 type Tab = 'inventory' | 'orders';
 type View = 'list' | 'edit';
@@ -36,7 +37,10 @@ const AdminApp: React.FC = () => {
   return (
     <div className="admin-app">
       <div className="sidebar">
-        <h1>Admin Panel</h1>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
+          <h1 style={{ marginBottom: 0 }}>Admin Panel</h1>
+          <ThemeToggle />
+        </div>
         <nav>
           <button
             className={`nav-item ${currentTab === 'inventory' ? 'active' : ''}`}
