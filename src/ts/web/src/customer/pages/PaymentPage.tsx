@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { PLACE_ORDER } from '../queries';
 import { PlaceOrderMutation, PlaceOrderMutationVariables } from '../../generated/graphql';
+import ThemeToggle from '../../shared/ThemeToggle';
 import './PaymentPage.css';
 
 interface PaymentPageProps {
@@ -89,7 +90,7 @@ const PaymentPage: React.FC<PaymentPageProps> = ({
           ← Back
         </button>
         <h1>Payment</h1>
-        <div></div>
+        <ThemeToggle />
       </header>
 
       <div className="container">
