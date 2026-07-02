@@ -8,11 +8,22 @@
   background: #2c3e50;
   color: white;
   padding: 24px;
+  transition: background-color 0.3s;
+}
+
+[data-theme="dark"] .sidebar {
+  background: #1a1a2e;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
 }
 
 .sidebar h1 {
   font-size: 24px;
-  margin-bottom: 32px;
   color: white;
 }
 
@@ -40,8 +51,24 @@
   background: #3498db;
 }
 
+[data-theme="dark"] .nav-item.active {
+  background: #4dabff;
+}
+
 .main-content {
   flex: 1;
   padding: 24px;
   overflow: auto;
+  background-color: var(--color-bg);
+  transition: background-color 0.3s;
+}
+
+.sidebar .theme-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.sidebar .theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
