@@ -9,6 +9,7 @@ import {
   RemoveFromCartMutationVariables,
 } from '../../generated/graphql';
 import { getImageUrl } from '../../shared/helpers';
+import ThemeToggle from '../../shared/ThemeToggle';
 import './CheckoutPage.css';
 
 interface CheckoutPageProps {
@@ -55,7 +56,7 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({
           ← Back
         </button>
         <h1>Shopping Cart</h1>
-        <div></div>
+        <ThemeToggle />
       </header>
 
       <div className="container">
